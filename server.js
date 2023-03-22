@@ -1,21 +1,53 @@
 const express = require('express')
 const app = express()
-// const sql = require('mssql');
-const { Client } = require('pg');
+const mysql = require('mysql');
 const PORT = process.env.PORT || 8080
 require('dotenv').config()
 
 app.use(express.json())
-const client = new Client({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-        rejectUnauthorized: false
-    }
+
+const connection = mysql.createConnection({
+    host: process.env.HOST,
+    port: process.env.HOST_PORT,
+    user: process.env.HOST_USER,
+    password: process.env.HOST_PASS,
+    database: process.env.HOST_DB
 });
 
-client.connect(() => {
-    console.log(`db connected`)
-});
+(async () => {
+    try {
+        await connection.connect();
+        console.log(`db connected`)
+    } catch (error) {
+        console.log(error)
+    }
+})()
+
+
+app.use('/subjects', require('./routers/subjectsRout'))
+app.use('/quizes', require('./routers/quizesRout'))
+
+app.listen(PORT, () => {
+    console.log(`http://localhost:${PORT}`)
+})
+
+
+
+
+
+
+
+
+
+
+// const connectDB = async () => {
+//     try {
+//         await connection.connect();
+//         console.log(`db connected`)
+//     } catch (error) {
+//         console.log(error)
+//     }
+// }
 
 // const query = `CREATE TABLE first_table_of_my_life (
 //     name varchar(225)
@@ -33,33 +65,36 @@ client.connect(() => {
 //     client.end();
 // });
 
-app.get('/get-info', (req, res) => {
-    const query = `SELECT * FROM first_table_of_my_life`
+// app.get('/get-info', (req, res) => {
+//     console.log(`wqeqwe`)
 
-    client.query(query, (err, answer) => {
-        if (err) throw err;
+//     const query = `SELECT * FROM first_table_of_my_life`
 
-        res.send(answer.rows)
-    })
-})
+//     client.query(query, (err, answer) => {
+//         console.log(`qweqweqweqwe`)
+//         if (err) throw err;
 
-app.post('/insert-info', (req, res) => {
-    const { name } = req.body
+//         res.send(answer.rows)
+//     })
+// })
 
-    console.log(name)
+// app.post('/insert-info', (req, res) => {
+//     const { name } = req.body
 
-    if (name) {
-        const query = `INSERT INTO first_table_of_my_life (name) VALUES ('${name}')`
+//     console.log(name)
 
-        client.query(query, (err, answer) => {
-            if (err) throw err;
+//     if (name) {
+//         const query = `INSERT INTO first_table_of_my_life (name) VALUES ('${name}')`
 
-            return res.send(answer.rows)
-        })
-    }
+//         client.query(query, (err, answer) => {
+//             if (err) throw err;
 
-    // res.send('name is empty')
-})
+//             return res.send(answer.rows)
+//         })
+//     }
+
+//     // res.send('name is empty')
+// })
 
 // const query = `DROP TABLE first_table;`
 // client.query(query, (err, answer) => {
@@ -67,8 +102,3 @@ app.post('/insert-info', (req, res) => {
 //     console.log(answer)
 //     // return res.send(answer.rows)
 // })
-
-
-app.listen(PORT, () => {
-    console.log(`http://localhost:${PORT}`)
-})
