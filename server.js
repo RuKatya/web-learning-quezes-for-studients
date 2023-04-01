@@ -1,8 +1,8 @@
+require('dotenv').config()
 const express = require('express')
 const app = express()
 const mysql = require('mysql');
 const PORT = process.env.PORT || 8080
-require('dotenv').config()
 
 app.use(express.json())
 
@@ -23,9 +23,9 @@ const connection = mysql.createConnection({
     }
 })()
 
-
-app.use('/subjects', require('./routers/subjectsRout'))
-app.use('/quizes', require('./routers/quizesRout'))
+app.use('/subjects', require('./routers/Subject/subjectsRout'))
+app.use('/title-quiz', require('./routers/Title/TitleRou'))
+app.use('/title-questions', require('./routers/Questions/QuestionRout'))
 
 app.listen(PORT, () => {
     console.log(`http://localhost:${PORT}`)
