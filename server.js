@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const mysql = require('mysql');
 const PORT = process.env.PORT || 8080
+const cookieParser = require('cookie-parser');
 
 app.use(express.json())
 
@@ -23,6 +24,7 @@ const connection = mysql.createConnection({
     }
 })()
 
+app.use('/users', require('./routers/Users/usersRout'))
 app.use('/subjects', require('./routers/Subject/subjectsRout'))
 app.use('/title-quiz', require('./routers/Title/TitleRou'))
 app.use('/title-questions', require('./routers/Questions/QuestionRout'))

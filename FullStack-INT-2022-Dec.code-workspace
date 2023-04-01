@@ -1,0 +1,165 @@
+{
+  "folders": [
+    {
+      "folder": "client",
+      "path": "./client",
+      "folders": [
+        {
+          "folder": "public",
+          "path": "./client/public",
+          "files": [
+            { "file": "index.html" },
+            { "file": "manifest.json" },
+            { "file": "robots.txt" }
+          ]
+        },
+        {
+          "folder": "src",
+          "path": "./client/src",
+          "folders": [
+            {
+              "folder": "app",
+              "path": "./client/src/app",
+              "files": [{ "file": "hooks.ts" }, { "file": "store.ts" }]
+            },
+            {
+              "folder": "Router",
+              "path": "./client/src/Router",
+              "files": [{ "file": "RouterPage.tsx" }]
+            },
+            {
+              "folder": "style",
+              "path": "./client/src/style"
+            },
+            {
+              "folder": "View",
+              "path": "./client/src/View",
+              "folders": [
+                {
+                  "folder": "View",
+                  "path": "./client/src/View",
+                  "folders": [
+                    {
+                      "folder": "Components",
+                      "path": "./client/src/Components",
+                      "files": [{ "file": "NavBar.jsx" }]
+                    },
+                    {
+                      "folder": "Pages",
+                      "path": "./client/src/Pages",
+                      "folders": [
+                        {
+                          "folder": "Auth",
+                          "path": "./client/src/Pages/Auth",
+                          "folders": [
+                            {
+                              "folder": "Login",
+                              "path": "./client/src/Pages/Auth/Login",
+                              "files": [
+                                { "file": "Login.tsx" },
+                                { "file": "LoginActions.tsx" },
+                                { "file": "LoginInterface.ts" }
+                              ]
+                            },
+                            {
+                              "folder": "Regist",
+                              "path": "./client/src/Pages/Auth/Regist",
+                              "files": [
+                                { "file": "Registration.tsx" },
+                                { "file": "RegistActions.tsx" },
+                                { "file": "RegistInterface.ts" }
+                              ]
+                            }
+                          ],
+                          "files": [{ "file": "Auth.tsx" }]
+                        }
+                      ]
+                    },
+                    {
+                      "folder": "UI",
+                      "path": "./client/src/UI",
+                      "files": [
+                        { "file": "AuthForm.tsx" },
+                        { "file": "Input.tsx" }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "files": [{ "file": "Layout.tsx" }]
+            }
+          ],
+          "files": [{ "file": "App.tsx" }, { "file": "index.tsx" }]
+        }
+      ],
+      "files": [
+        { "file": ".gitignore" },
+        { "file": "README.md" },
+        { "file": "tsconfig.json" }
+      ]
+    },
+    {
+      "folder": "controllers",
+      "path": "./controllers",
+      "folders": [
+        {
+          "folder": "Question",
+          "path": "./controllers/Question",
+          "file": "QuestionCont.js"
+        },
+        {
+          "folder": "Subject",
+          "path": "./controllers/Subject",
+          "file": "SubjectsCont.js"
+        },
+        {
+          "folder": "Title",
+          "path": "./controllers/Title",
+          "file": "TitleCont.js"
+        },
+        {
+          "folder": "Users",
+          "path": "./controllers/Users",
+          "file": "UsersCont.js"
+        }
+      ]
+    },
+    {
+      "folder": "routers",
+      "path": "./routers",
+      "folders": [
+        {
+          "folder": "Question",
+          "path": "./routers/Question",
+          "file": "QuestionRout.js"
+        },
+        {
+          "folder": "Subject",
+          "path": "./routers/Subject",
+          "file": "SubjectRout.js"
+        },
+        {
+          "folder": "Title",
+          "path": "./routers/Title",
+          "file": "TitleRout.js"
+        },
+        {
+          "folder": "Users",
+          "path": "./routers/Users",
+          "file": "UsersRout.js"
+        }
+      ]
+    },
+    {
+      "folder": "validation",
+      "path": "authValid.js"
+    }
+  ],
+  "files": [
+    { "file": ".env" },
+    { "file": ".gitignore" },
+    { "file": "connection.js" },
+    { "file": "db-connection.js" },
+    { "file": "server.js" }
+  ]
+}
