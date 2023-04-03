@@ -62,10 +62,16 @@ exports.loginUser = async (req, res) => {
                 return res.send({ continueWork: false, message: "Password not correct" })
             }
 
-            const cookiesData = { name: user[0].UserName, userID: user[0].UserID, userRole: user[0].UserRole }
+            const cookiesData = { userID: user[0].UserID }
             const token = jwt.encode(cookiesData, process.env.SECRET)
             res.cookie("web-learning-token", token, { maxAge: 1000 * 60 * 60 * 3, httpOnly: true })
-            res.send({ continueWork: true, message: "User Login" })
+            res.send({
+                continueWork: true,
+                userLogin: true,
+                message: "User Login",
+                userName: user[0].UserName,
+                userRole: user[0].UserRole
+            })
         })
     } catch (error) {
         console.log('error UserCont.js line:77');

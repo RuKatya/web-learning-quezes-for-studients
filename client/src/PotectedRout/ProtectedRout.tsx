@@ -6,15 +6,16 @@ interface ProtectedRoutProps {
     isLogin: boolean,
     children?: ReactNode
 }
-const ProtectedRout:FC<ProtectedRoutProps> = ({isLogin, children}) => {
-    const navigate = useNavigate();
-    useEffect(()=>{
-        if(!isLogin) {
-            return navigate("/auth", {replace:true});
-        }
-    },[isLogin])
 
-  return <>{children}</>
+const ProtectedRout: FC<ProtectedRoutProps> = ({ isLogin, children }) => {
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (!isLogin) {
+            return navigate("/auth", { replace: true });
+        }
+    }, [isLogin, navigate])
+
+    return <>{children}</>
 }
 
 export default ProtectedRout
