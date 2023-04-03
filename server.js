@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 8080
 const cookieParser = require('cookie-parser');
 
 app.use(express.json())
+app.use(express.static('client/build'))
 
 const connection = mysql.createConnection({
     host: process.env.HOST,

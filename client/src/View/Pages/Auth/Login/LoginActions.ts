@@ -24,7 +24,8 @@ export const loginAction = async ({ request }: any) => {
 
     const { continueWork, error, message } = data;
 
-    if (continueWork) return redirect("/auth")
+    if (data) return data
+    // if (continueWork) return redirect("/dashboard")
 
     if (error) return message;
 }

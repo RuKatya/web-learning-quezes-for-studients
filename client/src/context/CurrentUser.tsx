@@ -1,5 +1,11 @@
-import { createContext } from 'react'
+import { createContext, useContext } from 'react'
 
-const CurrentUser = createContext({})
+interface CurrentUserContextInterface {
+    isLogin: boolean,
+    userName: string,
+    userRole: string
+}
 
-export default CurrentUser
+export const CurrentUserContext = createContext<CurrentUserContextInterface>({ isLogin: false, userName: "", userRole: "" })
+
+export const CurrentUser = () => useContext(CurrentUserContext)

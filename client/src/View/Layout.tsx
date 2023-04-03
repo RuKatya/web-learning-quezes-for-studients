@@ -1,10 +1,12 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Navbar from './Components/Navbar'
-// import PropTypes from 'prop-types'
+import { CurrentUser } from '../context/CurrentUser'
 
 const Layout = () => {
     const [admin, setAdmin] = useState<string>()
+    const navigate = useNavigate();
+    const currentUserLogin = CurrentUser()
 
     // localStorage.setItem('AdminKatya', JSON.stringify("KatyaAdmin"))
 
@@ -16,6 +18,12 @@ const Layout = () => {
         }
     }, [])
 
+    useEffect(() => {
+        if (currentUserLogin.isLogin) {
+            return navigate("/dashboard", { replace: true })
+        }
+    }, [currentUserLogin, navigate])
+
     return (
         <div>
             <Navbar admin={admin} />
@@ -23,9 +31,5 @@ const Layout = () => {
         </div>
     )
 }
-
-// Layout.propTypes = {
-
-// }
 
 export default Layout

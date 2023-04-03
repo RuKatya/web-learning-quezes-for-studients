@@ -1,14 +1,15 @@
 import { FC, ReactNode, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-// import { Navigate } from 'react-router-dom'
+import { CurrentUser } from '../context/CurrentUser';
 
 interface ProtectedRoutProps {
-    isLogin: boolean,
     children?: ReactNode
 }
 
-const ProtectedRout: FC<ProtectedRoutProps> = ({ isLogin, children }) => {
+const ProtectedRout: FC<ProtectedRoutProps> = ({ children }) => {
     const navigate = useNavigate();
+    const { isLogin } = CurrentUser()
+
     useEffect(() => {
         if (!isLogin) {
             return navigate("/auth", { replace: true });

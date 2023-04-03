@@ -55,6 +55,11 @@ exports.loginUser = async (req, res) => {
 
             console.log(user)
 
+            if (user.length == 0) {
+                console.log('%cUserCont.js line:60 User not exist');
+                return res.send({ continueWork: false, message: "User not exist" })
+            }
+
             const comparePass = await bcrypt.compare(password, user[0].UserPassword)
 
             if (!comparePass) {
@@ -67,7 +72,7 @@ exports.loginUser = async (req, res) => {
             res.cookie("web-learning-token", token, { maxAge: 1000 * 60 * 60 * 3, httpOnly: true })
             res.send({
                 continueWork: true,
-                userLogin: true,
+                isLogin: true,
                 message: "User Login",
                 userName: user[0].UserName,
                 userRole: user[0].UserRole

@@ -1,5 +1,5 @@
-import { useState, useContext } from 'react'
-import { RouterProvider, Route, createBrowserRouter, createRoutesFromElements, } from "react-router-dom";
+import { useState } from 'react'
+import { RouterProvider, Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 import Layout from "../View/Layout";
 import App from "../App";
 import Login from "../View/Pages/Auth/Login/Login";
@@ -9,39 +9,37 @@ import { registAction } from "../View/Pages/Auth/Regist/RegistActions";
 import { loginAction } from "../View/Pages/Auth/Login/LoginActions";
 import Dashboard from "../View/Pages/Dashboard/Dashboard";
 import ProtectedRout from "../PotectedRout/ProtectedRout";
-import CurrentUser from "../context/CurrentUser";
+import { CurrentUserContext } from '../context/CurrentUser';
+
+interface UserDetails {
+    isLogin: boolean,
+    userName: string,
+    userRole: string
+}
 
 const RouterPage = () => {
-    const [user, setUser] = useState({})
-    const loggedUser = useContext(CurrentUser)
-    console.log(loggedUser)
+    const [user, setUser] = useState<UserDetails>({ isLogin: false, userName: "", userRole: "" })
 
     const router = createBrowserRouter(
         createRoutesFromElements(
-            <>
-
-                <Route path="/" element={<Layout />}>
-                    <Route index element={<App />} />
-                    <Route path="auth" element={<Auth />} action={loginAction}>
-                        <Route index element={<Login setUser={setUser} />} />
-                        <Route path="registretion" element={<Registration />} action={registAction} />
-                    </Route>
-                    <Route path="dashboard" element={
-                        <ProtectedRout isLogin={false}>
-                            <Dashboard />
-                        </ProtectedRout>
-                    } />
-
-                    {/* </Route> */}
+            <Route path="/" element={<Layout />}>
+                <Route index element={<App />} />
+                <Route path="auth" element={<Auth />} action={loginAction}>
+                    <Route index element={<Login setUser={setUser} />} />
+                    <Route path="registretion" element={<Registration />} action={registAction} />
                 </Route>
-                {/* </CurrentUser.Provider> */}
-            </>
+                <Route path="dashboard" element={
+                    <ProtectedRout>
+                        <Dashboard />
+                    </ProtectedRout>
+                } />
+            </Route>
         )
     )
 
-    return <CurrentUser.Provider value={user}>
+    return <CurrentUserContext.Provider value={user}>
         <RouterProvider router={router} />
-    </CurrentUser.Provider>
+    </CurrentUserContext.Provider>
 }
 
 export default RouterPage
