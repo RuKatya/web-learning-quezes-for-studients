@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
+const path = require('path')
 const mysql = require('mysql2');
 const PORT = process.env.PORT || 8080
 const cookieParser = require('cookie-parser');
@@ -8,9 +9,6 @@ const cookieParser = require('cookie-parser');
 app.use(express.json())
 app.use(express.static('client/build'))
 
-// app.get('/', (req, res) => {
-//     res.send(`<h1>Hello</h1>`)
-// })
 
 const connection = mysql.createConnection({
     host: process.env.HOST,
@@ -29,6 +27,11 @@ const connection = mysql.createConnection({
         console.log(error)
     }
 })()
+
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
+});
+
 
 app.use('/users', require('./routers/Users/usersRout'))
 app.use('/subjects', require('./routers/Subject/subjectsRout'))
