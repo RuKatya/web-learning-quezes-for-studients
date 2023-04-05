@@ -6,29 +6,33 @@ const PORT = process.env.PORT || 8080
 const cookieParser = require('cookie-parser');
 
 app.use(express.json())
-app.use(express.static('client/build'))
+// app.use(express.static('client/build'))
 
-const connection = mysql.createConnection({
-    host: process.env.HOST,
-    port: process.env.HOST_PORT,
-    user: process.env.HOST_USER,
-    password: process.env.HOST_PASS,
-    database: process.env.HOST_DB
-});
+app.get('/', (req, res) => {
+    res.send(`<h1>Hello</h1>`)
+})
 
-(async () => {
-    try {
-        await connection.connect();
-        console.log(`db connected`)
-    } catch (error) {
-        console.log(error)
-    }
-})()
+// const connection = mysql.createConnection({
+//     host: process.env.HOST,
+//     port: process.env.HOST_PORT,
+//     user: process.env.HOST_USER,
+//     password: process.env.HOST_PASS,
+//     database: process.env.HOST_DB
+// });
 
-app.use('/users', require('./routers/Users/usersRout'))
-app.use('/subjects', require('./routers/Subject/subjectsRout'))
-app.use('/title-quiz', require('./routers/Title/TitleRou'))
-app.use('/title-questions', require('./routers/Questions/QuestionRout'))
+// (async () => {
+//     try {
+//         await connection.connect();
+//         console.log(`db connected`)
+//     } catch (error) {
+//         console.log(error)
+//     }
+// })()
+
+// app.use('/users', require('./routers/Users/usersRout'))
+// app.use('/subjects', require('./routers/Subject/subjectsRout'))
+// app.use('/title-quiz', require('./routers/Title/TitleRou'))
+// app.use('/title-questions', require('./routers/Questions/QuestionRout'))
 
 app.listen(PORT, () => {
     console.log(`http://localhost:${PORT}`)
