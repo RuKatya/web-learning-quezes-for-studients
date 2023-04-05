@@ -8,9 +8,9 @@ const cookieParser = require('cookie-parser');
 app.use(express.json())
 app.use(express.static('client/build'))
 
-app.get('/', (req, res) => {
-    res.send(`<h1>Hello</h1>`)
-})
+// app.get('/', (req, res) => {
+//     res.send(`<h1>Hello</h1>`)
+// })
 
 const connection = mysql.createConnection({
     host: process.env.HOST,
@@ -30,10 +30,10 @@ const connection = mysql.createConnection({
     }
 })()
 
-// app.use('/users', require('./routers/Users/usersRout'))
-// app.use('/subjects', require('./routers/Subject/subjectsRout'))
-// app.use('/title-quiz', require('./routers/Title/TitleRou'))
-// app.use('/title-questions', require('./routers/Questions/QuestionRout'))
+app.use('/users', require('./routers/Users/usersRout'))
+app.use('/subjects', require('./routers/Subject/subjectsRout'))
+app.use('/title-quiz', require('./routers/Title/TitleRou'))
+app.use('/title-questions', require('./routers/Questions/QuestionRout'))
 
 app.listen(PORT, () => {
     console.log(`http://localhost:${PORT}`)

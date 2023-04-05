@@ -2,6 +2,18 @@ const connection = require("../../connection");
 const bcrypt = require('bcryptjs');
 const jwt = require('jwt-simple');
 const { userRegValidation, userLogValidation } = require("../../validation/authValid");
+const { transporter } = require("../../nodeMailer/connectionMailer");
+const { info } = require("../../nodeMailer/mailToUsers");
+// const nodemailer = require("nodemailer");
+
+// const transporter = nodemailer.createTransport({
+//     host: "sandbox.smtp.mailtrap.io",
+//     port: 2525,
+//     auth: {
+//       user: "711accb5d2c5a0",
+//       pass: "cbde3b46d2c9f5"
+//     }
+//   });
 
 exports.addNewUser = async (req, res) => {
     try {
@@ -20,12 +32,13 @@ exports.addNewUser = async (req, res) => {
 
         const saveUser = `INSERT INTO users (Email, UserName, UserPassword, UserRole ) VALUES ("${email}", "${userName}","${hashpass}","user")`
 
-        connection.query(saveUser, (err, result) => {
+        connection.query(saveUser, async (err, result) => {
             if (err) {
                 console.log('UserConst.js line:11', err.sqlMessage);
                 return res.send({ continueWork: false, message: err.sqlMessage })
             }
 
+            // await info(email)
             res.send({ continueWork: true, message: "User Saved" })
         })
     } catch (error) {
