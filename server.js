@@ -6,28 +6,29 @@ const PORT = process.env.PORT || 8080
 const cookieParser = require('cookie-parser');
 
 app.use(express.json())
-// app.use(express.static('client/build'))
+app.use(express.static('client/build'))
 
 app.get('/', (req, res) => {
     res.send(`<h1>Hello</h1>`)
 })
 
-// const connection = mysql.createConnection({
-//     host: process.env.HOST,
-//     port: process.env.HOST_PORT,
-//     user: process.env.HOST_USER,
-//     password: process.env.HOST_PASS,
-//     database: process.env.HOST_DB
-// });
+const connection = mysql.createConnection({
+    host: process.env.HOST,
+    port: process.env.HOST_PORT,
+    user: process.env.HOST_USER,
+    password: process.env.HOST_PASS,
+    database: process.env.HOST_DB
+});
 
-// (async () => {
-//     try {
-//         await connection.connect();
-//         console.log(`db connected`)
-//     } catch (error) {
-//         console.log(error)
-//     }
-// })()
+(async () => {
+    try {
+        await connection.connect();
+        console.log(`db connected`)
+    } catch (error) {
+        console.log('%cserver.js line:28 error');
+        console.log(error)
+    }
+})()
 
 // app.use('/users', require('./routers/Users/usersRout'))
 // app.use('/subjects', require('./routers/Subject/subjectsRout'))
