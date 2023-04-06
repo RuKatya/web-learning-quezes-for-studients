@@ -2,18 +2,8 @@ const connection = require("../../connection");
 const bcrypt = require('bcryptjs');
 const jwt = require('jwt-simple');
 const { userRegValidation, userLogValidation } = require("../../validation/authValid");
-const { transporter } = require("../../nodeMailer/connectionMailer");
-const { info } = require("../../nodeMailer/mailToUsers");
-// const nodemailer = require("nodemailer");
-
-// const transporter = nodemailer.createTransport({
-//     host: "sandbox.smtp.mailtrap.io",
-//     port: 2525,
-//     auth: {
-//       user: "711accb5d2c5a0",
-//       pass: "cbde3b46d2c9f5"
-//     }
-//   });
+// const { transporter } = require("../../nodeMailer/connectionMailer");
+// const { info } = require("../../nodeMailer/mailToUsers");
 
 exports.addNewUser = async (req, res) => {
     try {

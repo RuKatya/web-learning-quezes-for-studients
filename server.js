@@ -27,7 +27,7 @@ const connection = mysql.createConnection({
 (async () => {
     try {
         await connection.connect();
-        console.log(`db connected`)
+        console.log(`db connected to ${process.env.HOST}`)
     } catch (error) {
         console.log('%cserver.js line:28 error');
         console.log(error)
