@@ -32,7 +32,7 @@ exports.addNewUser = async (req, res) => {
             res.send({ continueWork: true, message: "User Saved" })
         })
     } catch (error) {
-        console.log('error UserCont.js line:32');
+        console.log('error UserCont.js line:35 function addNewUser');
         console.log(error)
     }
 }
@@ -72,7 +72,7 @@ exports.loginUser = async (req, res) => {
 
             const cookiesData = { userID: user[0].UserID }
             const token = jwt.encode(cookiesData, process.env.SECRET)
-            res.cookie("web-learning-token", token, { maxAge: 1000 * 60 * 60 * 3, httpOnly: true })
+            res.cookie("weblearningtoken", token, { maxAge: 1000 * 60 * 60 * 3, httpOnly: true })
             res.send({
                 continueWork: true,
                 isLogin: true,
@@ -82,7 +82,57 @@ exports.loginUser = async (req, res) => {
             })
         })
     } catch (error) {
-        console.log('error UserCont.js line:77');
+        console.log('error UserCont.js line:85 function loginUser');
+        console.log(error)
+    }
+}
+
+exports.checkUserCookies = async (req, res) => {
+    try {
+        const {weblearningtoken} = req.cookies
+        // const {cookies} = req
+        console.log(weblearningtoken)
+
+        const {userID} = await jwt.decode(weblearningtoken, process.env.SECRET)
+        console.log(userID)
+        // const { id } = decoded;
+
+        if(!weblearningtoken) {
+            return res.send({continueWork: false, isLogin: false})
+        }
+        
+
+        const userSearch = `SELECT * FROM users WHERE userID=${userID}`
+
+        connection.query(userSearch, async (err, user)=>{
+            if (err) {
+                console.log(err.sqlMessage);
+                return res.send({ continueWork: false, message: err.sqlMessage })
+            }
+
+            const cookiesData = { userID: user[0].UserID }
+            const token = jwt.encode(cookiesData, process.env.SECRET)
+            res.cookie("weblearningtoken", token, { maxAge: 1000 * 60 * 60 * 3, httpOnly: true })
+            res.send({
+                continueWork: true,
+                isLogin: true,
+                message: "User Login",
+                userName: user[0].UserName,
+                userRole: user[0].UserRole
+            })
+        })
+        // res.send({
+        //     continueWork: true,
+        //     isLogin: true,
+        //     message: "User Login",
+        //     userName: user[0].UserName,
+        //     userRole: user[0].UserRole
+        // })
+
+
+        // console.log(req)
+    } catch (error) {
+        console.log('error UserCont.js line:94 function checkUserCookies');
         console.log(error)
     }
 }

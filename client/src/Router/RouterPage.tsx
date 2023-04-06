@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { RouterProvider, Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 import Layout from "../View/Layout";
 import App from "../App";
@@ -7,7 +7,7 @@ import Auth from "../View/Pages/Auth/Auth";
 import Registration from "../View/Pages/Auth/Regist/Registration";
 import { registAction } from "../View/Pages/Auth/Regist/RegistActions";
 import { loginAction } from "../View/Pages/Auth/Login/LoginActions";
-import Dashboard from "../View/Pages/Dashboard/Dashboard";
+import Dashboard, { dashboardLoader } from "../View/Pages/Dashboard/Dashboard";
 import ProtectedRout from "../PotectedRout/ProtectedRout";
 import { CurrentUserContext } from '../context/CurrentUser';
 
@@ -29,10 +29,10 @@ const RouterPage = () => {
                     <Route path="registretion" element={<Registration />} action={registAction} />
                 </Route>
                 <Route path="dashboard" element={
-                    <ProtectedRout>
-                        <Dashboard />
+                     <ProtectedRout>
+                        <Dashboard setUser={setUser} />
                     </ProtectedRout>
-                } />
+                } loader={dashboardLoader}/>
             </Route>
         )
     )

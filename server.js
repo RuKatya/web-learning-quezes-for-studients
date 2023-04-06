@@ -7,8 +7,8 @@ const PORT = process.env.PORT || 8080
 const cookieParser = require('cookie-parser');
 
 connectionToENV()
-app.use(cookieParser())
 app.use(express.json())
+app.use(cookieParser())
 app.use(express.static('client/build'))
 
 const connection = mysql.createConnection({
@@ -29,14 +29,15 @@ const connection = mysql.createConnection({
     }
 })()
 
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
-});
 
 app.use('/users', require('./routers/Users/usersRout'))
 app.use('/subjects', require('./routers/Subject/subjectsRout'))
 app.use('/title-quiz', require('./routers/Title/TitleRou'))
 app.use('/title-questions', require('./routers/Questions/QuestionRout'))
+
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
+});
 
 app.listen(PORT, () => {
     console.log(`http://localhost:${PORT}`)
