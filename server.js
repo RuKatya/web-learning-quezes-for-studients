@@ -1,11 +1,11 @@
+const path = require('path')
+const express = require('express')
+const app = express()
 if(process.env.NODE_ENV == "production") {
     require('dotenv').config({ path: path.join(__dirname, `../.env.${process.env.NODE_ENV}`)}); 
 } else {
     require('dotenv').config()
 }
-const express = require('express')
-const app = express()
-const path = require('path')
 const mysql = require('mysql2');
 const PORT = process.env.PORT || 8080
 const cookieParser = require('cookie-parser');
