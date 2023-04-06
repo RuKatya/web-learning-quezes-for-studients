@@ -1,15 +1,13 @@
 const path = require('path')
 const express = require('express')
 const app = express()
-if(process.env.NODE_ENV == "production") {
-    require('dotenv').config({ path: path.join(__dirname, `../.env.${process.env.NODE_ENV}`)}); 
-} else {
-    require('dotenv').config()
-}
+const { connectionToENV } = require('./utils/connectionToENV');
 const mysql = require('mysql2');
 const PORT = process.env.PORT || 8080
 const cookieParser = require('cookie-parser');
 
+connectionToENV()
+app.use(cookieParser())
 app.use(express.json())
 app.use(express.static('client/build'))
 
@@ -34,7 +32,6 @@ const connection = mysql.createConnection({
 app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
 });
-
 
 app.use('/users', require('./routers/Users/usersRout'))
 app.use('/subjects', require('./routers/Subject/subjectsRout'))
