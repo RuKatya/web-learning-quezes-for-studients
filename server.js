@@ -13,9 +13,6 @@ const cookieParser = require('cookie-parser');
 app.use(express.json())
 app.use(express.static('client/build'))
 
-console.log(`./.env.${process.env.NODE_ENV}`)
-console.log(process.env.NODE_ENV)
-
 const connection = mysql.createConnection({
     host: process.env.HOST,
     port: process.env.HOST_PORT,
