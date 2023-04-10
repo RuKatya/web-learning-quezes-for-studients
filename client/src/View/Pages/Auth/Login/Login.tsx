@@ -1,32 +1,34 @@
 import { FC, useEffect, useState } from 'react'
-import { useActionData } from 'react-router-dom';
 import AuthForm from '../../../UI/AuthForm'
 import Input from '../../../UI/Input'
+import { useActionData, useNavigate, useNavigation } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '../../../../app/hooks'
+import { selectAuth, userLogin } from '../../../../features/auth/authSlice'
 
 const loginInputs = [
     { type: "email", name: "email", placeholder: "Email" },
     { type: "password", name: "password", placeholder: "Password" }
 ]
 
-interface LoginProps {
-    setUser: Function
-}
-
-const Login: FC<LoginProps> = ({ setUser }) => {
-    const data: any = useActionData();
-    const [errorFromServer, setErrorFromServer] = useState()
+const Login: FC = () => {
+    const [errorFromServer, setErrorFromServer] = useState<string>()
+    const navigate = useNavigate()
+    const data: any = useActionData()
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
-        if (data) {
-            const { continueWork, message, isLogin, userName, userRole } = data
-
-            if (!continueWork) {
-                return setErrorFromServer(message)
+        (async () => {
+            if (data) {
+                const { isLogin, userName, userRole, message, continueWork } = data
+                if (continueWork) {
+                    dispatch(userLogin({ isLogin, userName, userRole }))
+                    await navigate('/')
+                } else {
+                    setErrorFromServer(message)
+                }
             }
-
-            return setUser({ isLogin, userName, userRole })
-        }
-    }, [data, setUser])
+        })()
+    })
 
     return (
         <div>
@@ -41,3 +43,24 @@ const Login: FC<LoginProps> = ({ setUser }) => {
 }
 
 export default Login
+
+/*
+interface LoginProps {
+    setUser: Function
+}
+    // <LoginProps>
+        // const data: any = useActionData();
+        // const [errorFromServer, setErrorFromServer] = useState()
+
+        // useEffect(() => {
+        //     if (data) {
+        //         const { continueWork, message, isLogin, userName, userRole } = data
+
+        //         if (!continueWork) {
+        //             return setErrorFromServer(message)
+        //         }
+
+        //         return setUser({ isLogin, userName, userRole })
+        //     }
+        // }, [data, setUser])
+*/

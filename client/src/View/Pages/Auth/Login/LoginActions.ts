@@ -22,10 +22,9 @@ export const loginAction = async ({ request }: any) => {
 
     const data = await login(registUser);
 
-    const { continueWork, error, message } = data;
+    const { error, message } = data;
 
     if (data) return data
-    // if (continueWork) return redirect("/dashboard")
 
     if (error) return message;
 }

@@ -13,13 +13,13 @@ const Input: FC<InputsProps> = ({ type, name, placeholder }) => {
     return (
         name === "password" || name === "confirmPassword" ?
             <>
-                <input type={showPass ? 'text' : 'password'} name={name} placeholder={placeholder} />
+                <input type={showPass ? 'text' : 'password'} name={name} placeholder={placeholder} required />
                 <button
                     type="button"
                     onClick={() => setShowPass(!showPass)}>Show pass</button>
             </>
             :
-            <input type={type} name={name} placeholder={placeholder} />)
+            <input type={type} name={name} placeholder={placeholder} required />)
 }
 
 export default Input
