@@ -10,7 +10,6 @@ export const themes: Themes = {
 
 export const getTheme = () => {
     const theme = `${window?.localStorage?.getItem("theme")}`;
-    console.log('%cuseTheme.ts line:13 theme', 'color: #007acc;', theme);
 
     if (Object.values(themes).includes(theme)) return theme;
 

@@ -1,5 +1,4 @@
 import axios from "axios";
-import { redirect } from "react-router-dom";
 import { LoginUser } from "./LoginInterface";
 
 const login = async ({ email, password }: LoginUser) => {

@@ -1,0 +1,70 @@
+.nav {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+
+  &__dark-theme {
+    background-color: $dark-theme-main;
+  }
+
+  &__light-theme {
+    background-color: $light-theme-main;
+  }
+
+  & > div {
+    display: flex;
+  }
+
+  .homePagebtn {
+    width: clamp(150px, 20vw, 220px);
+  }
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  padding: 0% 1%;
+  width: 90%;
+  justify-content: flex-end;
+
+  &__link {
+    font-family: "Arial";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: $inputs-radius;
+    padding: 0.5%;
+    width: 14%;
+    margin: 0% 1%;
+    font-size: 20px;
+
+    &--dark {
+      background-color: $dark-theme-btn-color;
+      color: $dark-theme-main;
+    }
+
+    &--light {
+      background-color: $light-theme-btn-color;
+      color: $light-theme-main;
+    }
+
+    &--favQuizes {
+      padding: 0.2%;
+
+      & span {
+        position: relative;
+        left: 10%;
+        background-color: #cf1cf1;
+        border-radius: $inputs-radius;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 30px;
+        height: 30px;
+        font-size: 18px;
+      }
+    }
+  }
+}

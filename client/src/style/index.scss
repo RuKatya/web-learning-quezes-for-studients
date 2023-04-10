@@ -1,7 +1,14 @@
 @import "./vars/index";
+@import "./components/themeBtn";
+@import "./components/navbar";
+@import "./pages/bodyStyle";
+@import "./logo/logo";
 
 body {
-  background-color: aqua;
   width: clamp(250px, 100%, 1440px);
   margin: 0% auto;
+}
+
+a {
+  text-decoration: none;
 }

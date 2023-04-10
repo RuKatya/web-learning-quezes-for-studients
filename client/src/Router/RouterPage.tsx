@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { RouterProvider, Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 import Layout from "../View/Layout";
 import App from "../App";
@@ -9,21 +8,8 @@ import { registAction } from "../View/Pages/Auth/Regist/RegistActions";
 import { loginAction } from "../View/Pages/Auth/Login/LoginActions";
 import Dashboard from "../View/Pages/Dashboard/Dashboard";
 import UserProfile from "../View/Pages/UserProfile/UserProfile";
-import { useAppSelector } from "../app/hooks";
-import { selectAuth } from "../features/auth/authSlice";
-// import { useTheme } from '../hooks/useTheme';
-import { selectTheme } from '../features/dark-light-theme/theme';
 
 const RouterPage = () => {
-    // const [theme, setTheme] = useState(useTheme);
-
-    // useEffect(() => {
-    //     localStorage.setItem("theme", theme);
-    // }, [theme]);
-
-    const theme = useAppSelector(selectTheme)
-    console.log(theme)
-
     const router = createBrowserRouter(
         createRoutesFromElements(
             <Route path="/" element={<Layout />}>

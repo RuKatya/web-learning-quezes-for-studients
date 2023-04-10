@@ -1,9 +1,9 @@
 import { FC, useEffect, useState } from 'react'
 import AuthForm from '../../../UI/AuthForm'
 import Input from '../../../UI/Input'
-import { useActionData, useNavigate, useNavigation } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '../../../../app/hooks'
-import { selectAuth, userLogin } from '../../../../features/auth/authSlice'
+import { useActionData, useNavigate } from 'react-router-dom'
+import { useAppDispatch } from '../../../../app/hooks'
+import { userLogin } from '../../../../features/auth/authSlice'
 
 const loginInputs = [
     { type: "email", name: "email", placeholder: "Email" },

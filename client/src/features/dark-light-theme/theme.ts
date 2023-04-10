@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { ThemeState } from './themeInterface';
-import { getTheme } from '../../hooks/useTheme';
+import { getTheme } from '../../utils/useTheme';
 
 const initialState: ThemeState = {
     themeColor: getTheme()

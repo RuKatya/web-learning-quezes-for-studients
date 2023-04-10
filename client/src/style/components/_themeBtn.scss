@@ -1,0 +1,14 @@
+.themeBtn {
+  background-color: #9399c6;
+  border-radius: $inputs-radius;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  & img {
+    width: 65%;
+  }
+}
