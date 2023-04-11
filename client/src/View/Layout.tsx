@@ -4,10 +4,15 @@ import Navbar from './Components/Navigation/Navbar'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { selectTheme } from '../features/dark-light-theme/theme'
 import { checkLogin } from '../features/auth/authAPI'
+import { selectAuth } from '../features/auth/authSlice'
 
 const Layout = () => {
     const theme = useAppSelector(selectTheme)
     const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(checkLogin())
+    })
 
     useEffect(() => {
         const body = document.querySelector('body')
@@ -20,10 +25,6 @@ const Layout = () => {
             body?.classList.remove("dark-body")
         }
     }, [theme])
-
-    useEffect(() => {
-        dispatch(checkLogin())
-    })
 
     return (
         <div>

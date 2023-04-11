@@ -22,7 +22,7 @@ const Login: FC = () => {
                 const { isLogin, userName, userRole, message, continueWork } = data
                 if (continueWork) {
                     dispatch(userLogin({ isLogin, userName, userRole }))
-                    await navigate('/')
+                    await navigate('/', { replace: true })
                 } else {
                     setErrorFromServer(message)
                 }
