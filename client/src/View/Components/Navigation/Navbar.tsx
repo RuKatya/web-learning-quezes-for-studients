@@ -1,4 +1,3 @@
-// import { useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
 import { FC } from 'react'
 import { useAppSelector } from "../../../app/hooks";
@@ -7,12 +6,13 @@ import ThemeSwitchButton from "../../UI/ThemeButton";
 import Logo from "../../logo/Logo";
 import { selectTheme } from "../../../features/dark-light-theme/theme";
 import LinksOfMav from "./LinksOfMav";
+import AdminBtn from "./AdminBtn";
+import LogoutBtn from "./LogoutBtn";
 
 const linksForUser = [
   { link: "", title: "Fav Quizes" },
   { link: "", title: "Statistic" },
-  { link: "/profile", title: "Profile" },
-  { link: "/", title: "Logout" },
+  { link: "/profile/1", title: "Profile" },
 ]
 const Navbar: FC = () => {
   const user = useAppSelector(selectAuth);
@@ -24,15 +24,12 @@ const Navbar: FC = () => {
         <Logo />
       </Link>
       <div className={`navigation`}>
-        {user.isLogin && user.userRole === "admin" && (
-          <Link
-            to="/dashboard"
-            className={`navigation__link navigation__link--${theme}`}
-          >Dashboard</Link>
-        )}
-        {user.isLogin && linksForUser.map(link => (
-          <LinksOfMav link={link.link} title={link.title} />
-        ))}
+        <AdminBtn />
+        {user.isLogin && linksForUser.map((link, index) => (
+          <LinksOfMav key={index} link={link.link} title={link.title} />
+        ))
+        }
+        <LogoutBtn />
         <ThemeSwitchButton />
       </div>
     </nav>
@@ -40,26 +37,3 @@ const Navbar: FC = () => {
 };
 
 export default Navbar;
-
-
-/*
-
- <Link
-            to=""
-            className={`navigation__link navigation__link--${theme}`}
-          >Fav Quizes <span>11</span></Link>
-          <Link
-            to=""
-            className={`navigation__link navigation__link--${theme}`}
-          >Statistic</Link>
-          <Link
-            to="/profile"
-            className={`navigation__link navigation__link--${theme}`}
-          >Profile</Link>
-          <Link
-            to="logout"
-            className={`navigation__link navigation__link--${theme}`}
-          >{user.userName} | Logut</Link>
-        </> 
-
-        */

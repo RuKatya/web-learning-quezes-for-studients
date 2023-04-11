@@ -89,22 +89,18 @@ exports.loginUser = async (req, res) => {
 
 exports.checkUserCookies = async (req, res) => {
     try {
-        const {weblearningtoken} = req.cookies
-        // const {cookies} = req
-        console.log(weblearningtoken)
+        const { weblearningtoken } = req.cookies
 
-        const {userID} = await jwt.decode(weblearningtoken, process.env.SECRET)
-        console.log(userID)
-        // const { id } = decoded;
+        const { userID } = await jwt.decode(weblearningtoken, process.env.SECRET)
 
-        if(!weblearningtoken) {
-            return res.send({continueWork: false, isLogin: false})
+        if (!weblearningtoken) {
+            console.log(`No cookie token`)
+            return res.send({ continueWork: false, isLogin: false })
         }
-        
 
         const userSearch = `SELECT * FROM users WHERE userID=${userID}`
 
-        connection.query(userSearch, async (err, user)=>{
+        connection.query(userSearch, async (err, user) => {
             if (err) {
                 console.log(err.sqlMessage);
                 return res.send({ continueWork: false, message: err.sqlMessage })
@@ -121,18 +117,20 @@ exports.checkUserCookies = async (req, res) => {
                 userRole: user[0].UserRole
             })
         })
-        // res.send({
-        //     continueWork: true,
-        //     isLogin: true,
-        //     message: "User Login",
-        //     userName: user[0].UserName,
-        //     userRole: user[0].UserRole
-        // })
-
-
-        // console.log(req)
     } catch (error) {
         console.log('error UserCont.js line:94 function checkUserCookies');
+        console.log(error.message)
+        return res.send({ continueWork: false, isLogin: false })
+    }
+}
+
+exports.userLogout = async (req, res) => {
+    console.log(`out`)
+    try {
+        res.clearCookie('weblearningtoken')
+        return res.send({ continueWork: false, isLogin: false })
+    } catch (error) {
+        console.log('error UserCont.js line:130 function userLogout');
         console.log(error)
     }
 }

@@ -1,11 +1,13 @@
 import { useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 import Navbar from './Components/Navigation/Navbar'
-import { useAppSelector } from '../app/hooks'
+import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { selectTheme } from '../features/dark-light-theme/theme'
+import { checkLogin } from '../features/auth/authAPI'
 
 const Layout = () => {
     const theme = useAppSelector(selectTheme)
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
         const body = document.querySelector('body')
@@ -18,6 +20,10 @@ const Layout = () => {
             body?.classList.remove("dark-body")
         }
     }, [theme])
+
+    useEffect(() => {
+        dispatch(checkLogin())
+    })
 
     return (
         <div>

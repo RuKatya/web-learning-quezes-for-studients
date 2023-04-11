@@ -8,6 +8,8 @@ import { registAction } from "../View/Pages/Auth/Regist/RegistActions";
 import { loginAction } from "../View/Pages/Auth/Login/LoginActions";
 import Dashboard from "../View/Pages/Dashboard/Dashboard";
 import UserProfile from "../View/Pages/UserProfile/UserProfile";
+import UserProtectedRout from "../PotectedRout/UserProtectedRout";
+import DashboardProtectedRout from "../PotectedRout/DashboardProtectedRout";
 
 const RouterPage = () => {
     const router = createBrowserRouter(
@@ -18,8 +20,16 @@ const RouterPage = () => {
                     <Route index element={<Login />} />
                     <Route path="registretion" element={<Registration />} action={registAction} />
                 </Route>
-                <Route path="dashboard" element={<Dashboard />} />
-                <Route path="profile/:id" element={<UserProfile />} />
+                <Route path="dashboard" element={
+                    <DashboardProtectedRout>
+                        <Dashboard />
+                    </DashboardProtectedRout>
+                } />
+                <Route path="profile/:id" element={
+                    <UserProtectedRout>
+                        <UserProfile />
+                    </UserProtectedRout>
+                } />
             </Route>
         )
     )
