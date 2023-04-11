@@ -10,18 +10,18 @@ interface FormProps {
 
 const AuthForm: FC<FormProps> = ({ children, title, buttonText, action }) => {
     return (
-        <Form action={action} method='post'>
-            <h2>{title}</h2>
-            <div>
+        <div className='authPage'>
+            <Form action={action} method='post' className='authForm'>
+                <h2>{title}</h2>
                 {children}
-            </div>
-            <button type="submit">{buttonText}</button>
-            {title === "Login" ?
-                <>Do not have account? <Link to="/auth/registretion">Registration</Link></>
-                :
-                <>Alredy exist? <Link to="/auth">Login</Link></>
-            }
-        </Form>
+                <button type="submit">{buttonText}</button>
+                {title === "Login" ?
+                    <div>Do not have an account? <Link to="/auth/registretion">Sign up</Link></div>
+                    :
+                    <div>Have an account? <Link to="/auth">Login now </Link></div>
+                }
+            </Form>
+        </div>
     )
 }
 
