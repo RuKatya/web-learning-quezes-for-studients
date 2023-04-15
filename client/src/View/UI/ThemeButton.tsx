@@ -1,5 +1,7 @@
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectTheme, setUserTheme } from '../../features/dark-light-theme/theme';
+import sunIcon from '../../images/icons/sun.svg'
+import moonIcon from '../../images/icons/moon.svg'
 
 const ThemeSwitchButton = () => {
     const dispatch = useAppDispatch()
@@ -10,8 +12,8 @@ const ThemeSwitchButton = () => {
             <img
                 src={
                     theme === "dark"
-                        ? `/images/icons/sun.svg`
-                        : `/images/icons/moon.svg`
+                        ? sunIcon
+                        : moonIcon
                 }
                 alt="change icon theme"
                 onClick={

@@ -12,14 +12,11 @@ const initialState: AuthState = {
     status: 'idle',
 };
 
-
-
 export const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
         userLogin: (state, action: PayloadAction<User>) => {
-            console.log(action.payload)
             state.user = {
                 isLogin: action.payload.isLogin,
                 userName: action.payload.userName,
@@ -56,9 +53,8 @@ export const authSlice = createSlice({
             })
             .addCase(logout.fulfilled, (state, action: PayloadAction<{ continueWork: boolean, isLogin: boolean }>) => {
                 state.status = 'idle';
-                console.log(action.payload)
                 state.user = {
-                    isLogin: false,
+                    isLogin: action.payload.isLogin,
                     userName: "",
                     userRole: ""
                 }

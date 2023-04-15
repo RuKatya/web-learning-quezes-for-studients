@@ -16,7 +16,7 @@ const DashboardProtectedRout: FC<ProtectedRoutProps> = ({ children }) => {
                 return navigate("/auth", { replace: true });
             }
         })
-    }, [user, navigate])
+    })
 
     return user.isLogin && user.userRole === "admin" ? <>{children}</> :
         user.isLogin ? <>{navigate("/", { replace: true })}</> : <>{navigate("/auth", { replace: true })}</>

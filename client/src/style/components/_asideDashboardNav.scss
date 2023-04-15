@@ -1,0 +1,11 @@
+.asideDashboardNav {
+  background-color: aqua;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & a {
+    background-color: azure;
+    font-size: 1.3rem;
+  }
+}

@@ -1,10 +1,6 @@
-import React, { useEffect } from 'react'
-import { useAppDispatch, useAppSelector } from '../../../app/hooks'
-import { checkLogin } from '../../../features/auth/authAPI'
-import { selectAuth } from '../../../features/auth/authSlice'
+import React from 'react'
 
 const UserProfile = () => {
-    const user = useAppSelector(selectAuth);
 
     return (
         <div>

@@ -12,7 +12,7 @@ exports.saveNewSubject = (req, res) => {
                 return res.send({ continueWork: false, message: err.sqlMessage })
             }
 
-            return res.send({ continueWork: true, message: "Subject Saved", subjectName })
+            return res.send({ continueWork: true, message: "Subject Saved", SubjectID: result.insertId, SubjectName: subjectName })
         })
     } catch (error) {
         console.error(error)
@@ -23,13 +23,13 @@ exports.getAllSubjects = async (req, res) => {
     try {
         const query = `SELECT * FROM subjects;`
 
-        connection.query(query, (err, result) => {
+        connection.query(query, (err, subjects) => {
             if (err) {
                 console.log('%cerror SubjectsCont.js line:27 ', err.sqlMessage);
                 return res.send({ continueWork: false, message: err.sqlMessage })
             }
 
-            return res.send({ continueWork: true, result })
+            return res.send({ continueWork: true, subjects })
         })
     } catch (error) {
         console.log(error)

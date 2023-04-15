@@ -4,7 +4,6 @@ import Navbar from './Components/Navigation/Navbar'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { selectTheme } from '../features/dark-light-theme/theme'
 import { checkLogin } from '../features/auth/authAPI'
-import { selectAuth } from '../features/auth/authSlice'
 
 const Layout = () => {
     const theme = useAppSelector(selectTheme)
@@ -29,7 +28,9 @@ const Layout = () => {
     return (
         <div>
             <Navbar />
-            <Outlet />
+            <main>
+                <Outlet />
+            </main>
         </div>
     )
 }

@@ -1,12 +1,14 @@
 import { useAppSelector } from '../../app/hooks'
 import { selectTheme } from '../../features/dark-light-theme/theme'
+import logoDarkTheme from '../../images/logo/logoDarkTheme.svg';
+import logoLightTheme from '../../images/logo/logoLightTheme.svg';
 
 const Logo = () => {
     const theme = useAppSelector(selectTheme)
 
     return (
         <div className='logo'>
-            <img src={`./images/logo/logo-${theme}-theme.svg`} alt="logo of the site" />
+            <img src={theme === "dark" ? logoDarkTheme : logoLightTheme} alt="logo of the site" />
         </div>
     )
 }

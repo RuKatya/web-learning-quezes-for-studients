@@ -73,12 +73,15 @@ exports.loginUser = async (req, res) => {
             const cookiesData = { userID: user[0].UserID }
             const token = jwt.encode(cookiesData, process.env.SECRET)
             res.cookie("weblearningtoken", token, { maxAge: 1000 * 60 * 60 * 3, httpOnly: true })
+
+            console.log(user)
+
             res.send({
                 continueWork: true,
                 isLogin: true,
                 message: "User Login",
                 userName: user[0].UserName,
-                userRole: user[0].UserRole
+                userRole: user[0].UserRole,
             })
         })
     } catch (error) {

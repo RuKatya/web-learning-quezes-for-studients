@@ -11,6 +11,7 @@ import UserProfile from "../View/Pages/UserProfile/UserProfile";
 import UserProtectedRout from "../PotectedRout/UserProtectedRout";
 import DashboardProtectedRout from "../PotectedRout/DashboardProtectedRout";
 import AuthProtectedRout from "../PotectedRout/AuthProtectedRout";
+import MainDashboard from "../View/Pages/Dashboard/MainDashboard/MainDashboard";
 
 const RouterPage = () => {
     const router = createBrowserRouter(
@@ -23,13 +24,18 @@ const RouterPage = () => {
                     </AuthProtectedRout>
                 } action={loginAction}>
                     <Route index element={<Login />} />
-                    <Route path="registretion" element={<Registration />} action={registAction} />
+                    <Route path="registretion" element={<Registration />}
+                        action={registAction}
+                    />
                 </Route>
                 <Route path="dashboard" element={
                     <DashboardProtectedRout>
                         <Dashboard />
                     </DashboardProtectedRout>
-                } />
+                }  >
+                    <Route index element={<MainDashboard />} />
+                    <Route path="subjects/:subjectId" element={<h1>hello</h1>} />
+                </Route>
                 <Route path="profile/:id" element={
                     <UserProtectedRout>
                         <UserProfile />
