@@ -1,37 +1,34 @@
-import React, { Suspense, useEffect, useState } from 'react'
-import { Await, Form, Link, useLoaderData } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks'
-import { selectSubject, setMessageEmpty, subjectMessage } from '../../../../features/subjects/subjectsSlice'
-import { addSubject, getSubjects } from '../../../../features/subjects/subjectsAPI'
-
-import { Alert } from '@mui/material';
-import { Stack } from '@mui/material';
+import { selectSubject, subjectSubjectsMessage, subjectSubjectsStatus } from '../../../../features/subjects/subjectsSlice'
+import { getSubjects } from '../../../../features/subjects/subjectsAPI'
 import SubjectList from './SubjectList'
 import AddSubjForm from './AddSubjForm'
 import InfoAlert from '../../../UI/InfoAlert'
 
 const MainDashboard = () => {
-    const [showAddNewSubjectWindow, setShowAddNewSubjectWindow] = useState<boolean>(false)
     const [openMessage, setOpenMessage] = useState<boolean>(false)
     const subjects = useAppSelector(selectSubject)
-    const subMessage = useAppSelector(subjectMessage)
+    const subMessage = useAppSelector(subjectSubjectsMessage)
+    const subStatus = useAppSelector(subjectSubjectsStatus)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
         dispatch(getSubjects())
-    })
+    }, [dispatch])
 
     useEffect(() => {
-        if (subMessage) setOpenMessage(true)
+        if (subMessage.length > 0) setOpenMessage(true)
     }, [subMessage])
 
     return (
+        <div className='dashboardInfo'>
+            {subStatus === 'loading' ? <h1>Loading...</h1> : <>
+                {openMessage && (<InfoAlert message={subMessage} setOpenMessage={setOpenMessage} />)}
 
-        <div>
-            {openMessage && (<InfoAlert message={subMessage} setOpenMessage={setOpenMessage} />)}
-
-            <AddSubjForm />
-            <SubjectList subjects={subjects} />
+                <AddSubjForm />
+                <SubjectList subjects={subjects} />
+            </>}
         </div>
     )
 }

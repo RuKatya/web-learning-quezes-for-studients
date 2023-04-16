@@ -19,3 +19,9 @@ export interface getSubjectsInterface {
     message: string,
     subjects: Array<SubjectList>
 }
+
+export interface DeleteInterface {
+    continueWork: boolean,
+    message: string,
+    id: number,
+}

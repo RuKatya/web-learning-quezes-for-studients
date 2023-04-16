@@ -1,11 +1,21 @@
 .asideDashboardNav {
-  background-color: aqua;
+  background-color: $dashboardBackGround;
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: $dashboardBorderRadiusMain;
+  justify-content: space-evenly;
 
   & a {
     background-color: azure;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
+    width: 80%;
+    text-align: center;
+    padding: 2%;
+    border-radius: $dashboardBorderRadiusMain;
   }
 }
+
+// .activeBtnDashcoard {
+//   background-color: aqua;
+// }

@@ -14,7 +14,7 @@ const UserProtectedRout: FC<ProtectedRoutProps> = ({ children }) => {
                 return navigate("/auth", { replace: true });
             }
         })
-    })
+    }, [dispatch, navigate])
 
     return <>{children}</>
 }

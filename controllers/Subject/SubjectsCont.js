@@ -35,3 +35,25 @@ exports.getAllSubjects = async (req, res) => {
         console.log(error)
     }
 }
+
+exports.removeSubject = async (req, res) => {
+    try {
+        const { id } = req.body
+
+        const deleteQuery = `DELETE FROM subjects WHERE SubjectID=${id}`
+
+        connection.query(deleteQuery, (err, result) => {
+            if (err) {
+                console.log('%cerror SubjectsCont.js line:47 ', err.sqlMessage);
+                return res.send({ continueWork: false, message: err.sqlMessage })
+            }
+
+            /* ########## 
+                ADD REMOVING TITLES AND QUESTION OF THE SUBJECT
+             ########### */
+            return res.send({ continueWork: true, id, message: "Subject Deleted" })
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}

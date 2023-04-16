@@ -18,3 +18,12 @@ export const addSubject = createAsyncThunk("subjects/addNewSubject", async (subj
         console.log(error)
     }
 })
+
+export const removeSubject = createAsyncThunk("subjects/removeSubject", async (id: number) => {
+    try {
+        const { data } = await axios.delete("/subjects/remove-subject", { data: { id } })
+        return data
+    } catch (error) {
+        console.log(error)
+    }
+})

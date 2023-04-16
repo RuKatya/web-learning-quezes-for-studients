@@ -1,9 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { getSubjectsInterface, NewSubject, Subjects } from './subjectsInterface';
-import { addSubject, getSubjects } from './subjectsAPI';
-import { SubjectList } from './subjectsInterface';
-
+import { DeleteInterface, getSubjectsInterface, NewSubject, Subjects } from './subjectsInterface';
+import { addSubject, getSubjects, removeSubject } from './subjectsAPI';
 
 const initialState: Subjects = {
     list: [],
@@ -44,7 +42,7 @@ export const subjectsSlice = createSlice({
             .addCase(addSubject.fulfilled, (state, action: PayloadAction<NewSubject>) => {
                 state.status = 'idle';
                 const { SubjectID, SubjectName, continueWork, message } = action.payload
-                // console.log(message)
+
                 if (continueWork) {
                     state.message = message
                     state.list = [...state.list, { SubjectID, SubjectName }]
@@ -54,6 +52,24 @@ export const subjectsSlice = createSlice({
             })
             .addCase(addSubject.rejected, (state) => {
                 state.status = 'failed';
+            })
+            .addCase(removeSubject.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(removeSubject.fulfilled, (state, action: PayloadAction<DeleteInterface>) => {
+                state.status = 'idle';
+                const { id, continueWork, message } = action.payload
+                console.log(id)
+
+                if (continueWork) {
+                    state.list = state.list.filter(item => item.SubjectID !== id)
+                    state.message = message
+                } else {
+                    state.message = message
+                }
+            })
+            .addCase(removeSubject.rejected, (state) => {
+                state.status = 'failed';
             });
 
     }
@@ -61,5 +77,6 @@ export const subjectsSlice = createSlice({
 
 export const { setMessageEmpty } = subjectsSlice.actions
 export const selectSubject = (state: RootState) => state.subjects.list;
-export const subjectMessage = (state: RootState) => state.subjects.message;
+export const subjectSubjectsMessage = (state: RootState) => state.subjects.message;
+export const subjectSubjectsStatus = (state: RootState) => state.subjects.status;
 export default subjectsSlice.reducer;

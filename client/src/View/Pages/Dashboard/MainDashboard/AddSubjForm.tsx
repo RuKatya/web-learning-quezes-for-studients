@@ -16,6 +16,7 @@ const AddSubjForm = () => {
 
         const subjectName = target.subjectName.value
         dispatch(addSubject(subjectName))
+        setShowAddNewSubjectWindow(false)
     }
     return (
         <>

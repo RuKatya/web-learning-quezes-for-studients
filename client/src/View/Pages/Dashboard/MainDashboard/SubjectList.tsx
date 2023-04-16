@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { SubjectList } from '../../../../features/subjects/subjectsInterface'
+import SubjectItem from './SubjectItem'
 
 export interface SubjectListInterface {
     subjects: Array<SubjectList>
@@ -9,11 +10,7 @@ export interface SubjectListInterface {
 const Subjects = ({ subjects }: SubjectListInterface) => {
     return (<>{
         subjects.length > 0 ? subjects.map((sub: any) => (
-            <div key={sub.SubjectID}>
-                <h1>
-                    <Link to={`/dashboard/subjects/${sub.SubjectID}`}>{sub.SubjectName}</Link>
-                </h1>
-            </div>
+            <SubjectItem key={sub.SubjectID} sub={sub} />
         )) : (
             <div>
                 <h1>No Subjects</h1>

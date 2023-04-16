@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap");
+
 @import "./vars/index";
 @import "./components/themeBtn";
 @import "./components/navbar";
@@ -10,9 +12,14 @@
 body {
   width: clamp(250px, 100%, 1440px);
   margin: 0% auto;
-  font-family: "Arial";
+  // font-family: "Arial";
+  font-family: "Rubik", sans-serif;
 }
 
 a {
   text-decoration: none;
 }
+
+// .activeBtnDashcoard {
+//   background-color: aqua;
+// }

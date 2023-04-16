@@ -12,14 +12,18 @@ const DashboardProtectedRout: FC<ProtectedRoutProps> = ({ children }) => {
 
     useEffect(() => {
         dispatch(checkLogin()).then((actionUuser: any) => {
-            if (!actionUuser.payload.isLogin) {
+            const { isLogin, userRole } = actionUuser.payload
+            if (!isLogin) {
                 return navigate("/auth", { replace: true });
             }
-        })
-    })
 
-    return user.isLogin && user.userRole === "admin" ? <>{children}</> :
-        user.isLogin ? <>{navigate("/", { replace: true })}</> : <>{navigate("/auth", { replace: true })}</>
+            if (userRole !== "admin") {
+                return navigate("/", { replace: true })
+            }
+        })
+    }, [dispatch, navigate])
+
+    return <>{user.isLogin && user.userRole === "admin" && <>{children}</>}</>
 }
 
 export default DashboardProtectedRout
