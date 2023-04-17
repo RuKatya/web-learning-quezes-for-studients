@@ -1,21 +1,21 @@
-.authPage {
-  background: linear-gradient(180deg, #050f52 0%, rgba(5, 15, 82, 0) 100%);
-  //   background: #050f52;
-  width: clamp(250px, 43%, 620px);
-  margin: 10% auto;
-  color: white;
-  text-align: center;
-  border-radius: $form-radius;
-  border-bottom: 5px solid #132075;
+// .authPage {
+//   background: linear-gradient(180deg, #050f52 0%, rgba(5, 15, 82, 0) 100%);
+//   //   background: #050f52;
+//   width: clamp(250px, 43%, 620px);
+//   margin: 10% auto;
+//   color: white;
+//   text-align: center;
+//   border-radius: $form-radius;
+//   border-bottom: 5px solid #132075;
 
-  & h2 {
-    text-transform: uppercase;
-  }
-}
+//   & h2 {
+//     text-transform: uppercase;
+//   }
+// }
 
-.authForm {
-  width: 85%;
-  margin: 0% auto;
-  display: flex;
-  flex-direction: column;
-}
+// .authForm {
+//   width: 85%;
+//   margin: 0% auto;
+//   display: flex;
+//   flex-direction: column;
+// }

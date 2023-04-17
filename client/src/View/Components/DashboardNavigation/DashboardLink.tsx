@@ -1,11 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const DashboardLink = () => {
+interface LinkProps {
+    link: {
+        to: string,
+        title: string
+    },
+    activeSideNav: string,
+    setActiveSideNav: Function
+}
+const DashboardLink = ({ link, setActiveSideNav, activeSideNav }: LinkProps) => {
     return (
-        <div>
-            <Link to="/dashboard">Dashboard</Link>
-        </div>
+        <>
+            <Link to={`/${link.to}`} className={activeSideNav == link.title ? "activeSideNav" : ""} onClick={() => setActiveSideNav(link.title)}>{link.title}</Link>
+        </>
     )
 }
 

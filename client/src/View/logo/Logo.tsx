@@ -12,7 +12,7 @@ const Logo = () => {
         <div className='logo'>
             <img src={theme === "dark" ? logoDarkTheme : logoLightTheme} alt="logo of the site" />
             {location.pathname.includes("dashboard") ? <div>
-                .dashboard</div> : null}
+                _dashboard</div> : null}
         </div>
     )
 }

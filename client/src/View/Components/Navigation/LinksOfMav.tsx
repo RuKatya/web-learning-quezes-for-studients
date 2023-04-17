@@ -19,9 +19,13 @@ const LinksOfMav: FC<LinksProps> = ({ link, title }) => {
         >{
                 title === "Fav Quizes" ?
                     <>{title} <span>{11}</span></>
-                    : title
+                    :
+                    title
             }</Link>
     )
 }
 
 export default LinksOfMav
+
+
+// navigation__link--${theme} ${title === "Fav Quizes" && "navigation__link--favQuizes"
