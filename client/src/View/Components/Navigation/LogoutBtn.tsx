@@ -9,6 +9,7 @@ const LogoutBtn = () => {
     const user = useAppSelector(selectAuth);
     const theme = useAppSelector(selectTheme)
     const dispatch = useAppDispatch()
+
     return (
         <>
             {

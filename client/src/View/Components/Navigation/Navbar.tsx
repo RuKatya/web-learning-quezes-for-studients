@@ -3,7 +3,7 @@ import { FC, useState } from 'react'
 import { selectTheme } from "../../../features/dark-light-theme/theme";
 import { useAppSelector } from "../../../app/hooks";
 import { selectAuth } from "../../../features/auth/authSlice";
-import { useResponsivity } from "../../../utils/useWidth";
+import { useResponsivity } from "../../../hooks/useWidth";
 import MenuIcon from '@mui/icons-material/Menu';
 import ThemeSwitchButton from "../../UI/ThemeButton";
 import Logo from "../../logo/Logo";
@@ -35,11 +35,12 @@ const Navbar: FC = () => {
         <Logo />
       </Link>
 
-      <div onClick={toggleNav} className="menuBtn">
+      <div className="nav__navigation">
+        {/* <div onClick={toggleNav} className="menuBtn">
         <MenuIcon sx={{ color: theme === "dark" ? lightBtnColor : darkBtnColor }} />
-      </div>
+      </div> */}
 
-      <div className="navigation">
+        {/* <div className="navigation"> */}
         {/* {(toggleMenu || !isMobile) && (
         // <>
         //   <AdminBtn />
@@ -50,15 +51,19 @@ const Navbar: FC = () => {
         //   <ThemeSwitchButton />
         // </>
         )} */}
-        <>
+        {/* <>
           <AdminBtn />
           {user.isLogin && linksForUser.map((link, index) => (
             <LinksOfMav key={index} link={link.link} title={link.title} />
           ))}
           <LogoutBtn />
-          <ThemeSwitchButton />
-        </>
+        </> */}
+        <ThemeSwitchButton />
+        {user.isLogin ? <LogoutBtn /> : <Link to="/auth">SIGN IN</Link>}
       </div>
+      {/* </div> */}
+
+
 
     </nav>
   );
