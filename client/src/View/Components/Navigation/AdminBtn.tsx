@@ -1,4 +1,3 @@
-import React from 'react'
 import { useAppSelector } from '../../../app/hooks';
 import { selectAuth } from '../../../features/auth/authSlice';
 import { Link } from 'react-router-dom';

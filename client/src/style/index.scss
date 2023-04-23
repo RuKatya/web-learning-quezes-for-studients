@@ -9,16 +9,6 @@
 @import "./pages/dashboardStyle";
 
 body {
-  background-image: url("../images/backgound/programming-light.png");
-  // background: url(1645195911_45-kartinkin-net-p-kartinki-programmirovanie-55.png);
-  // background-color: aqua;
-  // background-image: url("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg");
-  // background-position: center;
-  // background-position: right;
-  background-position: top right;
-  background-repeat: no-repeat;
-  background-size: auto;
-  // background-size: 100svw 50dvh;
   width: clamp(250px, 100%, 1440px);
   margin: 0% auto;
   font-family: "Rubik", sans-serif;
@@ -30,10 +20,19 @@ a {
 
 .dark-body {
   background-color: $dark-theme-main;
-  background-image: url("../images/backgound/programming-dark.png");
+  // background-image: url("../images/backgound/programming-dark.png");
 }
 
 .light-body {
   background-color: $light-theme-main;
-  background-image: url("../images/backgound/programming-light.png");
+  // background-image: url("../images/backgound/programming-light.png");
+}
+
+#root {
+  background-image: url("../images/backgound/programming-dark.png");
+  background-position: top right;
+  background-repeat: no-repeat;
+  // background-size: 65% 100%;
+  background-size: auto;
+  height: 100vh;
 }

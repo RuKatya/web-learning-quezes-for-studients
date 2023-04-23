@@ -9,8 +9,6 @@ exports.addNewUser = async (req, res) => {
     try {
         const { userName, email, password, confirmPassword } = req.body
 
-        console.log(email, confirmPassword, password, userName)
-
         const { error } = userRegValidation.validate({ email, password, confirmPassword, userName })
 
         if (error) {
@@ -28,7 +26,6 @@ exports.addNewUser = async (req, res) => {
                 return res.send({ continueWork: false, message: err.sqlMessage })
             }
 
-            // await info(email)
             res.send({ continueWork: true, message: "User Saved" })
         })
     } catch (error) {
@@ -56,8 +53,6 @@ exports.loginUser = async (req, res) => {
                 return res.send({ continueWork: false, message: err.sqlMessage })
             }
 
-            console.log(user)
-
             if (user.length == 0) {
                 console.log('%cUserCont.js line:60 User not exist');
                 return res.send({ continueWork: false, message: "User not exist" })
@@ -73,8 +68,6 @@ exports.loginUser = async (req, res) => {
             const cookiesData = { userID: user[0].UserID }
             const token = jwt.encode(cookiesData, process.env.SECRET)
             res.cookie("weblearningtoken", token, { maxAge: 1000 * 60 * 60 * 3, httpOnly: true })
-
-            console.log(user)
 
             res.send({
                 continueWork: true,

@@ -52,12 +52,12 @@ const Navbar: FC = () => {
         // </>
         )} */}
         {/* <>
-          <AdminBtn />
           {user.isLogin && linksForUser.map((link, index) => (
             <LinksOfMav key={index} link={link.link} title={link.title} />
-          ))}
-          <LogoutBtn />
-        </> */}
+            ))}
+            <LogoutBtn />
+          </> */}
+        <AdminBtn />
         <ThemeSwitchButton />
         {user.isLogin ? <LogoutBtn /> : <Link to="/auth">SIGN IN</Link>}
       </div>

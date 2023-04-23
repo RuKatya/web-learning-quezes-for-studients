@@ -4,7 +4,6 @@ import Navbar from './Components/Navigation/Navbar'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { selectTheme } from '../features/dark-light-theme/theme'
 import { checkLogin } from '../features/auth/authAPI'
-// import NananaBlat from './Components/Navigation/nananaBlat'
 
 const Layout = () => {
     const theme = useAppSelector(selectTheme)
@@ -28,7 +27,6 @@ const Layout = () => {
 
     return (
         <div>
-            {/* <NananaBlat /> */}
             <Navbar />
             <main>
                 <Outlet />
