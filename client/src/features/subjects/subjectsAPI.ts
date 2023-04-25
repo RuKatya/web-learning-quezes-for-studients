@@ -27,3 +27,17 @@ export const removeSubject = createAsyncThunk("subjects/removeSubject", async (i
         console.log(error)
     }
 })
+
+interface UpdateSubject {
+    id: number,
+    SubjectName: string
+}
+
+export const updateSubject = createAsyncThunk("subjects/updateSubject", async ({ id, SubjectName }: UpdateSubject) => {
+    try {
+        const { data } = await axios.post("/subjects/update-subject", { id, SubjectName })
+        return data
+    } catch (error) {
+        console.log(error)
+    }
+})

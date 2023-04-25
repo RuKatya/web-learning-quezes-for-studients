@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { DeleteInterface, getSubjectsInterface, NewSubject, Subjects } from './subjectsInterface';
-import { addSubject, getSubjects, removeSubject } from './subjectsAPI';
+import { DeleteInterface, getSubjectsInterface, NewSubject, Subjects, UpdateInterface } from './subjectsInterface';
+import { addSubject, getSubjects, removeSubject, updateSubject } from './subjectsAPI';
 
 const initialState: Subjects = {
     list: [],
@@ -70,8 +70,24 @@ export const subjectsSlice = createSlice({
             })
             .addCase(removeSubject.rejected, (state) => {
                 state.status = 'failed';
-            });
+            })
+            .addCase(updateSubject.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(updateSubject.fulfilled, (state, action: PayloadAction<UpdateInterface>) => {
+                state.status = 'idle';
+                const { id, continueWork, message, SubjectName } = action.payload
 
+                if (continueWork) {
+                    state.list = state.list.map(item => item.SubjectID == id ? { ...item, SubjectName } : item)
+                    state.message = message
+                } else {
+                    state.message = message
+                }
+            })
+            .addCase(updateSubject.rejected, (state) => {
+                state.status = 'failed';
+            })
     }
 })
 

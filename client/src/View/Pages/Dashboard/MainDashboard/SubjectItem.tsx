@@ -1,14 +1,15 @@
-import React from 'react'
+import React, { FC, useState } from 'react'
 import { SubjectList } from '../../../../features/subjects/subjectsInterface'
 import { Link } from 'react-router-dom'
 import { useAppDispatch } from '../../../../app/hooks'
-import { removeSubject } from '../../../../features/subjects/subjectsAPI'
+import { removeSubject, updateSubject } from '../../../../features/subjects/subjectsAPI'
+import ListItem from '../../../UI/ListItem'
 
 interface SubjectItemProps {
     sub: SubjectList
-
 }
-const SubjectItem = ({ sub }: SubjectItemProps) => {
+
+const SubjectItem: FC<SubjectItemProps> = ({ sub }) => {
     const dispatch = useAppDispatch()
 
     const deleteSubject = (id: number, subject: string) => {
@@ -24,13 +25,32 @@ const SubjectItem = ({ sub }: SubjectItemProps) => {
             }
         }
     }
+
+    const updateSubjectFunc = (ev: React.SyntheticEvent) => {
+        ev.preventDefault()
+
+        const target = ev.target as typeof ev.target & {
+            subjectsName: { value: string, id: string }
+        }
+
+        const SubjectName = target.subjectsName.value
+        const id = Number(target.subjectsName.id)
+
+        if (SubjectName.length <= 2) {
+            return alert("The Input must be atleast 3 charasters")
+        }
+
+        dispatch(updateSubject({ id, SubjectName }))
+    }
+
     return (
-        <div key={sub.SubjectID}>
-            <h1>
-                <Link to={`/dashboard/subjects/${sub.SubjectID}`}>{sub.SubjectName}</Link>
-            </h1>
-            <button onClick={() => deleteSubject(sub.SubjectID, sub.SubjectName)}>Delete</button>
-        </div>
+        <ListItem
+            itemID={sub.SubjectID}
+            itemName={sub.SubjectName}
+            itemCategory={"subjects"}
+            deleteFunc={deleteSubject}
+            updateFunc={updateSubjectFunc}
+        />
     )
 }
 

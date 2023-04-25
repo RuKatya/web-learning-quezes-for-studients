@@ -8,14 +8,14 @@ export interface SubjectListInterface {
 }
 
 const Subjects = ({ subjects }: SubjectListInterface) => {
-    return (<>{
+    return (<div className='dashboardInfo__listOfItems'>{
         subjects.length > 0 ? subjects.map((sub: any) => (
             <SubjectItem key={sub.SubjectID} sub={sub} />
         )) : (
-            <div>
-                <h1>No Subjects</h1>
-            </div>)
-    }</>)
+            <>
+                <h1 className='dashboardInfo__noSubjects-info'>No Subjects</h1>
+            </>)
+    }</div>)
 }
 
 export default Subjects

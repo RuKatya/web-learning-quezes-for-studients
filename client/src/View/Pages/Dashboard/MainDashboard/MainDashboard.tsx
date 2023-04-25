@@ -5,6 +5,7 @@ import { getSubjects } from '../../../../features/subjects/subjectsAPI'
 import SubjectList from './SubjectList'
 import AddSubjForm from './AddSubjForm'
 import InfoAlert from '../../../UI/InfoAlert'
+import LoadingPage from '../../../UI/LoadingPage'
 
 const MainDashboard = () => {
     const [openMessage, setOpenMessage] = useState<boolean>(false)
@@ -23,12 +24,16 @@ const MainDashboard = () => {
 
     return (
         <div className='dashboardInfo'>
-            {subStatus === 'loading' ? <h1>Loading...</h1> : <>
-                {openMessage && (<InfoAlert message={subMessage} setOpenMessage={setOpenMessage} />)}
+            {subStatus === 'loading' ?
+                <LoadingPage />
+                :
+                <>
+                    {openMessage && (<InfoAlert message={subMessage} setOpenMessage={setOpenMessage} />)}
 
-                <AddSubjForm />
-                <SubjectList subjects={subjects} />
-            </>}
+                    <AddSubjForm />
+                    <SubjectList subjects={subjects} />
+                </>
+            }
         </div>
     )
 }

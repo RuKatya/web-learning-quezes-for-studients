@@ -3,10 +3,14 @@
 @import "./vars/index";
 @import "./components/themeBtn";
 @import "./components/navbar";
-@import "./logo/logo";
-@import "./components/input";
-@import "./components/authForm";
-@import "./pages/dashboardStyle";
+
+@import "./dashboard/mainDashboard";
+// @import "./components/input";
+// @import "./components/authForm";
+// @import "./pages/dashboardStyle";
+
+// @import "./logo/logo";
+@import "./loader/loader";
 
 body {
   width: clamp(250px, 100%, 1440px);

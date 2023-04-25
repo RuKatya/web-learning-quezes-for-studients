@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 interface LinkProps {
@@ -9,10 +8,12 @@ interface LinkProps {
     activeSideNav: string,
     setActiveSideNav: Function
 }
+
 const DashboardLink = ({ link, setActiveSideNav, activeSideNav }: LinkProps) => {
     return (
         <>
-            <Link to={`/${link.to}`} className={activeSideNav == link.title ? "activeSideNav" : ""} onClick={() => setActiveSideNav(link.title)}>{link.title}</Link>
+            <Link to={`/${link.to}`} className={`asideDashboardNav__link ${activeSideNav === link.title ? "activeSideNavLink" : ""
+                }`} onClick={() => setActiveSideNav(link.title)}>{link.title}</Link>
         </>
     )
 }

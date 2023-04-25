@@ -36,6 +36,25 @@ exports.getAllSubjects = async (req, res) => {
     }
 }
 
+exports.updateSubject = async (req, res) => {
+    try {
+        const { id, SubjectName } = req.body
+
+        const updateQuery = `UPDATE subjects SET subjectName='${SubjectName}' WHERE SubjectID=${id}`
+
+        connection.query(updateQuery, (err, result) => {
+            if (err) {
+                console.log('%cerror SubjectsCont.js line:47 ', err.sqlMessage);
+                return res.send({ continueWork: false, message: err.sqlMessage })
+            }
+
+            return res.send({ continueWork: true, id, SubjectName, message: "Subject Updated" })
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 exports.removeSubject = async (req, res) => {
     try {
         const { id } = req.body

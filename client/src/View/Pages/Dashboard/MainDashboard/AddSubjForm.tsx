@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import { Form } from 'react-router-dom'
+import React, { FC, useState } from 'react'
 import { useAppDispatch } from '../../../../app/hooks'
 import { addSubject } from '../../../../features/subjects/subjectsAPI'
+import DashboardAddNew from '../../../UI/DashboardAddNew/DashboardAddNew'
 
-const AddSubjForm = () => {
+const AddSubjForm: FC = () => {
     const [showAddNewSubjectWindow, setShowAddNewSubjectWindow] = useState<boolean>(false)
     const dispatch = useAppDispatch()
 
@@ -15,21 +15,23 @@ const AddSubjForm = () => {
         }
 
         const subjectName = target.subjectName.value
+        if (subjectName.length <= 2) {
+            return alert("The Input must be atleast 3 charasters")
+        }
+
         dispatch(addSubject(subjectName))
         setShowAddNewSubjectWindow(false)
     }
+
     return (
         <>
-            <button onClick={() => setShowAddNewSubjectWindow(!showAddNewSubjectWindow)}>Add new Subject</button>
-
-            {
-                showAddNewSubjectWindow && (
-                    <Form onSubmit={addNewSubject}>
-                        <input type="text" name="subjectName" placeholder='Enter Subject to save' />
-                        <button type='submit'>Save</button>
-                    </Form>
-                )
-            }
+            <DashboardAddNew
+                btnText={"SUBJECT"}
+                submitFunction={addNewSubject}
+                inputName={"subjectName"}
+                placeholderText={'Subject'}
+                showAddNewSubjectWindow={showAddNewSubjectWindow}
+                setShowAddNewSubjectWindow={setShowAddNewSubjectWindow} />
         </>
     )
 }

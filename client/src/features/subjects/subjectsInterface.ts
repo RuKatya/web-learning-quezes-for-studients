@@ -25,3 +25,7 @@ export interface DeleteInterface {
     message: string,
     id: number,
 }
+
+export interface UpdateInterface extends DeleteInterface {
+    SubjectName: string
+}
