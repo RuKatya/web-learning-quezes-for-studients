@@ -67,9 +67,12 @@ $purpleColorOfBtns: #9319f0;
   }
 
   &__listOfItems {
+    width: clamp(180px, 80%, 900px);
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(6, 1fr);
     gap: 5%;
+    height: 100%;
   }
 
   &__listItem {
@@ -78,7 +81,6 @@ $purpleColorOfBtns: #9319f0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 90%;
 
     &__dark-theme {
       background-color: $dahbordAsideLinkColor--darkTheme;
@@ -143,10 +145,10 @@ $purpleColorOfBtns: #9319f0;
 }
 
 .addMoreForm {
-  background-color: rgba(128, 128, 128, 0.95);
+  background-color: rgba(128, 128, 128);
   padding: 3%;
   position: absolute;
-  right: 0%;
+  right: 3%;
   top: 10%;
   display: flex;
   justify-content: center;

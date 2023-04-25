@@ -21,7 +21,12 @@ const DashboardAddNew: FC<DashboardAddNewProps> = ({
         <>
             <button
                 onClick={() => setShowAddNewSubjectWindow(!showAddNewSubjectWindow)}
-                className='addMoreBtn'>ADD NEW {btnText}</button>
+                className='addMoreBtn'>
+                {showAddNewSubjectWindow ?
+                    "CLOSE" :
+                    `ADD NEW ${btnText}`
+                }
+            </button>
 
             {
                 showAddNewSubjectWindow && (
