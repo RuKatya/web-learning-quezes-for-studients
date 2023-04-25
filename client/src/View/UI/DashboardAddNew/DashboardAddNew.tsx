@@ -1,4 +1,4 @@
-import React, { FC, FormEventHandler, useState } from 'react'
+import { FC, FormEventHandler } from 'react'
 import DashboardAddNewForm from './DashboardAddNewForm'
 
 interface DashboardAddNewProps {

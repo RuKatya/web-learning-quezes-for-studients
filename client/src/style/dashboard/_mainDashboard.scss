@@ -68,7 +68,7 @@ $purpleColorOfBtns: #9319f0;
 
   &__listOfItems {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 5%;
   }
 
@@ -78,7 +78,7 @@ $purpleColorOfBtns: #9319f0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    width: 90%;
 
     &__dark-theme {
       background-color: $dahbordAsideLinkColor--darkTheme;
@@ -111,6 +111,27 @@ $purpleColorOfBtns: #9319f0;
         background-color: rgb(183, 183, 2);
       }
       button:nth-child(2) {
+        background-color: rgb(189, 0, 0);
+      }
+    }
+
+    &--formUpdate {
+      display: flex;
+
+      input {
+        width: 70%;
+      }
+
+      button {
+        box-sizing: border-box;
+        border: none;
+        cursor: pointer;
+      }
+
+      button[type="submit"] {
+        background-color: rgb(0, 177, 53);
+      }
+      button[type="button"] {
         background-color: rgb(189, 0, 0);
       }
     }

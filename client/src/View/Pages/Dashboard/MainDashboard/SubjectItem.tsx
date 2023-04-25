@@ -1,6 +1,5 @@
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import { SubjectList } from '../../../../features/subjects/subjectsInterface'
-import { Link } from 'react-router-dom'
 import { useAppDispatch } from '../../../../app/hooks'
 import { removeSubject, updateSubject } from '../../../../features/subjects/subjectsAPI'
 import ListItem from '../../../UI/ListItem'

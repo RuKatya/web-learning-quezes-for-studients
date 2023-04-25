@@ -79,7 +79,7 @@ export const subjectsSlice = createSlice({
                 const { id, continueWork, message, SubjectName } = action.payload
 
                 if (continueWork) {
-                    state.list = state.list.map(item => item.SubjectID == id ? { ...item, SubjectName } : item)
+                    state.list = state.list.map(item => item.SubjectID === id ? { ...item, SubjectName } : item)
                     state.message = message
                 } else {
                     state.message = message
