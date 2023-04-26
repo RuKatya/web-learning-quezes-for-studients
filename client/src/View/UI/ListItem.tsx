@@ -6,6 +6,7 @@ import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined
 import UpdateOutlinedIcon from '@mui/icons-material/UpdateOutlined';
 import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import AutorenewOutlinedIcon from '@mui/icons-material/AutorenewOutlined';
 
 interface ListItemProps {
     itemID: number,
@@ -61,7 +62,8 @@ const ListItem: FC<ListItemProps> = ({
                         type='button'
                         title={`Update ${itemName}`}
                         onClick={() => setEditItem(!editItem)}>
-                        <UpdateOutlinedIcon sx={{ color: 'white' }} />
+                        <AutorenewOutlinedIcon
+                            sx={{ color: 'white' }} />
                     </button>
                     <button
                         type='button'
