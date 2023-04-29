@@ -1,6 +1,7 @@
 import axios from "axios";
 import { RegUser } from "./RegistInterface";
 import { redirect } from "react-router-dom";
+import { validBeforeSend } from "../../../../hooks/formValidation";
 
 const registration = async ({ userName, email, password, confirmPassword }: RegUser) => {
     const { data } = await axios.post('/users/save-new-user', { userName, email, password, confirmPassword })
@@ -24,11 +25,16 @@ export const registAction = async ({ request }: any) => {
         !formData.get("confirmPassword")
     ) { return "All field are required"; }
 
+    const validData = validBeforeSend(registUser)
+    const { continueNext, messageFromClient } = validData
+
+    if (!continueNext) return messageFromClient
+
     const data = await registration(registUser);
 
     const { continueWork, error, message } = data;
 
     if (continueWork) return redirect("/auth")
 
-    if (error) return message;
+    if (error || !continueWork) return message;
 }

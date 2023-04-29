@@ -4,6 +4,8 @@
 @import "./components/themeBtn";
 @import "./components/navbar";
 
+@import "./auth/auth";
+
 @import "./dashboard/mainDashboard";
 // @import "./components/input";
 // @import "./components/authForm";
@@ -24,19 +26,19 @@ a {
 
 .dark-body {
   background-color: $dark-theme-main;
-  // background-image: url("../images/backgound/programming-dark.png");
 }
 
 .light-body {
   background-color: $light-theme-main;
-  // background-image: url("../images/backgound/programming-light.png");
 }
 
 #root {
+  height: 100vh;
+}
+
+.root-background-img {
   background-image: url("../images/backgound/programming-dark.png");
   background-position: top right;
   background-repeat: no-repeat;
-  // background-size: 65% 100%;
   background-size: auto;
-  height: 100vh;
 }

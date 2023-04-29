@@ -6,8 +6,17 @@ import { useAppDispatch } from '../../../../app/hooks'
 import { userLogin } from '../../../../features/auth/authSlice'
 
 const loginInputs = [
-    { type: "email", name: "email", placeholder: "Email" },
-    { type: "password", name: "password", placeholder: "Password" }
+    { type: "email", name: "email", placeholder: "Email", inputInfo: "Please enter a valid email address. <b>examle@email.com</b>" },
+    {
+        type: "password", name: "password", placeholder: "Password", inputInfo:
+            `Password must: 
+                <ul>
+                    <li>Include letters and numbers.</li>  
+                    <li>At least one special character <b>!@#$%^&*</b></li>  
+                    <li>Without spaces.</li>  
+                    <li>At least 6 sybmols.</li>  
+                </ul>`
+    }
 ]
 
 const Login: FC = () => {
@@ -31,36 +40,13 @@ const Login: FC = () => {
     })
 
     return (
-        <div>
-            {errorFromServer}
-            <AuthForm title={"Login"} buttonText={"Login"} action="/auth">
-                {loginInputs.map((input, index) => (
-                    <Input key={index} {...input} />
-                ))}
-            </AuthForm>
-        </div>
+        <AuthForm title={"Login"} buttonText={"SIGN IN"} action="/auth">
+            <p>{errorFromServer}</p>
+            {loginInputs.map((input, index) => (
+                <Input key={index} {...input} />
+            ))}
+        </AuthForm>
     )
 }
 
 export default Login
-
-/*
-interface LoginProps {
-    setUser: Function
-}
-    // <LoginProps>
-        // const data: any = useActionData();
-        // const [errorFromServer, setErrorFromServer] = useState()
-
-        // useEffect(() => {
-        //     if (data) {
-        //         const { continueWork, message, isLogin, userName, userRole } = data
-
-        //         if (!continueWork) {
-        //             return setErrorFromServer(message)
-        //         }
-
-        //         return setUser({ isLogin, userName, userRole })
-        //     }
-        // }, [data, setUser])
-*/
