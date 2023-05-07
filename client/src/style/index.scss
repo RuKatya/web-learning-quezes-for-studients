@@ -37,8 +37,13 @@ a {
 }
 
 .root-background-img {
-  background-image: url("../images/backgound/programming-dark.png");
+  background-image: url("../images/backgound/desktop/programming-dark-desktop.png");
   background-position: top right;
   background-repeat: no-repeat;
   background-size: auto;
+
+  @media screen and (max-width: 768px) {
+    background-image: url("../images/backgound/mobile/programming-dark-mobile.png");
+    background-size: 100%;
+  }
 }

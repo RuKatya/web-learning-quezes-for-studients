@@ -1,6 +1,6 @@
 .theme_switch {
-  width: 56px;
-  height: 28px;
+  width: 40px;
+  height: 20px;
   border-radius: 2rem;
   position: relative;
   display: flex;
@@ -21,7 +21,7 @@
     align-items: center;
     position: absolute;
     box-sizing: border-box;
-    width: 50%;
+    width: 20px;
     height: 100%;
     border-radius: $inputs-radius;
     transform: translateX(0%);

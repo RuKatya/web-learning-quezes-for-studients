@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
-import Navbar from './Components/Navigation/Navbar'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { selectTheme } from '../features/dark-light-theme/theme'
 import { checkLogin } from '../features/auth/authAPI'
+import Navbar from './Components/Navigation/NavBar'
 
 const Layout = () => {
     let location = useLocation();
@@ -33,7 +33,6 @@ const Layout = () => {
         }
     }, [theme, location])
 
-    // console.log(location.pathname)
     return (
         <div>
             <Navbar />

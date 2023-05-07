@@ -47,7 +47,6 @@ const Input: FC<InputsProps> = ({ type, name, placeholder, inputInfo }) => {
 
                         `}
                         placeholder={placeholder}
-                        onChange={checkValid}
                         min={6}
                         required
                     />

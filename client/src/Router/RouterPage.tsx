@@ -19,6 +19,9 @@ const RouterPage = () => {
         createRoutesFromElements(
             <Route path="/" element={<Layout />}>
                 <Route index element={<App />} />
+                <Route path="html" element={<div>HTML</div>} />
+                <Route path="css" element={<div>CSS</div>} />
+                <Route path="javascript" element={<div>JAVASCRIPT</div>} />
                 <Route path="auth" element={
                     <AuthProtectedRout>
                         <Auth />
