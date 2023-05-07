@@ -29,7 +29,7 @@ const NavigationLinks: FC<NavigationLinksProps> = ({ toggleMenu, linksForUser, s
     return (
         <>
             {(toggleMenu || !isMobile) && (
-                <div className={`navbar__navigation--links`}>
+                <div className={`navbar__navigation--links navbar__navigation--links__${theme}-theme`}>
                     {
                         user.isLogin ? <>
                             {user.isLogin && linksForUser.map((link, index) => (
@@ -46,7 +46,7 @@ const NavigationLinks: FC<NavigationLinksProps> = ({ toggleMenu, linksForUser, s
                             :
                             <>
                                 <NavLink
-                                    className={`nav__navigation--link__${theme}-theme`}
+                                    className={`navbar__navigation--link__${theme}-theme`}
                                     to="/auth"
                                     onClick={() => {
                                         setToggleMenu(!toggleMenu)

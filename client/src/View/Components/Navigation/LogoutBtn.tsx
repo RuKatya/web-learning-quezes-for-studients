@@ -15,7 +15,7 @@ const LogoutBtn = () => {
             {
                 user.isLogin && <Link
                     to="/"
-                    className={`navigation__link navigation__link--${theme}`}
+                    className={`navbar__navigation--link navbar__navigation--link__${theme}-theme`}
                     onClick={() => dispatch(logout())}
                 >{user.userName} | Logout</Link>
             }

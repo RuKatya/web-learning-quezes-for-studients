@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useAppSelector } from "../../../app/hooks";
 import { selectTheme } from "../../../features/dark-light-theme/theme";
 
@@ -17,7 +17,8 @@ const LinksOfMav: FC<LinksProps> = ({ link, title, setToggleMenu }) => {
     return (
         <NavLink
             to={link}
-            className={`navigation__link navigation__link--${theme} ${title === "Fav Quizes" && "navigation__link--favQuizes"}`}
+            className={`navbar__navigation--link navbar__navigation--link__${theme}-theme`}
+            // className={`navigation__link navigation__link--${theme} ${title === "Fav Quizes" && "navigation__link--favQuizes"}`}
             onClick={() => setToggleMenu(false)}
         >{
                 title === "Fav Quizes" ?

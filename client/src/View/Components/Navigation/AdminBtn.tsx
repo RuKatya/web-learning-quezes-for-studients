@@ -1,6 +1,6 @@
 import { useAppSelector } from '../../../app/hooks';
 import { selectAuth } from '../../../features/auth/authSlice';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { selectTheme } from '../../../features/dark-light-theme/theme';
 import { FC } from 'react';
 
@@ -14,11 +14,11 @@ const AdminBtn: FC<AdminBtnProps> = ({ setToggleMenu }) => {
     return (
         <>
             {user.isLogin && user.userRole === "admin" && (
-                <Link
+                <NavLink
                     to="/dashboard"
-                    className={`navigation__link navigation__link--${theme}`}
+                    className={`navbar__navigation--link navbar__navigation--link__${theme}-theme`}
                     onClick={() => setToggleMenu(false)}
-                >Dashboard</Link>
+                >Dashboard</NavLink>
             )}
         </>
     )

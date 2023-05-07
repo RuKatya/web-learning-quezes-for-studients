@@ -6,13 +6,28 @@
   align-items: center;
   padding: 0% 1%;
   backdrop-filter: blur(40.7742px);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(97, 97, 97, 0.06);
 
   &__navigation {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    // z-index: 101;
+    width: 50%;
+
+    &__dark-theme {
+      color: white;
+
+      a {
+        color: white;
+      }
+    }
+
+    &__light-theme {
+      color: rgba(11, 13, 23, 1);
+      a {
+        color: rgba(11, 13, 23, 1);
+      }
+    }
 
     @media screen and (max-width: 768px) {
       width: 25%;
@@ -23,57 +38,68 @@
       display: flex;
       flex-direction: row;
       z-index: 100;
+      width: 100%;
+      align-items: center;
+      padding-left: 5%;
+      justify-content: space-between;
 
       @media screen and (max-width: 768px) {
         flex-direction: column;
         position: absolute;
         width: 100vw;
-        top: 10vh;
+        top: 11vh;
         height: 50vh;
-        background-color: aqua;
+        align-items: center;
+        justify-content: center;
         right: 0;
+
+        &__dark-theme {
+          background-color: rgba(12, 16, 24, 0.95);
+        }
+
+        &__light-theme {
+          background-color: rgba(225, 222, 222, 0.95);
+        }
+
+        a {
+          margin: 5% 0%;
+        }
       }
     }
 
-    // @media screen and (max-width: 768px) {
-    //   width: 40%;
-    //   margin: 0% 2%;
-    //   // flex-direction: column;
-    // }
+    &--link {
+      text-transform: uppercase;
 
-    // &--link {
-    //   &__dark-theme.active {
-    //     border-bottom: 1px solid white;
-    //   }
-    // }
+      &__dark-theme.active {
+        border-bottom: 1px solid white;
+      }
+    }
 
-    // &--link {
-    //   &__light-theme.active {
-    //     border-bottom: 1px solid rgba(11, 13, 23, 1);
-    //   }
-    // }
+    &--link {
+      &__light-theme.active {
+        border-bottom: 1px solid rgba(11, 13, 23, 1);
+      }
+    }
 
-    // &__dark-theme {
-    //   a {
-    //     color: white;
-    //   }
-    // }
+    &__dark-theme {
+      a {
+        color: white;
+      }
+    }
 
-    // &__light-theme {
-    //   a {
-    //     color: rgba(11, 13, 23, 1);
-    //   }
-    // }
+    &__light-theme {
+      a {
+        color: rgba(11, 13, 23, 1);
+      }
+    }
   }
 }
 
 .secondNavbar {
-  background-color: aqua;
-  // z-index: -1;
-  // position: relative;
+  background: rgba(72, 72, 72, 0.2);
 
   &__dark-theme {
-    background-color: rgb(77, 77, 77);
+    color: white;
 
     a {
       color: white;
@@ -81,7 +107,7 @@
   }
 
   &__light-theme {
-    background-color: rgb(222, 222, 222);
+    color: rgba(11, 13, 23, 1);
 
     a {
       color: rgba(11, 13, 23, 1);
@@ -93,156 +119,45 @@
 
     @media screen and (max-width: 768px) {
       display: block;
+      margin-left: 1%;
     }
   }
 
   &__navigation {
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
     padding: 0.5% 2%;
+    width: 100%;
+
+    &__dark-theme {
+      background: #171a28;
+      @media screen and (max-width: 768px) {
+        box-shadow: 0px 4px 5px rgb(40, 39, 39);
+      }
+    }
+
+    &__light-theme {
+      background: #d8d9da;
+      @media screen and (max-width: 768px) {
+        box-shadow: 0px 4px 5px rgb(154, 154, 154);
+      }
+    }
 
     a {
       margin: 0% 2%;
       font-size: clamp(18px, 1rem, 24px);
+
+      @media screen and (max-width: 768px) {
+        margin: 5% 0%;
+      }
     }
 
     @media screen and (max-width: 768px) {
       position: absolute;
-      width: 100%;
-      height: 50vh;
+      padding: 10% 0%;
       flex-direction: column;
-      justify-content: space-evenly;
       align-items: center;
-
-      a {
-        margin: 0;
-      }
-    }
-
-    &__dark-theme {
-      background-color: rgb(77, 77, 77);
-    }
-
-    &__light-theme {
-      background-color: rgb(222, 222, 222);
     }
   }
 }
-
-// .menuBtn {
-//   display: none;
-
-//   @media only screen and (max-width: 768px) {
-//     display: block;
-//     cursor: pointer;
-//   }
-// }
-
-// .nav {
-//   display: flex;
-//   width: 100%;
-//   position: relative;
-//   align-items: center;
-//   justify-content: space-between;
-//   padding: 0% 2%;
-//   box-sizing: border-box;
-
-//   &__dark-theme {
-//     background-color: $dark-theme-main;
-//   }
-
-//   &__light-theme {
-//     background-color: $light-theme-main;
-//   }
-
-//   .homePagebtn {
-//     width: clamp(150px, 20vw, 220px);
-//   }
-// }
-
-// .navigation {
-//   display: flex;
-//   flex-direction: column;
-//   // background-color: aqua;
-//   position: absolute;
-//   width: 85%;
-//   right: 0;
-//   top: 0;
-//   align-items: center;
-//   justify-content: space-evenly;
-//   height: 100vh;
-
-//   &__link {
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     border-radius: 2rem;
-//     padding: 3%;
-//     width: 80%;
-//     // width: 14%;
-//     // margin: 0% 1%;
-
-//     font-size: clamp(22px, 1.3vw, 28px);
-
-//     &--dark {
-//       background-color: $dark-theme-btn-color;
-//       color: $dark-theme-main;
-//     }
-
-//     &--light {
-//       background-color: $light-theme-btn-color;
-//       color: $light-theme-main;
-//     }
-
-//     &--favQuizes {
-//       // padding: 0.2%;
-//       position: relative;
-
-//       & span {
-//         position: absolute;
-//         right: 2%;
-//         // left: 10%;
-//         background-color: #cf1cf1;
-//         border-radius: $inputs-radius;
-//         color: white;
-//         display: flex;
-//         justify-content: center;
-//         align-items: center;
-//         width: 30px;
-//         height: 30px;
-//         font-size: 18px;
-//       }
-//     }
-//   }
-// }
-
-// // .nav {
-// //   justify-content: space-between;
-// //   align-items: center;
-
-// //   &__dark-theme {
-// //     background-color: $dark-theme-main;
-// //   }
-
-// //   &__light-theme {
-// //     background-color: $light-theme-main;
-// //   }
-
-// //   & > div {
-// //     display: flex;
-// //   }
-
-// //   .homePagebtn {
-// //     width: clamp(150px, 20vw, 220px);
-// //   }
-// // }
-
-// // .navigation {
-// //   display: flex;
-// //   align-items: center;
-// //   padding: 0% 1%;
-// //   width: 85%;
-// //   justify-content: flex-end;
-
-// //
-// // }

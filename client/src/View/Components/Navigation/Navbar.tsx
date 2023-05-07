@@ -38,7 +38,7 @@ const Navbar: FC = () => {
                     />
                 </NavLink>
 
-                <div className={`navbar__navigation nav__navigation__${theme}-theme`}>
+                <div className={`navbar__navigation navbar__navigation__${theme}-theme`}>
                     <ThemeSwitchButton />
                     <div className="secondNavbar__menuBtn">
                         <MenuIcon fontSize="large"

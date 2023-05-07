@@ -39,7 +39,7 @@ const AsideBar: FC<toggleSecondMenu> = ({ toggleSecondMenu, setToggleSecondMenu,
                         <NavLink
                             to="javascript"
                             onClick={() => setToggleSecondMenu(false)}
-                        >javaScript</NavLink>
+                        >JavaScript</NavLink>
                     </div>
                 )}
             </aside>)
