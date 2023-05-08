@@ -2,13 +2,13 @@ const connection = require("../../connection")
 
 exports.saveNewTitle = (req, res) => {
     try {
-        const { TitleName, SubjectID } = req.body
+        const { Title, SubjectID } = req.body
 
-        if (TitleName == undefined || SubjectID == undefined) {
+        if (Title == undefined || SubjectID == undefined) {
             return res.send({ continueWork: false, message: "Title or SubjectID are missing" })
         }
 
-        const query = `INSERT INTO titles_quizes (Title, SubjectID) VALUES ("${TitleName}", "${SubjectID}")`
+        const query = `INSERT INTO titles_quizes (Title, SubjectID) VALUES ("${Title}", "${SubjectID}")`
 
         connection.query(query, (err, result) => {
             if (err) {
@@ -16,7 +16,8 @@ exports.saveNewTitle = (req, res) => {
                 return res.send({ continueWork: false, message: err.sqlMessage })
             }
 
-            return res.send({ continueWork: true, message: "Subject Saved", TitleName })
+            const numberId = Number(SubjectID)
+            return res.send({ continueWork: true, message: "Subject Saved", SubjectID: numberId, Title, Title_QuizID: result.insertId })
         })
     } catch (error) {
         console.error(error)
@@ -29,13 +30,13 @@ exports.getAllTitles = async (req, res) => {
 
         const query = `SELECT * FROM titles_quizes WHERE SubjectID = ${SubjectID}`
 
-        connection.query(query, (err, result) => {
+        connection.query(query, (err, titles) => {
             if (err) {
                 console.log('%cerror SubjectsCont.js line:27 ', err.sqlMessage);
                 return res.send({ continueWork: false, message: err.sqlMessage })
             }
 
-            return res.send({ continueWork: true, result })
+            return res.send({ continueWork: true, titles })
         })
     } catch (error) {
         console.log(error)

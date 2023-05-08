@@ -8,19 +8,20 @@ import ThemeSwitchButton from "../../UI/ThemeButton";
 import NavigationLinks from "./NavigationLinks";
 import MenuIcon from '@mui/icons-material/Menu';
 import AsideBar from "./AsideBar";
+import { selectAuth } from "../../../features/auth/authSlice";
 
 const linksForUser = [
-    { link: "", title: "Fav Quizes" },
-    { link: "", title: "Statistic" },
+    // { link: "", title: "Fav Quizes" },
+    // { link: "", title: "Statistic" },
     { link: "/profile/1", title: "Profile" },
 ]
 
 const Navbar: FC = () => {
-
     const [toggleMenu, setToggleMenu] = useState(false);
     const [toggleSecondMenu, setToggleSecondMenu] = useState(false);
     const isMobile = useResponsivity()
     const theme = useAppSelector(selectTheme)
+    const user = useAppSelector(selectAuth);
 
     useEffect(() => {
         setToggleSecondMenu(false)
@@ -38,7 +39,10 @@ const Navbar: FC = () => {
                     />
                 </NavLink>
 
-                <div className={`navbar__navigation navbar__navigation__${theme}-theme`}>
+                <div
+                    className={`navbar__navigation navbar__navigation__${theme}-theme`}
+                    style={{ width: user.isLogin ? isMobile ? "20%" : "50%" : isMobile ? "20%" : "15%" }}
+                >
                     <ThemeSwitchButton />
                     <div className="secondNavbar__menuBtn">
                         <MenuIcon fontSize="large"

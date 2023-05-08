@@ -12,7 +12,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 50%;
 
     &__dark-theme {
       color: white;
@@ -41,7 +40,7 @@
       width: 100%;
       align-items: center;
       padding-left: 5%;
-      justify-content: space-between;
+      justify-content: space-around;
 
       @media screen and (max-width: 768px) {
         flex-direction: column;
@@ -54,11 +53,19 @@
         right: 0;
 
         &__dark-theme {
-          background-color: rgba(12, 16, 24, 0.95);
+          background-color: rgba(12, 16, 24);
+
+          @media screen and (max-width: 768px) {
+            box-shadow: 0px 4px 5px rgb(40, 39, 39);
+          }
         }
 
         &__light-theme {
-          background-color: rgba(225, 222, 222, 0.95);
+          background-color: rgba(225, 222, 222);
+
+          @media screen and (max-width: 768px) {
+            box-shadow: 0px 4px 5px rgb(154, 154, 154);
+          }
         }
 
         a {
