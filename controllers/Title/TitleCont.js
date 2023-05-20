@@ -45,9 +45,9 @@ exports.getAllTitles = async (req, res) => {
 
 exports.updateTitle = async (req, res) => {
     try {
-        const { id, TitletName } = req.body
+        const { id, TitleName } = req.body
 
-        const updateQuery = `UPDATE titles_quizes SET Title='${TitletName}' WHERE Title_QuizID=${id}`
+        const updateQuery = `UPDATE titles_quizes SET Title='${TitleName}' WHERE Title_QuizID=${id}`
 
         connection.query(updateQuery, (err, result) => {
             if (err) {
@@ -55,7 +55,7 @@ exports.updateTitle = async (req, res) => {
                 return res.send({ continueWork: false, message: err.sqlMessage })
             }
 
-            return res.send({ continueWork: true, id, TitletName, message: "Title Updated" })
+            return res.send({ continueWork: true, id, TitleName, message: "Title Updated" })
         })
     } catch (error) {
         console.log(error)

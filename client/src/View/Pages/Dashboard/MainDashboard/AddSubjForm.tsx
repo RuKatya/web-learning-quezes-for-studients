@@ -7,7 +7,7 @@ const AddSubjForm: FC = () => {
     const [showAddNewSubjectWindow, setShowAddNewSubjectWindow] = useState<boolean>(false)
     const dispatch = useAppDispatch()
 
-    const addNewSubject = (ev: React.SyntheticEvent) => {
+    const hendleAddNewSubject = (ev: React.SyntheticEvent) => {
         ev.preventDefault()
 
         const target = ev.target as typeof ev.target & {
@@ -27,9 +27,9 @@ const AddSubjForm: FC = () => {
         <>
             <DashboardAddNew
                 btnText={"SUBJECT"}
-                submitFunction={addNewSubject}
+                submitFunction={hendleAddNewSubject}
                 inputName={"subjectName"}
-                placeholderText={'Subject'}
+                placeholderText={'Enter Subject'}
                 showAddNewSubjectWindow={showAddNewSubjectWindow}
                 setShowAddNewSubjectWindow={setShowAddNewSubjectWindow} />
         </>

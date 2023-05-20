@@ -10,8 +10,13 @@ interface DashboardAddNewFormProps {
 const DashboardAddNewForm = ({ submitFunction, inputName, placeholderText }: DashboardAddNewFormProps) => {
     return (
         <Form onSubmit={submitFunction} className='addMoreForm'>
-            <input type="text" name={inputName}
-                placeholder={`Enter ${placeholderText} To Save`} />
+            <input
+                type="text"
+                name={inputName}
+                placeholder={`Enter ${placeholderText} To Save`}
+                required
+                minLength={3}
+            />
             <button type='submit'>Save</button>
         </Form>
     )

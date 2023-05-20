@@ -30,10 +30,12 @@ export const removeTitle = createAsyncThunk("titles/removeTitles", async (id: nu
     }
 })
 
-export const updateTitle = createAsyncThunk("titles/updateTitle", async ({ id, TitletName }: UpdateTitle) => {
+export const updateTitle = createAsyncThunk("titles/updateTitle", async ({ id, TitleName }: UpdateTitle) => {
     try {
-        const { data } = await axios.patch("/title-quiz/update-title", { id, TitletName })
+        // console.log(id, TitleName)
+        const { data } = await axios.patch("/title-quiz/update-title", { id, TitleName })
         return data
+        // return { id, TitleName }
     } catch (error) {
         console.log(error)
     }

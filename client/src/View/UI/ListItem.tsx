@@ -1,9 +1,8 @@
 import { FC, useState } from 'react'
-import { Form, Link } from 'react-router-dom'
+import { Form, Link, useParams } from 'react-router-dom'
 import { selectTheme } from '../../features/dark-light-theme/theme';
 import { useAppSelector } from '../../app/hooks';
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
-// import UpdateOutlinedIcon from '@mui/icons-material/UpdateOutlined';
 import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import AutorenewOutlinedIcon from '@mui/icons-material/AutorenewOutlined';
@@ -24,6 +23,7 @@ const ListItem: FC<ListItemProps> = ({
     updateFunc,
 }) => {
     const [editItem, setEditItem] = useState<boolean>(false)
+    const { subjectId } = useParams()
     const theme = useAppSelector(selectTheme)
 
     return (
@@ -49,12 +49,12 @@ const ListItem: FC<ListItemProps> = ({
                                 sx={{ color: 'white' }}
                             />
                         </button>
-                        {/* <div className='dashboardInfo__listItem--formUpdateBtns'>
-                        </div> */}
                     </Form>
                     :
-                    <Link to={`/dashboard/${itemCategory}/${itemID}`}>{itemName}</Link>
-                }
+                    itemCategory === "title" ?
+                        (<Link to={`/dashboard/subjects/${subjectId}/${itemID}`}>{itemName}</Link>)
+                        :
+                        (<Link to={`/dashboard/subjects/${itemID}`}>{itemName}</Link>)}
             </h1>
             <div className='dashboardInfo__listItem--controlBtn'>
                 {!editItem && (<>
@@ -74,7 +74,7 @@ const ListItem: FC<ListItemProps> = ({
                     </button>
                 </>)}
             </div>
-        </div>
+        </div >
     )
 }
 

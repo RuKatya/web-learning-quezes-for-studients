@@ -11,7 +11,7 @@ interface SubjectItemProps {
 const SubjectItem: FC<SubjectItemProps> = ({ sub }) => {
     const dispatch = useAppDispatch()
 
-    const deleteSubject = (id: number, subject: string) => {
+    const hendleDeleteSubject = (id: number, subject: string) => {
         const approveUserToDelete = window.confirm("Are you sure you want to delete the subject?")
 
         if (approveUserToDelete) {
@@ -25,7 +25,7 @@ const SubjectItem: FC<SubjectItemProps> = ({ sub }) => {
         }
     }
 
-    const updateSubjectFunc = (ev: React.SyntheticEvent) => {
+    const hendleUpdateSubjectFunc = (ev: React.SyntheticEvent) => {
         ev.preventDefault()
 
         const target = ev.target as typeof ev.target & {
@@ -47,8 +47,8 @@ const SubjectItem: FC<SubjectItemProps> = ({ sub }) => {
             itemID={sub.SubjectID}
             itemName={sub.SubjectName}
             itemCategory={"subjects"}
-            deleteFunc={deleteSubject}
-            updateFunc={updateSubjectFunc}
+            deleteFunc={hendleDeleteSubject}
+            updateFunc={hendleUpdateSubjectFunc}
         />
     )
 }

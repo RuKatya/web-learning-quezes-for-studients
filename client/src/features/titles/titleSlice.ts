@@ -77,12 +77,15 @@ export const titlesSlice = createSlice({
             .addCase(updateTitle.pending, (state) => {
                 state.status = 'loading';
             })
-            .addCase(updateTitle.fulfilled, (state, action: PayloadAction<UpdateTtileInterface>) => {
+            .addCase(updateTitle.fulfilled, (state, action: PayloadAction<UpdateTtileInterface>
+            ) => {
                 state.status = 'idle';
-                const { id, continueWork, message, TitletName } = action.payload
+
+                console.log(action.payload)
+                const { id, continueWork, message, TitleName } = action.payload
 
                 if (continueWork) {
-                    state.list = state.list.map(item => item.SubjectID === id ? { ...item, TitletName } : item)
+                    state.list = state.list.map(item => item.Title_QuizID === id ? { ...item, Title: TitleName } : item)
                     state.message = message
                 } else {
                     state.message = message

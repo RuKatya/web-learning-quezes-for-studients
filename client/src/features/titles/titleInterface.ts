@@ -31,9 +31,9 @@ export interface NewTitle extends AddTitle {
 
 export interface UpdateTitle {
     id: number,
-    TitletName: string
+    TitleName: string
 }
 
 export interface UpdateTtileInterface extends DeleteInterface {
-    TitletName: string
+    TitleName: string
 }

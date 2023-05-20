@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks'
-import { selectSubject, subjectSubjectsMessage, subjectSubjectsStatus } from '../../../../features/subjects/subjectsSlice'
+import { subjectSubjectsMessage, subjectSubjectsStatus } from '../../../../features/subjects/subjectsSlice'
 import { getSubjects } from '../../../../features/subjects/subjectsAPI'
 import SubjectList from './SubjectList'
 import AddSubjForm from './AddSubjForm'
@@ -9,7 +9,6 @@ import LoadingPage from '../../../UI/LoadingPage'
 
 const MainDashboard = () => {
     const [openMessage, setOpenMessage] = useState<boolean>(false)
-    const subjects = useAppSelector(selectSubject)
     const subMessage = useAppSelector(subjectSubjectsMessage)
     const subStatus = useAppSelector(subjectSubjectsStatus)
     const dispatch = useAppDispatch()
@@ -31,7 +30,7 @@ const MainDashboard = () => {
                     {openMessage && (<InfoAlert message={subMessage} setOpenMessage={setOpenMessage} />)}
 
                     <AddSubjForm />
-                    <SubjectList subjects={subjects} />
+                    <SubjectList />
                 </>
             }
         </div>

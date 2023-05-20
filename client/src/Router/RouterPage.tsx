@@ -12,7 +12,8 @@ import DashboardProtectedRout from "../PotectedRout/DashboardProtectedRout";
 import AuthProtectedRout from "../PotectedRout/AuthProtectedRout";
 import MainDashboard from "../View/Pages/Dashboard/MainDashboard/MainDashboard";
 import MainPage from "../View/Pages/MainPage/MainPage";
-import MainTitle from "../View/Pages/Dashboard/TitlesSubject/MainTitle";
+import MainTitle from "../View/Pages/Dashboard/MainTitles/MainTitle";
+import MainQuestions from "../View/Pages/Dashboard/MainQuestions/MainQuestions";
 
 const RouterPage = () => {
     const router = createBrowserRouter(
@@ -39,6 +40,7 @@ const RouterPage = () => {
                 }  >
                     <Route index element={<MainDashboard />} />
                     <Route path="subjects/:subjectId" element={<MainTitle />} />
+                    <Route path="subjects/:subjectId/:titleId" element={<MainQuestions />} />
                 </Route>
                 <Route path="profile/:id" element={
                     <UserProtectedRout>
