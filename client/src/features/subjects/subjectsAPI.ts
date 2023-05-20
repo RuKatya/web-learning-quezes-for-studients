@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { UpdateSubject } from './subjectsInterface';
 
 export const getSubjects = createAsyncThunk("subjects/getSubjects", async () => {
     try {
@@ -28,14 +29,11 @@ export const removeSubject = createAsyncThunk("subjects/removeSubject", async (i
     }
 })
 
-interface UpdateSubject {
-    id: number,
-    SubjectName: string
-}
+
 
 export const updateSubject = createAsyncThunk("subjects/updateSubject", async ({ id, SubjectName }: UpdateSubject) => {
     try {
-        const { data } = await axios.post("/subjects/update-subject", { id, SubjectName })
+        const { data } = await axios.patch("/subjects/update-subject", { id, SubjectName })
         return data
     } catch (error) {
         console.log(error)

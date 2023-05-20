@@ -11,8 +11,7 @@ import UserProtectedRout from "../PotectedRout/UserProtectedRout";
 import DashboardProtectedRout from "../PotectedRout/DashboardProtectedRout";
 import AuthProtectedRout from "../PotectedRout/AuthProtectedRout";
 import MainDashboard from "../View/Pages/Dashboard/MainDashboard/MainDashboard";
-// import MainTitleSubject from "../View/Pages/Dashboard/TitlesSubject/MainTitleSubject";
-import MainPage from "../View/MainPage/MainPage";
+import MainPage from "../View/Pages/MainPage/MainPage";
 import MainTitle from "../View/Pages/Dashboard/TitlesSubject/MainTitle";
 
 const RouterPage = () => {

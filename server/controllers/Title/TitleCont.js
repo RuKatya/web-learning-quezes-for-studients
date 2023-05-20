@@ -42,3 +42,44 @@ exports.getAllTitles = async (req, res) => {
         console.log(error)
     }
 }
+
+exports.updateTitle = async (req, res) => {
+    try {
+        const { id, TitletName } = req.body
+
+        const updateQuery = `UPDATE titles_quizes SET Title='${TitletName}' WHERE Title_QuizID=${id}`
+
+        connection.query(updateQuery, (err, result) => {
+            if (err) {
+                console.log('%cerror SubjectsCont.js line:47 ', err.sqlMessage);
+                return res.send({ continueWork: false, message: err.sqlMessage })
+            }
+
+            return res.send({ continueWork: true, id, TitletName, message: "Title Updated" })
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+exports.removeTitle = async (req, res) => {
+    try {
+        const { id } = req.body
+
+        const deleteQuery = `DELETE FROM titles_quizes WHERE Title_QuizID=${id}`
+
+        connection.query(deleteQuery, (err, result) => {
+            if (err) {
+                console.log('%cerror SubjectsCont.js line:47 ', err.sqlMessage);
+                return res.send({ continueWork: false, message: err.sqlMessage })
+            }
+
+            /* ########## 
+                ADD QUESTION OF THE TITLE
+             ########### */
+            return res.send({ continueWork: true, id, message: "Title Deleted" })
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}

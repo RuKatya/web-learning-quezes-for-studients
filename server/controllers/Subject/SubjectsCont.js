@@ -1,18 +1,42 @@
 const connection = require("../../connection")
+const { httpCodes } = require("../../utils/httpStatusCode")
+const { addNewSubjectValidation } = require("../../validation/dashboardValid")
 
 exports.saveNewSubject = (req, res) => {
     try {
         const { subjectName } = req.body
+
+
+        const { error } = addNewSubjectValidation.validate({ subjectName })
+
+        if (error) {
+            console.log('%cSubjectsCont.js line:13:', error.message);
+            return res
+                .status(httpCodes.FORBIDDEN)
+                .send({
+                    continueWork: false,
+                    message: error.message
+                })
+        }
 
         const query = `INSERT INTO subjects (subjectName) VALUES ("${subjectName}")`
 
         connection.query(query, (err, result) => {
             if (err) {
                 console.log('%cerror SubjectsCont.js line:11 ', err.sqlMessage);
-                return res.send({ continueWork: false, message: err.sqlMessage })
+                return res
+                    .status(httpCodes.REQUEST_CONFLICT)
+                    .send({ continueWork: false, message: err.sqlMessage })
             }
 
-            return res.send({ continueWork: true, message: "Subject Saved", SubjectID: result.insertId, SubjectName: subjectName })
+            return res
+                .status(httpCodes.OK)
+                .send({
+                    continueWork: true,
+                    message: "Subject Saved",
+                    SubjectID: result.insertId,
+                    SubjectName: subjectName
+                })
         })
     } catch (error) {
         console.error(error)

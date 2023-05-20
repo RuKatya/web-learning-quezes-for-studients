@@ -1,7 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { addNewTitle, getTitlesBySubjectID } from './titleApi';
-import { NewTitle, TitleList, getTitleInterface } from './titleInterface';
+import { addNewTitle, getTitlesBySubjectID, removeTitle, updateTitle } from './titleApi';
+import { NewTitle, TitleList, UpdateTtileInterface, getTitleInterface } from './titleInterface';
+import { DeleteInterface } from '../subjects/subjectsInterface';
 
 const initialState: TitleList = {
     list: [],
@@ -54,6 +55,40 @@ export const titlesSlice = createSlice({
                 }
             })
             .addCase(addNewTitle.rejected, (state) => {
+                state.status = 'failed';
+            })
+            .addCase(removeTitle.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(removeTitle.fulfilled, (state, action: PayloadAction<DeleteInterface>) => {
+                state.status = 'idle';
+                const { id, continueWork, message } = action.payload
+
+                if (continueWork) {
+                    state.list = state.list.filter(item => item.Title_QuizID !== id)
+                    state.message = message
+                } else {
+                    state.message = message
+                }
+            })
+            .addCase(removeTitle.rejected, (state) => {
+                state.status = 'failed';
+            })
+            .addCase(updateTitle.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(updateTitle.fulfilled, (state, action: PayloadAction<UpdateTtileInterface>) => {
+                state.status = 'idle';
+                const { id, continueWork, message, TitletName } = action.payload
+
+                if (continueWork) {
+                    state.list = state.list.map(item => item.SubjectID === id ? { ...item, TitletName } : item)
+                    state.message = message
+                } else {
+                    state.message = message
+                }
+            })
+            .addCase(updateTitle.rejected, (state) => {
                 state.status = 'failed';
             })
     }

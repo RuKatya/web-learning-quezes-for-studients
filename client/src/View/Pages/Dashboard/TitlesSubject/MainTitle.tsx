@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import { selectTitles, titlesMessage, titlesStatus } from '../../../../features/titles/titleSlice';
-import { addNewTitle, getTitlesBySubjectID } from '../../../../features/titles/titleApi';
+import { addNewTitle, getTitlesBySubjectID, removeTitle } from '../../../../features/titles/titleApi';
 import LoadingPage from '../../../UI/LoadingPage';
 import InfoAlert from '../../../UI/InfoAlert';
 
@@ -54,7 +54,7 @@ const MainTitle = () => {
             const makeSureToDelete = prompt(`To delete the subject, please write ${title}`)
 
             if (title === makeSureToDelete) {
-                // dispatch(removeSubject(id))
+                dispatch(removeTitle(Title_QuizID))
             } else {
                 alert("Wrong Value")
             }

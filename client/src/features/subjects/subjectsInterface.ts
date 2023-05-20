@@ -26,6 +26,11 @@ export interface DeleteInterface {
     id: number,
 }
 
-export interface UpdateInterface extends DeleteInterface {
+export interface UpdateSubjectInterface extends DeleteInterface {
+    SubjectName: string
+}
+
+export interface UpdateSubject {
+    id: number,
     SubjectName: string
 }
