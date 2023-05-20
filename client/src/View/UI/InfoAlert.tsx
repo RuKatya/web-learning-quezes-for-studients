@@ -3,10 +3,10 @@ import { Stack } from '@mui/material';
 import { setMessageEmpty } from '../../features/subjects/subjectsSlice';
 import { useAppDispatch } from '../../app/hooks';
 
-export interface InfoAlert {
+export interface InfoAlertProps {
     message: string, setOpenMessage: Function
 }
-const InfoAlert = ({ message, setOpenMessage }: InfoAlert) => {
+const InfoAlert = ({ message, setOpenMessage }: InfoAlertProps) => {
     const dispatch = useAppDispatch()
 
     return (

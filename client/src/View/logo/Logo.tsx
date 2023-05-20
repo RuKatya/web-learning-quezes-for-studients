@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
 import { useAppSelector } from '../../app/hooks'
 import { selectTheme } from '../../features/dark-light-theme/theme'
 import logoDarkTheme from '../../images/logo/logoDarkTheme.svg';
@@ -12,7 +12,7 @@ interface LogoProps {
 }
 const Logo: FC<LogoProps> = ({ classProps, setToggleMenu, setToggleSecondMenu }) => {
     const theme = useAppSelector(selectTheme)
-    const location = useLocation();
+    // const location = useLocation();
 
     return (
         <div className='logo' onClick={() => {
