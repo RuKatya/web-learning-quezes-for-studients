@@ -121,7 +121,9 @@ exports.loginUser = async (req, res) => {
     } catch (error) {
         console.log('error UserCont.js line:85 function loginUser');
         console.log(error)
-        return res.status(httpCodes.SERVER_ERROR).send({ message: "Server Feiled, try again" })
+        return res
+            .status(httpCodes.SERVER_ERROR)
+            .send({ message: "Server Feiled, try again" })
     }
 }
 
