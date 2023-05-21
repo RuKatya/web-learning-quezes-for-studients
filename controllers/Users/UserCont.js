@@ -95,8 +95,6 @@ exports.loginUser = async (req, res) => {
                     .send({ continueWork: false, message: "Password not correct" })
             }
 
-            console.log(user[0])
-
             const cookiesData = {
                 userID: user[0].UserID,
                 userRole: user[0].UserRole
