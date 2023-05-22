@@ -17,7 +17,7 @@ exports.saveNewTitle = (req, res) => {
                 })
         }
 
-        const query = `INSERT INTO titles_quizes (Title, SubjectID) VALUES ("${Title}", "${SubjectID}")`
+        const query = `INSERT INTO titles_quizes (Title, SubjectID, Draft) VALUES ("${Title}", "${SubjectID}", true)`
 
         connection.query(query, (err, result) => {
             if (err) {

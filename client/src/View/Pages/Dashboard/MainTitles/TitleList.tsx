@@ -14,8 +14,8 @@ const TitleList: FC = () => {
     const titles = useAppSelector(selectTitles)
 
     return (<div className='dashboardInfo__listOfItems'>{
-        titles.length > 0 ? titles.map((title: Title) => (
-            <TitleItem title={title} />
+        titles.length > 0 ? titles.map((title: Title, index: number) => (
+            <TitleItem title={title} key={index} />
         )) :
             (<h1 className='dashboardInfo__noSubjects-info'>No Titles</h1>)
     }</div>)

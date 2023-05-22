@@ -3,6 +3,7 @@ import authReducer from '../features/auth/authSlice';
 import themeReducer from '../features/dark-light-theme/theme';
 import subjectsReducer from '../features/subjects/subjectsSlice';
 import titlesReducer from '../features/titles/titleSlice';
+import questionsReducer from '../features/questions/questionsSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     theme: themeReducer,
     subjects: subjectsReducer,
     titles: titlesReducer,
+    questions: questionsReducer,
   },
 });
 
