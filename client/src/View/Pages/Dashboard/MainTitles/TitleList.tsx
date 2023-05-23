@@ -8,6 +8,7 @@ import TitleItem from './TitleItem'
 const TitleList: FC = () => {
     const titles = useAppSelector(selectTitles)
 
+    console.log(titles)
     return (<div className='dashboardInfo__listOfItems'>{
         titles.length > 0 ? titles.map((title: Title, index: number) => (
             <TitleItem title={title} key={index} />

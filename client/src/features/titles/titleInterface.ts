@@ -3,7 +3,8 @@ import { DeleteInterface } from "../subjects/subjectsInterface"
 export interface Title {
     SubjectID: number,
     Title: string,
-    Title_QuizID: number
+    Title_QuizID: number,
+    Draft: number
 }
 
 export interface TitleList {
@@ -26,7 +27,8 @@ export interface AddTitle {
 export interface NewTitle extends AddTitle {
     continueWork: boolean,
     message: string,
-    Title_QuizID: number
+    Title_QuizID: number,
+    Draft: number
 }
 
 export interface UpdateTitle {

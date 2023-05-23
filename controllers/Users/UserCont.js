@@ -45,8 +45,8 @@ exports.addNewUser = async (req, res) => {
                 })
         })
     } catch (error) {
-        console.log('error UserCont.js line:35 function addNewUser');
-        console.log(error)
+        console.error('error UserCont.js line:35 function addNewUser');
+        console.error(error)
         return res
             .status(httpCodes.SERVER_ERROR)
             .send({ message: "Server Feiled, try again" })
@@ -117,8 +117,8 @@ exports.loginUser = async (req, res) => {
                 })
         })
     } catch (error) {
-        console.log('error UserCont.js line:85 function loginUser');
-        console.log(error)
+        console.error('error UserCont.js line:85 function loginUser');
+        console.error(error)
         return res
             .status(httpCodes.SERVER_ERROR)
             .send({ message: "Server Feiled, try again" })
@@ -169,8 +169,8 @@ exports.checkUserCookies = async (req, res) => {
             })
         })
     } catch (error) {
-        console.log('error UserCont.js line:94 function checkUserCookies');
-        console.log(error.message)
+        console.error('error UserCont.js line:94 function checkUserCookies');
+        console.error(error.message)
         return res
             .status(httpCodes.SERVER_ERROR)
             .send({
@@ -189,8 +189,8 @@ exports.userLogout = async (req, res) => {
             .status(httpCodes.OK)
             .send({ continueWork: false, isLogin: false })
     } catch (error) {
-        console.log('error UserCont.js line:130 function userLogout');
-        console.log(error)
+        console.error('error UserCont.js line:130 function userLogout');
+        console.error(error)
         return res
             .status(httpCodes.SERVER_ERROR)
             .send({ message: "Server Feiled, try again" })

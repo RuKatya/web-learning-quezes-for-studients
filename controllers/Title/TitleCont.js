@@ -25,11 +25,20 @@ exports.saveNewTitle = (req, res) => {
                 return res.send({ continueWork: false, message: err.sqlMessage })
             }
 
-            const numberId = Number(SubjectID)
-            return res.send({ continueWork: true, message: "Subject Saved", SubjectID: numberId, Title, Title_QuizID: result.insertId })
+            return res.send({
+                continueWork: true,
+                message: "Subject Saved",
+                SubjectID: Number(SubjectID),
+                Title,
+                Title_QuizID: result.insertId,
+                Draft: 1
+            })
         })
     } catch (error) {
         console.error(error)
+        return res
+            .status(httpCodes.SERVER_ERROR)
+            .send({ message: "Server Feiled, try again" })
     }
 }
 
@@ -57,10 +66,14 @@ exports.getAllTitles = async (req, res) => {
                 return res.send({ continueWork: false, message: err.sqlMessage })
             }
 
+            // console.log(titles)
             return res.send({ continueWork: true, titles })
         })
     } catch (error) {
-        console.log(error)
+        console.error(error)
+        return res
+            .status(httpCodes.SERVER_ERROR)
+            .send({ message: "Server Feiled, try again" })
     }
 }
 
@@ -91,7 +104,10 @@ exports.updateTitle = async (req, res) => {
             return res.send({ continueWork: true, id, TitleName, message: "Title Updated" })
         })
     } catch (error) {
-        console.log(error)
+        console.error(error)
+        return res
+            .status(httpCodes.SERVER_ERROR)
+            .send({ message: "Server Feiled, try again" })
     }
 }
 
@@ -125,6 +141,9 @@ exports.removeTitle = async (req, res) => {
             return res.send({ continueWork: true, id, message: "Title Deleted" })
         })
     } catch (error) {
-        console.log(error)
+        console.error(error)
+        return res
+            .status(httpCodes.SERVER_ERROR)
+            .send({ message: "Server Feiled, try again" })
     }
 }

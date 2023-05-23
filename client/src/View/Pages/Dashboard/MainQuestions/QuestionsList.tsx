@@ -1,19 +1,16 @@
 import { selectQuestions } from '../../../../features/questions/questionsSlice'
 import { useAppSelector } from '../../../../app/hooks'
+import { FC } from 'react'
+import QuestionItem from './QuestionItem'
 
-const QuestionsList = () => {
+const QuestionsList: FC = () => {
     const selectQuest = useAppSelector(selectQuestions)
 
     return (
         <div>
-            {
-                selectQuest.length > 0 ? (selectQuest.map((quest) => (
-                    <div key={quest.QuestionID}>
-                        <div>{quest.QuestionText}</div>
-                    </div>
-                ))) : (<h2>No questions</h2>)
-            }
-
+            {selectQuest.length > 0 ? (selectQuest.map((quest) => (
+                <QuestionItem key={quest.QuestionID} {...quest} />
+            ))) : (<h2>No questions</h2>)}
         </div>
     )
 }

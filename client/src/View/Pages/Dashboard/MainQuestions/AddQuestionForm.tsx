@@ -21,13 +21,17 @@ const AddQuestionForm = () => {
         setQuestions(rows);
     };
 
-    const hendleChanges = (e: any) => {
-        const indexInput: number = Number(e.target.id)
-        const nameInput: keyof Questions = e.target.name
+    const hendleChanges = (ev: React.SyntheticEvent) => {
+        const target = ev.target as typeof ev.target & {
+            value: string, id: number, name: string
+        }
+
+        const indexInput = target.id
+        const nameInput = target.name
 
         setQuestions((questions) => {
             const newArr: any[] = questions.slice();
-            newArr[indexInput][nameInput] = e.target.value
+            newArr[indexInput][nameInput] = target.value
             return newArr
         })
     }
@@ -36,6 +40,7 @@ const AddQuestionForm = () => {
         dispatch(saveQuestions({ questions, draft }))
         setQuestions([])
     }
+
     return (
         <div>
             <Form>
@@ -47,7 +52,12 @@ const AddQuestionForm = () => {
                             <input type="text" id={`${index}`} name="Answer2" placeholder="Answer 2" defaultValue={input.Answer2} onChange={hendleChanges} />
                             <input type="text" id={`${index}`} name="Answer3" placeholder="Answer 3" defaultValue={input.Answer3} onChange={hendleChanges} />
                             <input type="text" id={`${index}`} name="Answer4" placeholder="Answer 4" defaultValue={input.Answer4} onChange={hendleChanges} />
-                            <input type="text" id={`${index}`} name="RigthQuestion" placeholder='Right Question' defaultValue={input.RigthQuestion} onChange={hendleChanges} />
+                            <select name="RigthQuestion" id={`${index}`} onChange={hendleChanges}>
+                                <option value="Answer1">A</option>
+                                <option value="Answer2">B</option>
+                                <option value="Answer3">C</option>
+                                <option value="Answer4">D</option>
+                            </select>
                         </div>
                         <div>
                             {questions.length > 0 && (

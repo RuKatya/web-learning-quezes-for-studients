@@ -62,7 +62,7 @@ exports.getAllSubjects = async (req, res) => {
                 .send({ continueWork: true, subjects })
         })
     } catch (error) {
-        console.log(error)
+        console.error(error)
         return res
             .status(httpCodes.SERVER_ERROR)
             .send({ message: "Server Feiled, try again" })
@@ -100,7 +100,7 @@ exports.updateSubject = async (req, res) => {
                 .send({ continueWork: true, id, SubjectName, message: "Subject Updated" })
         })
     } catch (error) {
-        console.log(error)
+        console.error(error)
         return res
             .status(httpCodes.SERVER_ERROR)
             .send({ message: "Server Feiled, try again" })
@@ -138,10 +138,14 @@ exports.removeSubject = async (req, res) => {
              ########### */
             return res
                 .status(httpCodes.OK)
-                .send({ continueWork: true, id, message: "Subject Deleted" })
+                .send({
+                    continueWork: true,
+                    id,
+                    message: "Subject Deleted"
+                })
         })
     } catch (error) {
-        console.log(error)
+        console.error(error)
         return res
             .status(httpCodes.SERVER_ERROR)
             .send({ message: "Server Feiled, try again" })

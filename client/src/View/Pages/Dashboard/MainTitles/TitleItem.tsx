@@ -49,6 +49,7 @@ const TitleItem: FC<TitleItemProps> = ({ title }) => {
             itemCategory={"title"}
             deleteFunc={hendleDeleteTitle}
             updateFunc={hendleUpdateTitleFunc}
+            draft={title.Draft}
         />
     )
 }

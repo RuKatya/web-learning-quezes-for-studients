@@ -44,12 +44,12 @@ export const titlesSlice = createSlice({
             ) => {
                 state.status = 'idle';
                 console.log(action.payload)
-                const { continueWork, message, Title, SubjectID, Title_QuizID } = action.payload
+                const { continueWork, message, Title, SubjectID, Title_QuizID, Draft } = action.payload
 
 
                 if (continueWork) {
                     state.message = message
-                    state.list = [...state.list, { SubjectID, Title, Title_QuizID }]
+                    state.list = [...state.list, { SubjectID, Title, Title_QuizID, Draft }]
                 } else {
                     state.message = message
                 }

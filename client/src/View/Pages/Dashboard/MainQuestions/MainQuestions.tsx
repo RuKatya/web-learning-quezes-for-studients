@@ -36,8 +36,8 @@ const MainQuestions = () => {
                         removeMessage={setQuestionMessageEmpty}
                     />)}
 
-                    <QuestionsList />
                     <AddQuestionForm />
+                    <QuestionsList />
                 </>}
         </div>
     )

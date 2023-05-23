@@ -7,7 +7,11 @@ export const getQuestions = createAsyncThunk("questions/getQuestions", async (Ti
 })
 
 export const saveQuestions = createAsyncThunk("questions/saveQuestions", async ({ questions, draft }: any) => {
-
     const { data } = await axios.post("/title-questions/save-new-questions", { questions, draft })
+    return data
+})
+
+export const deleteQuestion = createAsyncThunk("questions/deleteQuestion", async (id: number) => {
+    const { data } = await axios.delete("/title-questions/delete-one-question", { data: { id } })
     return data
 })

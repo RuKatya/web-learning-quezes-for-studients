@@ -13,6 +13,7 @@ interface ListItemProps {
     itemCategory: string,
     deleteFunc: Function,
     updateFunc?: any,
+    draft?: number
 }
 
 const ListItem: FC<ListItemProps> = ({
@@ -21,6 +22,7 @@ const ListItem: FC<ListItemProps> = ({
     itemCategory,
     deleteFunc,
     updateFunc,
+    draft
 }) => {
     const [editItem, setEditItem] = useState<boolean>(false)
     const { subjectId } = useParams()
@@ -28,6 +30,7 @@ const ListItem: FC<ListItemProps> = ({
 
     return (
         <div key={itemID} className={`dashboardInfo__listItem dashboardInfo__listItem__${theme}-theme`}>
+            {draft == 1 && (<span>D</span>)}
             <h1>
                 {editItem ?
                     <Form onSubmit={updateFunc} className='dashboardInfo__listItem--formUpdate'>

@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { Questions, QuestionsList, getQuestionsInterface } from './questionsInterface';
-import { getQuestions, saveQuestions } from './questionsApi';
+import { deleteQuestion, getQuestions, saveQuestions } from './questionsApi';
 
 
 const initialState: QuestionsList = {
@@ -48,15 +48,36 @@ export const questionsSlice = createSlice({
                 const { continueWork, message, questions } = action.payload
 
                 if (continueWork) {
-                    questions.forEach((el: Questions) => {
-                        state.list = [...state.list, el]
-                        state.message = message
-                    });
+                    // questions.forEach((el: Questions) => {
+                    //     state.list = [...state.list, el]
+                    // });
+                    state.list = questions
+                    state.message = message
                 } else {
                     state.message = message
                 }
             })
             .addCase(saveQuestions.rejected, (state) => {
+                state.status = 'failed';
+            })
+            .addCase(deleteQuestion.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(deleteQuestion.fulfilled, (state, action) => {
+                state.status = 'idle';
+
+                console.log(action.payload)
+
+                const { continueWork, message, id } = action.payload
+
+                if (continueWork) {
+                    state.list = state.list.filter(item => item.QuestionID !== id)
+                    state.message = message
+                } else {
+                    state.message = message
+                }
+            })
+            .addCase(deleteQuestion.rejected, (state) => {
                 state.status = 'failed';
             })
     }

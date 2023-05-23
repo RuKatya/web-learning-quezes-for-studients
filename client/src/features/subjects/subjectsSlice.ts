@@ -42,6 +42,7 @@ export const subjectsSlice = createSlice({
             })
             .addCase(addSubject.fulfilled, (state, action: PayloadAction<NewSubject>) => {
                 state.status = 'idle';
+
                 const { SubjectID, SubjectName, continueWork, message } = action.payload
 
                 if (continueWork) {
