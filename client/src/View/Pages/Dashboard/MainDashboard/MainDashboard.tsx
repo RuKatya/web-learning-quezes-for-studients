@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks'
-import { subjectSubjectsMessage, subjectSubjectsStatus } from '../../../../features/subjects/subjectsSlice'
+import { setMessageEmpty, subjectSubjectsMessage, subjectSubjectsStatus } from '../../../../features/subjects/subjectsSlice'
 import { getSubjects } from '../../../../features/subjects/subjectsAPI'
 import SubjectList from './SubjectList'
 import AddSubjForm from './AddSubjForm'
@@ -27,7 +27,12 @@ const MainDashboard = () => {
                 <LoadingPage />
                 :
                 <>
-                    {openMessage && (<InfoAlert message={subMessage} setOpenMessage={setOpenMessage} />)}
+                    {openMessage && (
+                        <InfoAlert
+                            message={subMessage}
+                            setOpenMessage={setOpenMessage}
+                            removeMessage={setMessageEmpty}
+                        />)}
 
                     <AddSubjForm />
                     <SubjectList />

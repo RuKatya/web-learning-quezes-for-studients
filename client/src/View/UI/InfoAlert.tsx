@@ -1,12 +1,11 @@
 import { Alert } from '@mui/material';
 import { Stack } from '@mui/material';
-import { setMessageEmpty } from '../../features/subjects/subjectsSlice';
 import { useAppDispatch } from '../../app/hooks';
 
 export interface InfoAlertProps {
-    message: string, setOpenMessage: Function
+    message: string, setOpenMessage: Function, removeMessage: Function
 }
-const InfoAlert = ({ message, setOpenMessage }: InfoAlertProps) => {
+const InfoAlert = ({ message, setOpenMessage, removeMessage }: InfoAlertProps) => {
     const dispatch = useAppDispatch()
 
     return (
@@ -15,7 +14,7 @@ const InfoAlert = ({ message, setOpenMessage }: InfoAlertProps) => {
                 variant="outlined" severity="info"
                 onClose={() => {
                     setOpenMessage(false)
-                    dispatch(setMessageEmpty())
+                    dispatch(removeMessage())
                 }}
             >{message}</Alert>
         </Stack>

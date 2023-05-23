@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
-import { titlesMessage, titlesStatus } from '../../../../features/titles/titleSlice';
+import { setTitleMessageEmpty, titlesMessage, titlesStatus } from '../../../../features/titles/titleSlice';
 import { getTitlesBySubjectID } from '../../../../features/titles/titleApi';
 import LoadingPage from '../../../UI/LoadingPage';
 import InfoAlert from '../../../UI/InfoAlert';
@@ -35,7 +35,12 @@ const MainTitle = () => {
                     <LoadingPage />
                     :
                     <>
-                        {openMessage && (<InfoAlert message={titleMsg} setOpenMessage={setOpenMessage} />)}
+                        {openMessage && (
+                            <InfoAlert
+                                message={titleMsg}
+                                setOpenMessage={setOpenMessage}
+                                removeMessage={setTitleMessageEmpty}
+                            />)}
 
                         <AddTitleForm subjectId={Number(subjectId)} />
                         <TitleList />

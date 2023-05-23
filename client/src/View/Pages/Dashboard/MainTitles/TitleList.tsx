@@ -5,11 +5,6 @@ import { useAppSelector } from '../../../../app/hooks'
 import { selectTitles } from '../../../../features/titles/titleSlice'
 import TitleItem from './TitleItem'
 
-// export interface TitleListInterface {
-//     titles: Array<Title>
-// }
-
-
 const TitleList: FC = () => {
     const titles = useAppSelector(selectTitles)
 
