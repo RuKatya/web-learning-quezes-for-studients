@@ -10,12 +10,7 @@ exports.saveNewSubject = (req, res) => {
 
         if (error) {
             console.log('%cSubjectsCont.js line:13:', error.message);
-            return res
-                .status(httpCodes.FORBIDDEN)
-                .send({
-                    continueWork: false,
-                    message: error.message
-                })
+            return res.status(httpCodes.FORBIDDEN).send({ continueWork: false, message: error.message })
         }
 
         const query = `INSERT INTO subjects (subjectName) VALUES ("${subjectName}")`
