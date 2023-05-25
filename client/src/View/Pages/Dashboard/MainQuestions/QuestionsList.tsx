@@ -10,7 +10,7 @@ const QuestionsList: FC = () => {
         <div>
             {selectQuest.length > 0 ? (selectQuest.map((quest) => (
                 <QuestionItem key={quest.QuestionID} {...quest} />
-            ))) : (<h2>No questions</h2>)}
+            ))) : (<h2>No questions, to add new Question press "+"</h2>)}
         </div>
     )
 }

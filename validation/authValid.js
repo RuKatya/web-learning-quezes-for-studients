@@ -3,6 +3,7 @@ const Joi = require('joi');
 exports.userRegValidation = Joi.object({
     userName: Joi.string().min(2).max(25).required().messages({
         'string.empty': "Name can not be empty",
+        'string.min': "Name can be maximun 2 sybmols",
         'string.max': "Name can be maximun 25 sybmols",
     }),
     email: Joi.string().email().messages({

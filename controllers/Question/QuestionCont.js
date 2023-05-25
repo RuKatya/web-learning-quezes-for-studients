@@ -1,12 +1,19 @@
 const connection = require("../../connection")
 const { httpCodes } = require("../../utils/httpStatusCode")
-const { deleteValidation } = require("../../validation/dashboardValid")
+const { deleteValidation, questionsValidation, getAllQuestionsaValidation, deleteManyIdsValidation } = require("../../validation/dashboardValid")
 
 // ---- Saves Question ---- //
 exports.saveNewQuestions = (req, res) => {
     try {
         const { questions, draft } = req.body
         const TitleID = questions[0].Title_QuizID
+
+        const { error } = questionsValidation.validate(questions)
+
+        if (error) {
+            console.error('QuestionCont.js line:14 validation error of saveNewQuestions:', error.message)
+            return res.send({ continueWork: false, message: error.message }).status(httpCodes.FORBIDDEN)
+        }
 
         const questionsToServer = questions.map(obj =>
             Object.values(obj)
@@ -16,16 +23,16 @@ exports.saveNewQuestions = (req, res) => {
 
         connection.query(query, [questionsToServer], (err, result) => {
             if (err) {
-                console.log('%cerror SubjectsCont.js line:11 ', err.sqlMessage);
-                return res.send({ continueWork: false, message: err.sqlMessage })
+                console.error('SubjectsCont.js line:26 sql error saveNewQuestions', err.sqlMessage);
+                return res.send({ continueWork: false, message: err.sqlMessage }).status(httpCodes.BAD_REQUEST)
             }
 
             const saveTitleDraft = `UPDATE titles_quizes SET Draft = ${draft} WHERE Title_QuizID = ${TitleID}`
 
             connection.query(saveTitleDraft, err => {
                 if (err) {
-                    console.log('%cerror SubjectsCont.js line:27 ', err.sqlMessage);
-                    return res.send({ continueWork: false, message: err.sqlMessage })
+                    console.error('SubjectsCont.js line:34 sql error saveNewQuestions', err.sqlMessage);
+                    return res.send({ continueWork: false, message: err.sqlMessage }).status(httpCodes.BAD_REQUEST)
                 }
             })
 
@@ -33,19 +40,16 @@ exports.saveNewQuestions = (req, res) => {
 
             connection.query(getQuestions, (err, questions) => {
                 if (err) {
-                    console.log('%cerror SubjectsCont.js line:27 ', err.sqlMessage);
-                    return res.send({ continueWork: false, message: err.sqlMessage })
+                    console.error('SubjectsCont.js line:43 sql error saveNewQuestions', err.sqlMessage);
+                    return res.send({ continueWork: false, message: err.sqlMessage }).status(httpCodes.BAD_REQUEST)
                 }
 
-                return res.send({ continueWork: true, message: "Saved", questions })
+                return res.send({ continueWork: true, message: "Saved", questions }).status(httpCodes.OK)
             })
         })
     } catch (error) {
-        console.log('%cQuestionCont.js line:24 saveNewQuestions error');
-        console.error(error)
-        return res
-            .status(httpCodes.SERVER_ERROR)
-            .send({ message: "Server Feiled, try again" })
+        console.log('QuestionCont.js line:24 saveNewQuestions error', error);
+        return res.send({ message: "Server Feiled, try again" }).status(httpCodes.SERVER_ERROR)
     }
 }
 
@@ -54,72 +58,86 @@ exports.getAllQuestionsByTitle = async (req, res) => {
     try {
         const { Title_QuizID } = req.body
 
+        const { error } = getAllQuestionsaValidation.validate({ Title_QuizID })
+
+        if (error) {
+            console.error('QuestionCont.js line:67 validation error of getAllQuestionsByTitle:', error.message)
+            return res.send({ continueWork: false, message: error.message }).status(httpCodes.FORBIDDEN)
+        }
+
         const getQuestions = `SELECT * FROM title_qustions WHERE Title_QuizID = ${Title_QuizID}`
 
         connection.query(getQuestions, (err, questions) => {
             if (err) {
-                console.log('getAllQuestionsByTitle line:54:', error.message);
-                return res
-                    .status(httpCodes.FORBIDDEN)
-                    .send({
-                        continueWork: false,
-                        message: error.message
-                    })
+                console.error('QuestionCont.js line:72 sql error getAllQuestionsByTitle', err.sqlMessage);
+                return res.send({ continueWork: false, message: err.message }).status(httpCodes.FORBIDDEN)
             }
 
-            return res.send({ continueWork: true, questions })
+            return res.send({ continueWork: true, questions }).status(httpCodes.OK)
         })
     } catch (error) {
-        console.log('%cQuestionCont.js line:50 getAllQuestionsByTitle error');
-        console.error(error)
-        return res
-            .status(httpCodes.SERVER_ERROR)
-            .send({ message: "Server Feiled, try again" })
+        console.log('QuestionCont.js line:50 getAllQuestionsByTitle error', error);
+        return res.send({ message: "Server Feiled, try again" }).status(httpCodes.SERVER_ERROR)
     }
 }
+
+// ---- Update Question ---- //
+// exports.updateQuestion
 
 // ---- Delete Question ---- //
 exports.deleteQuestion = async (req, res) => {
     try {
         const { id } = req.body
 
-        const deleteQuestionQuery = `DELETE FROM title_qustions WHERE QuestionID = ${id}`
-
         const { error } = deleteValidation.validate({ id })
 
         if (error) {
-            console.log('%cQuestionCont.js line:68:', error.message);
-            return res
-                .status(httpCodes.FORBIDDEN)
-                .send({
-                    continueWork: false,
-                    message: error.message
-                })
+            console.error('QuestionCont.js line:97 validation error of deleteQuestion:', error.message)
+            return res.send({ continueWork: false, message: error.message }).status(httpCodes.FORBIDDEN)
         }
+
+        const deleteQuestionQuery = `DELETE FROM title_qustions WHERE QuestionID = ${id}`
 
         connection.query(deleteQuestionQuery, (err, result) => {
             if (err) {
-                console.log('%cQuestionCont.js line:79: ', err.sqlMessage);
-                return res
-                    .status(httpCodes.BAD_REQUEST)
-                    .send({ continueWork: false, message: err.sqlMessage })
+                console.error('QuestionCont.js line:103 sql error deleteQuestion', err.sqlMessage);
+                return res.send({ continueWork: false, message: err.message }).status(httpCodes.FORBIDDEN)
             }
 
-            return res
-                .status(httpCodes.OK)
-                .send({
-                    continueWork: true,
-                    id,
-                    message: "Question Deleted"
-                })
+            return res.send({ continueWork: true, id, message: "Question Deleted" }).status(httpCodes.OK)
         })
     } catch (error) {
-        console.log('%cQuestionCont.js line:62 deleteQuestion error');
-        console.error(error)
-        return res
-            .status(httpCodes.SERVER_ERROR)
-            .send({ message: "Server Feiled, try again" })
+        console.log('QuestionCont.js line:110 deleteQuestion error', error);
+        return res.send({ message: "Server Feiled, try again" }).status(httpCodes.SERVER_ERROR)
     }
 }
 
-// exports.updateQuestion
+// ---- Delete Many Question ---- //
+exports.deleteManyQuestions = async (req, res) => {
+    try {
+        const { ids } = req.body
+
+        const { error } = deleteManyIdsValidation.validate(ids)
+
+        if (error) {
+            console.error('QuestionCont.js line:97 validation error of deleteQuestion:', error.message)
+            return res.send({ continueWork: false, message: error.message }).status(httpCodes.FORBIDDEN)
+        }
+
+        const deleteMany = `DELETE FROM title_qustions WHERE QuestionID IN (${ids})`
+
+        connection.query(deleteMany, (err, result) => {
+            if (err) {
+                console.error('QuestionCont.js line:124 sql error deleteManyQuestions', err.sqlMessage);
+                return res.send({ continueWork: false, message: err.message }).status(httpCodes.FORBIDDEN)
+            }
+
+            return res.send({ continueWork: true, ids, message: "Questions Deleted" }).status(httpCodes.OK)
+        })
+    } catch (error) {
+        console.log('QuestionCont.js line:110 deleteQuestion error', error);
+        return res.send({ message: "Server Feiled, try again" }).status(httpCodes.SERVER_ERROR)
+    }
+}
+
+

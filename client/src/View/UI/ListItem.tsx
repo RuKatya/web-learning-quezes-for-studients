@@ -30,8 +30,7 @@ const ListItem: FC<ListItemProps> = ({
 
     return (
         <div key={itemID} className={`dashboardInfo__listItem dashboardInfo__listItem__${theme}-theme`}>
-            {draft == 1 && (<span>D</span>)}
-            <h1>
+            <h1 className={`${draft === 1 ? "draft" : null}`}>
                 {editItem ?
                     <Form onSubmit={updateFunc} className='dashboardInfo__listItem--formUpdate'>
                         <button
