@@ -39,3 +39,15 @@ export interface UpdateTitle {
 export interface UpdateTtileInterface extends DeleteInterface {
     TitleName: string
 }
+
+export interface SaveTitleAs {
+    draft: boolean
+    id: number
+}
+
+export interface SaveTitleAsPayload {
+    continueWork: boolean,
+    message: string,
+    id: number
+    Draft: number
+}

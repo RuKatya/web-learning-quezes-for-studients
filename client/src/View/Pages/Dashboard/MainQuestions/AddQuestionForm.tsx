@@ -128,7 +128,7 @@ const AddQuestionForm = () => {
                 <button type='button' onClick={hendleAddInput}>+</button>
                 {questions.length > 0 && (
                     <>
-                        <button type='button' onClick={() => hendleSaveQuestions(false)}>Save</button>
+                        <button type='button' onClick={() => hendleSaveQuestions(false)}>Publish</button>
                         <button type='button' onClick={() => hendleSaveQuestions(true)}>Save as Draft</button>
                     </>
                 )}

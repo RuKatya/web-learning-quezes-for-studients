@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { addNewTitle, getTitlesBySubjectID, removeTitle, updateTitle } from './titleApi';
-import { NewTitle, TitleList, UpdateTtileInterface, getTitleInterface } from './titleInterface';
+import { addNewTitle, getTitlesBySubjectID, removeTitle, saveDraftOrPublish, updateTitle } from './titleApi';
+import { NewTitle, SaveTitleAsPayload, TitleList, UpdateTtileInterface, getTitleInterface } from './titleInterface';
 import { DeleteInterface } from '../subjects/subjectsInterface';
 
 const initialState: TitleList = {
@@ -92,6 +92,22 @@ export const titlesSlice = createSlice({
                 }
             })
             .addCase(updateTitle.rejected, (state) => {
+                state.status = 'failed';
+            })
+            // ---- SaveTitleAs ---- //
+            .addCase(saveDraftOrPublish.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(saveDraftOrPublish.fulfilled, (state, action: PayloadAction<SaveTitleAsPayload>
+            ) => {
+                state.status = 'idle';
+                const { id, continueWork, Draft } = action.payload
+
+                if (continueWork) {
+                    state.list = state.list.map(item => item.Title_QuizID === id ? { ...item, Draft: Draft } : item)
+                }
+            })
+            .addCase(saveDraftOrPublish.rejected, (state) => {
                 state.status = 'failed';
             })
     }

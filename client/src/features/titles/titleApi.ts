@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { AddTitle, UpdateTitle } from './titleInterface';
+import { AddTitle, SaveTitleAs, UpdateTitle } from './titleInterface';
 
 export const getTitlesBySubjectID = createAsyncThunk("titles/getTitles", async (SubjectID: number) => {
     try {
@@ -32,10 +32,17 @@ export const removeTitle = createAsyncThunk("titles/removeTitles", async (id: nu
 
 export const updateTitle = createAsyncThunk("titles/updateTitle", async ({ id, TitleName }: UpdateTitle) => {
     try {
-        // console.log(id, TitleName)
         const { data } = await axios.patch("/title-quiz/update-title", { id, TitleName })
         return data
-        // return { id, TitleName }
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+export const saveDraftOrPublish = createAsyncThunk("titles/saveDraftOrPublish", async ({ draft, id }: SaveTitleAs) => {
+    try {
+        const { data } = await axios.patch("/title-quiz/save-draft-or-publish", { draft, id })
+        return data
     } catch (error) {
         console.log(error)
     }

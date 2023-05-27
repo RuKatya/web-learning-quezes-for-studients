@@ -29,15 +29,15 @@ const AsideBar: FC<toggleSecondMenu> = ({ toggleSecondMenu, setToggleSecondMenu,
                 {(toggleSecondMenu || !isMobile) && (
                     <div className={`secondNavbar__navigation secondNavbar__navigation__${theme}-theme`}>
                         <NavLink
-                            to="html"
+                            to="/subject/HTML"
                             onClick={() => setToggleSecondMenu(false)}
                         >HTML</NavLink>
                         <NavLink
-                            to="css"
+                            to="/subject/CSS"
                             onClick={() => setToggleSecondMenu(false)}
                         >CSS</NavLink>
                         <NavLink
-                            to="javascript"
+                            to="/subject/JavaScript"
                             onClick={() => setToggleSecondMenu(false)}
                         >JavaScript</NavLink>
                     </div>

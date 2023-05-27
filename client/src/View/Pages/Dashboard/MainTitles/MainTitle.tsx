@@ -25,7 +25,9 @@ const MainTitle = () => {
     }, [subjectId, dispatch])
 
     useEffect(() => {
-        if (titleMsg.length > 0) setOpenMessage(true)
+        if (titleMsg.length > 0) {
+            setOpenMessage(true)
+        }
     }, [titleMsg])
 
     return (

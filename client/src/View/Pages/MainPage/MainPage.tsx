@@ -31,9 +31,9 @@ const MainPage: FC = () => {
             </p>
 
             <div className={`mainPage__links-to-study mainPage__links-to-study--${theme}-theme`}>
-                <Link to="/html"><img src={theme === "dark" ? HTML_dark_theme : HTML_light_theme} alt="HTML Link" /></Link>
-                <Link to="/css"><img src={theme === "dark" ? CSS_dark_theme : CSS_light_theme} alt="HTML Link" /></Link>
-                <Link to="/javascript"><img src={theme === "dark" ? JS_dark_theme : JS_light_theme} alt="HTML Link" /></Link>
+                <Link to="/subject/HTML"><img src={theme === "dark" ? HTML_dark_theme : HTML_light_theme} alt="HTML Link" /></Link>
+                <Link to="/subject/CSS"><img src={theme === "dark" ? CSS_dark_theme : CSS_light_theme} alt="HTML Link" /></Link>
+                <Link to="/subject/JavaScript"><img src={theme === "dark" ? JS_dark_theme : JS_light_theme} alt="HTML Link" /></Link>
             </div>
         </div>
     )

@@ -37,7 +37,7 @@ exports.saveNewSubject = (req, res) => {
     }
 }
 
-// ---- Get All Subjects ---- //
+// ---- Get All Subjects For Admin---- //
 exports.getAllSubjects = async (req, res) => {
     try {
         const query = `SELECT * FROM subjects;`

@@ -123,3 +123,62 @@ exports.removeTitle = async (req, res) => {
         return res.status(httpCodes.SERVER_ERROR).send({ message: "Server Feiled, try again" })
     }
 }
+
+// ---- Save Draft or Publish the Title ---- //
+exports.saveDraftOrPublish = async (req, res) => {
+    try {
+        const { draft, id } = req.body
+
+        // const {error} = validate({draft, id })
+
+        // if(error) ....
+
+        const chengeDraft = `UPDATE titles_quizes SET Draft = ${draft} WHERE Title_QuizID=${id}`
+
+        connection.query(chengeDraft, (err, result) => {
+            if (err) {
+                console.error('TitleConst.js line:140 sql error saveDraftOrPublish', err.sqlMessage);
+                return res.send({ continueWork: false, message: err.sqlMessage }).status(httpCodes.BAD_REQUEST)
+            }
+
+            return res.status(httpCodes.OK).send({ continueWork: true, id, Draft: draft === true ? 1 : 0, message: draft === true ? "Title Saved as Draft" : "Title Published" })
+        })
+
+    } catch (error) {
+
+    }
+}
+// ---- Get All Title For User ---- //
+exports.getAllTitlesUser = async (req, res) => {
+    try {
+        const { SubjectName } = req.body
+
+        // const {error} = validate({SubjectName})
+
+        // if(error) ....
+
+        const selectSubject = `SELECT * FROM subjects WHERE SubjectName = '${SubjectName}'`
+
+        connection.query(selectSubject, (err, result) => {
+            if (err) {
+                console.error('TitleConst.js line:136 sql error getAllTitlesUser', err.sqlMessage);
+                return res.send({ continueWork: false, message: err.sqlMessage }).status(httpCodes.BAD_REQUEST)
+            }
+
+            const SubjectID = result[0].SubjectID
+            const getAllTitles = `SELECT * FROM titles_quizes WHERE SubjectID = '${SubjectID}' AND Draft = 0`
+
+            connection.query(getAllTitles, (err, result) => {
+                if (err) {
+                    console.error('TitleConst.js line:148 sql error getAllTitlesUser', err.sqlMessage);
+                    return res.send({ continueWork: false, message: err.sqlMessage }).status(httpCodes.BAD_REQUEST)
+                }
+
+                return res.status(httpCodes.OK).send({ continueWork: true, result })
+            })
+        })
+    } catch (error) {
+        console.error('TitleConst.js line:140 function getAllTitlesUser', error);
+        return res.send({ message: "Server Feiled, try again" }).status(httpCodes.SERVER_ERROR)
+    }
+}

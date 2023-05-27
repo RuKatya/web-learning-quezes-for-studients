@@ -7,6 +7,7 @@ import AddQuestionForm from './AddQuestionForm'
 import LoadingPage from '../../../UI/LoadingPage'
 import InfoAlert from '../../../UI/InfoAlert'
 import QuestionsList from './QuestionsList'
+import { saveDraftOrPublish } from '../../../../features/titles/titleApi'
 
 const MainQuestions = () => {
     const [openMessage, setOpenMessage] = useState<boolean>(false)
@@ -21,6 +22,7 @@ const MainQuestions = () => {
 
     useEffect(() => {
         if (questMessage.length > 0) setOpenMessage(true)
+        console.log(questMessage)
     }, [questMessage])
 
     return (
@@ -29,6 +31,8 @@ const MainQuestions = () => {
                 <LoadingPage /> :
                 <>
                     <h2>Questions</h2>
+                    <button onClick={() => dispatch(saveDraftOrPublish({ draft: true, id: Number(titleId) }))}>Save as draft</button>
+                    <button onClick={() => dispatch(saveDraftOrPublish({ draft: false, id: Number(titleId) }))}>Publish</button>
 
                     {openMessage && (<InfoAlert
                         message={questMessage}

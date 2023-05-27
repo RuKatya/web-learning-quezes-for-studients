@@ -14,15 +14,16 @@ import MainDashboard from "../View/Pages/Dashboard/MainDashboard/MainDashboard";
 import MainPage from "../View/Pages/MainPage/MainPage";
 import MainTitle from "../View/Pages/Dashboard/MainTitles/MainTitle";
 import MainQuestions from "../View/Pages/Dashboard/MainQuestions/MainQuestions";
+import TitlePage, { titleLoader } from "../View/Pages/TitlePage/TitlePage";
 
 const RouterPage = () => {
     const router = createBrowserRouter(
         createRoutesFromElements(
             <Route path="/" element={<Layout />} >
                 <Route index element={<MainPage />} />
-                <Route path="html" element={<div>HTML</div>} />
-                <Route path="css" element={<div>CSS</div>} />
-                <Route path="javascript" element={<div>JAVASCRIPT</div>} />
+                <Route path="subject/:subject" element={<TitlePage />} loader={titleLoader} />
+                {/* <Route path="css" element={<div>CSS</div>} />
+                <Route path="javascript" element={<div>JAVASCRIPT</div>} /> */}
                 <Route path="auth" element={
                     <AuthProtectedRout>
                         <Auth />
