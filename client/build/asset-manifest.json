@@ -1,17 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.44d19661.css",
-    "main.js": "/static/js/main.f2906f7c.js",
+    "main.css": "/static/css/main.be5c2b35.css",
+    "main.js": "/static/js/main.58a1a0e1.js",
     "static/media/programming-dark-desktop.png": "/static/media/programming-dark-desktop.eba43ce05fdea24cfc98.png",
     "static/media/programming-dark-mobile.png": "/static/media/programming-dark-mobile.e7c7f536a741f0e94dfb.png",
+    "static/media/JS-light-theme.png": "/static/media/JS-light-theme.03e1001b927c7fbb4931.png",
+    "static/media/JS-dark-theme.png": "/static/media/JS-dark-theme.1f2e61ca93c843317109.png",
     "static/media/logoLightTheme.svg": "/static/media/logoLightTheme.92011899081be2d8c269543318090cff.svg",
     "static/media/logoDarkTheme.svg": "/static/media/logoDarkTheme.98b600d61b924953f69eef1cdf458025.svg",
     "index.html": "/index.html",
-    "main.44d19661.css.map": "/static/css/main.44d19661.css.map",
-    "main.f2906f7c.js.map": "/static/js/main.f2906f7c.js.map"
+    "main.be5c2b35.css.map": "/static/css/main.be5c2b35.css.map",
+    "main.58a1a0e1.js.map": "/static/js/main.58a1a0e1.js.map"
   },
   "entrypoints": [
-    "static/css/main.44d19661.css",
-    "static/js/main.f2906f7c.js"
+    "static/css/main.be5c2b35.css",
+    "static/js/main.58a1a0e1.js"
   ]
 }
