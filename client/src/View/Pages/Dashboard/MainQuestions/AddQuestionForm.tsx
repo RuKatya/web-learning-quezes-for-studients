@@ -3,6 +3,7 @@ import { Questions } from '../../../../features/questions/questionsInterface'
 import { Form, useParams } from 'react-router-dom'
 import { useAppDispatch } from '../../../../app/hooks'
 import { saveQuestions } from '../../../../features/questions/questionsApi'
+import EditQuestionForm from './EditQuestionForm'
 
 const AddQuestionForm = () => {
     const [questions, setQuestions] = useState<Array<Questions>>([])

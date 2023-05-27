@@ -1,9 +1,16 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { Questions } from '../../../../features/questions/questionsInterface'
 import { deleteQuestion } from '../../../../features/questions/questionsApi'
 import { useAppDispatch } from '../../../../app/hooks'
+import EditQuestionForm from './EditQuestionForm'
 
-const QuestionItem: FC<Questions> = ({ ...quest }) => {
+interface QuestionItemProps extends Questions {
+    setArrQuestToDelete: Function,
+    arrQuestToDelete: Array<number>
+}
+
+const QuestionItem: FC<QuestionItemProps> = ({ ...quest }) => {
+    const [editItem, setEditItem] = useState<boolean>(false)
     const dispatch = useAppDispatch()
 
     const hendleDeleteQuestion = (id: number) => {
@@ -23,27 +30,44 @@ const QuestionItem: FC<Questions> = ({ ...quest }) => {
         }
     }
 
+    const delteManyQuestionArr = (ev: React.SyntheticEvent) => {
+        const target = ev.target as typeof ev.target & {
+            id: string
+        }
+        const id = Number(target.id)
+
+        quest.setArrQuestToDelete((arr: Array<number>) => arr.some((i: number) => (i === id)) ?
+            arr.filter((i: any) => i !== id) : [...arr, id]
+        )
+    }
+
     return (
         <div>
-            <div key={quest.QuestionID}>
-                <p>Question: {quest.QuestionText}</p>
-                <p style={{
-                    color: quest.RigthQuestion === "Answer1" ? "green" : "none"
-                }}>A: {quest.Answer1}</p>
-                <p style={{
-                    color: quest.RigthQuestion === "Answer2" ? "green" : "none"
-                }}>B: {quest.Answer2}</p>
-                <p style={{
-                    color: quest.RigthQuestion === "Answer3" ? "green" : "none"
-                }}>C: {quest.Answer3}</p>
-                <p style={{
-                    color: quest.RigthQuestion === "Answer4" ? "green" : "none"
-                }}>D: {quest.Answer4}</p>
-            </div>
-            <div>
-                <button onClick={() => hendleDeleteQuestion(Number(quest.QuestionID))}>Delete</button>
-                <button>Edit</button>
-            </div>
+            <EditQuestionForm editItem={editItem} quest={quest} />
+            {!editItem && (
+                <>
+                    <input type="checkbox" onChange={delteManyQuestionArr} id={`${quest.QuestionID}`} />
+                    <div key={quest.QuestionID}>
+                        <p>Question: {quest.QuestionText}</p>
+                        <p style={{
+                            color: quest.RigthQuestion === "Answer1" ? "green" : "none"
+                        }}>A: {quest.Answer1}</p>
+                        <p style={{
+                            color: quest.RigthQuestion === "Answer2" ? "green" : "none"
+                        }}>B: {quest.Answer2}</p>
+                        <p style={{
+                            color: quest.RigthQuestion === "Answer3" ? "green" : "none"
+                        }}>C: {quest.Answer3}</p>
+                        <p style={{
+                            color: quest.RigthQuestion === "Answer4" ? "green" : "none"
+                        }}>D: {quest.Answer4}</p>
+                    </div>
+                    <div>
+                        <button onClick={() => hendleDeleteQuestion(Number(quest.QuestionID))}>Delete</button>
+                    </div>
+                </>
+            )}
+            <button onClick={() => setEditItem(!editItem)}>{editItem ? "Close" : "Edit"}</button>
         </div>
     )
 }

@@ -1,6 +1,6 @@
 const connection = require("../../connection")
 const { httpCodes } = require("../../utils/httpStatusCode")
-const { deleteValidation, questionsValidation, getAllQuestionsaValidation, deleteManyIdsValidation } = require("../../validation/dashboardValid")
+const { deleteValidation, questionsValidation, getAllQuestionsaValidation, deleteManyIdsValidation, updateQuestionValidation } = require("../../validation/dashboardValid")
 
 // ---- Saves Question ---- //
 exports.saveNewQuestions = (req, res) => {
@@ -82,7 +82,32 @@ exports.getAllQuestionsByTitle = async (req, res) => {
 }
 
 // ---- Update Question ---- //
-// exports.updateQuestion
+exports.updateQuestion = async (req, res) => {
+    try {
+        const { QuestionID, QuestionText, Answer1, Answer2, Answer3, Answer4, RigthQuestion } = req.body
+
+        const { error } = updateQuestionValidation.validate({ QuestionID, QuestionText, Answer1, Answer2, Answer3, Answer4, RigthQuestion })
+
+        if (error) {
+            console.error('QuestionCont.js line:67 validation error of getAllQuestionsByTitle:', error.message)
+            return res.send({ continueWork: false, message: error.message }).status(httpCodes.FORBIDDEN)
+        }
+
+        const updateQuestion = `UPDATE title_qustions SET QuestionText = '${QuestionText}', Answer1 = '${Answer1}', Answer2 = '${Answer2}', Answer3 = '${Answer3}', Answer4 = '${Answer4}', RigthQuestion = '${RigthQuestion}' WHERE QuestionID = ${QuestionID};`
+
+        connection.query(updateQuestion, (err, result) => {
+            if (err) {
+                console.error('QuestionCont.js line:72 sql error getAllQuestionsByTitle', err.sqlMessage);
+                return res.send({ continueWork: false, message: err.message }).status(httpCodes.FORBIDDEN)
+            }
+
+            res.send({ continueWork: true, message: "Question Updated", QuestionID, QuestionText, Answer1, Answer2, Answer3, Answer4, RigthQuestion })
+        })
+    } catch (error) {
+        console.log('QuestionCont.js line:110 updateQuestion error', error);
+        return res.send({ message: "Server Feiled, try again" }).status(httpCodes.SERVER_ERROR)
+    }
+}
 
 // ---- Delete Question ---- //
 exports.deleteQuestion = async (req, res) => {

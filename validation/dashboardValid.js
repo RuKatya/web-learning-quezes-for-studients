@@ -104,3 +104,34 @@ exports.getAllQuestionsaValidation = Joi.object({ //Get All Questions
 })
 
 exports.deleteManyIdsValidation = Joi.array().items(id)
+
+exports.updateQuestionValidation = Joi.object({
+    QuestionID: Joi.number().required().greater(0).messages({
+        'number.empty': "SubjectID can not be empty",
+        'number.greater': "SubjectID must be more than 0"
+    }),
+    QuestionText: Joi.string().min(5).required().messages({
+        'string.empty': "QuestionText can not be empty",
+        'string.min': "QuestionText must be minimum 5 sybmols",
+    }),
+    Answer1: Joi.string().min(2).required().messages({
+        'string.empty': "Answer1 can not be empty",
+        'string.min': "Answer1 must be minimum 2 sybmols",
+    }),
+    Answer2: Joi.string().min(2).required().messages({
+        'string.empty': "Answer2 can not be empty",
+        'string.min': "Answer2 must be minimum 2 sybmols",
+    }),
+    Answer3: Joi.string().min(2).required().messages({
+        'string.empty': "Answer3 can not be empty",
+        'string.min': "Answer3 must be minimum 2 sybmols",
+    }),
+    Answer4: Joi.string().min(2).required().messages({
+        'string.empty': "Answer4 can not be empty",
+        'string.min': "Answer4 must be minimum 2 sybmols",
+    }),
+    RigthQuestion: Joi.string().required().valid("Answer1", "Answer2", "Answer3", "Answer4").required().messages({
+        'string.empty': "RigthQuestion can not be empty",
+        'string.only': "RigthQuestion could include only 4 options: Answer1, Answer2, Answer3, Answer4",
+    }),
+})
