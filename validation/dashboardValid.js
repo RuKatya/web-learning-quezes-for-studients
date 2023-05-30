@@ -96,10 +96,15 @@ const question = Joi.object({ //Question Object Validation
 
 exports.questionsValidation = Joi.array().items(question) //Array Of Questions Validation
 
-exports.getAllQuestionsaValidation = Joi.object({ //Get All Questions
+exports.getAllQuestionsaValidationByID = Joi.object({ //Get All Questions By ID
     Title_QuizID: Joi.number().required().greater(0).messages({
         'number.empty': "SubjectID can not be empty",
         'number.greater': "SubjectID must be more than 0"
+    }),
+})
+exports.getAllQuestionsaValidationByName = Joi.object({ //Get All Questions By Name
+    Title: Joi.string().required().messages({
+        'string.empty': "QuestionText can not be empty",
     }),
 })
 

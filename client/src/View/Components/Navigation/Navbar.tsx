@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { useResponsivity } from "../../../hooks/useWidth";
 import { useAppSelector } from "../../../app/hooks";
 import { selectTheme } from "../../../features/dark-light-theme/theme"
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import Logo from "../../logo/Logo";
 import ThemeSwitchButton from "../../UI/ThemeButton";
 import NavigationLinks from "./NavigationLinks";
@@ -22,6 +22,7 @@ const Navbar: FC = () => {
     const isMobile = useResponsivity()
     const theme = useAppSelector(selectTheme)
     const user = useAppSelector(selectAuth);
+    let location = useLocation();
 
     useEffect(() => {
         setToggleSecondMenu(false)
@@ -62,11 +63,13 @@ const Navbar: FC = () => {
                 </div>
             </nav>
 
-            <AsideBar
-                toggleSecondMenu={toggleSecondMenu}
-                setToggleSecondMenu={setToggleSecondMenu}
-                setToggleMenu={setToggleMenu}
-            />
+            {location.pathname.includes("/dashboard") && (
+                <AsideBar
+                    toggleSecondMenu={toggleSecondMenu}
+                    setToggleSecondMenu={setToggleSecondMenu}
+                    setToggleMenu={setToggleMenu}
+                />
+            )}
         </>
     )
 }

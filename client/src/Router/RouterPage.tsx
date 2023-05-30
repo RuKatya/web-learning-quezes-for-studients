@@ -15,6 +15,9 @@ import MainPage from "../View/Pages/MainPage/MainPage";
 import MainTitle from "../View/Pages/Dashboard/MainTitles/MainTitle";
 import MainQuestions from "../View/Pages/Dashboard/MainQuestions/MainQuestions";
 import TitlePage, { titleLoader } from "../View/Pages/TitlePage/TitlePage";
+import StatisticPage from "../View/Pages/StatisticPage/StatisticPage";
+import QuestionPage, { QuestionLoader } from "../View/Pages/QuestionsPage/QuestionPage";
+import { getQuestions } from "../features/questions/questionsApi";
 
 const RouterPage = () => {
     const router = createBrowserRouter(
@@ -22,8 +25,8 @@ const RouterPage = () => {
             <Route path="/" element={<Layout />} >
                 <Route index element={<MainPage />} />
                 <Route path="subject/:subject" element={<TitlePage />} loader={titleLoader} />
-                {/* <Route path="css" element={<div>CSS</div>} />
-                <Route path="javascript" element={<div>JAVASCRIPT</div>} /> */}
+                <Route path="subject/:subject/:title/statistic" element={<StatisticPage />} />
+                <Route path="subject/:subject/:title/questions" element={<QuestionPage />} loader={QuestionLoader} />
                 <Route path="auth" element={
                     <AuthProtectedRout>
                         <Auth />

@@ -1,6 +1,13 @@
 const connection = require("../../connection")
 const { httpCodes } = require("../../utils/httpStatusCode")
-const { deleteValidation, questionsValidation, getAllQuestionsaValidation, deleteManyIdsValidation, updateQuestionValidation } = require("../../validation/dashboardValid")
+const {
+    deleteValidation,
+    questionsValidation,
+    deleteManyIdsValidation,
+    updateQuestionValidation,
+    getAllQuestionsaValidationByID,
+    getAllQuestionsaValidationByName
+} = require("../../validation/dashboardValid")
 
 // ---- Saves Question ---- //
 exports.saveNewQuestions = (req, res) => {
@@ -53,12 +60,12 @@ exports.saveNewQuestions = (req, res) => {
     }
 }
 
-// ---- Get All Questions ---- //
-exports.getAllQuestionsByTitle = async (req, res) => {
+// ---- Get All Questions By Title ID ---- //
+exports.getAllQuestionsByTitleID = async (req, res) => {
     try {
         const { Title_QuizID } = req.body
 
-        const { error } = getAllQuestionsaValidation.validate({ Title_QuizID })
+        const { error } = getAllQuestionsaValidationByID.validate({ Title_QuizID })
 
         if (error) {
             console.error('QuestionCont.js line:67 validation error of getAllQuestionsByTitle:', error.message)
@@ -74,6 +81,45 @@ exports.getAllQuestionsByTitle = async (req, res) => {
             }
 
             return res.send({ continueWork: true, questions }).status(httpCodes.OK)
+        })
+    } catch (error) {
+        console.log('QuestionCont.js line:50 getAllQuestionsByTitle error', error);
+        return res.send({ message: "Server Feiled, try again" }).status(httpCodes.SERVER_ERROR)
+    }
+}
+
+// ---- Get All Questions By Title Name ---- //
+exports.getAllQuestionsByTitle = async (req, res) => {
+    try {
+        const { Title } = req.body
+
+        const { error } = getAllQuestionsaValidationByName.validate({ Title })
+
+        if (error) {
+            console.error('QuestionCont.js line:67 validation error of getAllQuestionsByTitle:', error.message)
+            return res.send({ continueWork: false, message: error.message }).status(httpCodes.FORBIDDEN)
+        }
+
+        const getTitle = `SELECT * FROM weblearning.titles_quizes WHERE Title = "${Title}"`
+
+        connection.query(getTitle, (err, title) => {
+            if (err) {
+                console.error('QuestionCont.js line:72 sql error getAllQuestionsByTitle', err.sqlMessage);
+                return res.send({ continueWork: false, message: err.message }).status(httpCodes.FORBIDDEN)
+            }
+
+            const titleID = title[0].Title_QuizID
+
+            const getQuestions = `SELECT * FROM title_qustions WHERE Title_QuizID = ${titleID}`
+
+            connection.query(getQuestions, (err, questions) => {
+                if (err) {
+                    console.error('QuestionCont.js line:72 sql error getAllQuestionsByTitle', err.sqlMessage);
+                    return res.send({ continueWork: false, message: err.message }).status(httpCodes.FORBIDDEN)
+                }
+
+                return res.send({ continueWork: true, questions }).status(httpCodes.OK)
+            })
         })
     } catch (error) {
         console.log('QuestionCont.js line:50 getAllQuestionsByTitle error', error);
@@ -164,5 +210,6 @@ exports.deleteManyQuestions = async (req, res) => {
         return res.send({ message: "Server Feiled, try again" }).status(httpCodes.SERVER_ERROR)
     }
 }
+
 
 

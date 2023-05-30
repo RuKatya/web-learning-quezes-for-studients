@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { selectTheme } from '../features/dark-light-theme/theme'
 import { checkLogin } from '../features/auth/authAPI'
 import Navbar from './Components/Navigation/NavBar'
+import PagesNavigation from './Components/PagesNavigation/PagesNavigation'
 
 const Layout = () => {
     let location = useLocation();
@@ -18,7 +19,7 @@ const Layout = () => {
         const body = document.querySelector('body') as HTMLBodyElement
         const root = document.querySelector("#root") as HTMLDivElement
 
-        if (location.pathname.includes("/auth")) {
+        if (location.pathname.includes("/auth") || location.pathname.includes("/subject/")) {
             root.classList.remove("root-background-img")
         } else {
             root.classList.add("root-background-img")
@@ -37,6 +38,7 @@ const Layout = () => {
         <div>
             <Navbar />
             <main>
+                <PagesNavigation />
                 <Outlet />
             </main>
         </div>
