@@ -6,24 +6,23 @@ interface BtnQuizProps {
   answerNum: number,
   flagAnswered: boolean,
   setFlagAnswered: Function,
-  correctAns: string
+  correctAns: string,
+  setRightAns: Function
 }
-const BtnQuiz: FC<BtnQuizProps> = ({ answer, answerNum, flagAnswered, setFlagAnswered, correctAns }) => {
+const BtnQuiz: FC<BtnQuizProps> = ({ answer, answerNum, flagAnswered, setFlagAnswered, correctAns, setRightAns }) => {
   // const dispatch = useDispatch();
   const refAnswer = useRef<HTMLButtonElement>(null);
 
-  const checkAns = (ev: any, ifCorrectAns: string) => {
+  const checkAns = (ev: any, correctAns: string) => {
     if (!flagAnswered) {
       setFlagAnswered(true)
 
-      if (ifCorrectAns == ev.target.name) {
-        alert("Right")
+      if (correctAns === ev.target.name) {
+        setRightAns(true)
         refAnswer.current !== null && refAnswer.current?.classList.toggle("right__answer")
-        console.log(`da`)
       } else {
-        alert("Wrong!")
+        setRightAns(false)
         refAnswer.current !== null && refAnswer.current?.classList.toggle("wrong__answer")
-        console.log(`net`)
       }
     } else {
       alert("You Alredy Answered This Question")

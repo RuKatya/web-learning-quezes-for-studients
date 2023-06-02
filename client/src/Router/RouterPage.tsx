@@ -17,7 +17,7 @@ import MainQuestions from "../View/Pages/Dashboard/MainQuestions/MainQuestions";
 import TitlePage, { titleLoader } from "../View/Pages/TitlePage/TitlePage";
 import StatisticPage from "../View/Pages/StatisticPage/StatisticPage";
 import QuestionPage, { QuestionLoader } from "../View/Pages/QuestionsPage/QuestionPage";
-import { getQuestions } from "../features/questions/questionsApi";
+import DoneQuiz from "../View/Pages/DoneQuiz/DoneQuiz";
 
 const RouterPage = () => {
     const router = createBrowserRouter(
@@ -27,6 +27,7 @@ const RouterPage = () => {
                 <Route path="subject/:subject" element={<TitlePage />} loader={titleLoader} />
                 <Route path="subject/:subject/:title/statistic" element={<StatisticPage />} />
                 <Route path="subject/:subject/:title/questions" element={<QuestionPage />} loader={QuestionLoader} />
+                <Route path="subject/:subject/:title/done-quiz" element={<DoneQuiz/>}/>
                 <Route path="auth" element={
                     <AuthProtectedRout>
                         <Auth />

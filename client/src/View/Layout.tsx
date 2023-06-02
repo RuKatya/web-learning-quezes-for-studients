@@ -3,8 +3,8 @@ import { Outlet, useLocation } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { selectTheme } from '../features/dark-light-theme/theme'
 import { checkLogin } from '../features/auth/authAPI'
-import Navbar from './Components/Navigation/NavBar'
 import PagesNavigation from './Components/PagesNavigation/PagesNavigation'
+import Navbar from './Components/Navigation/Navbar'
 
 const Layout = () => {
     let location = useLocation();

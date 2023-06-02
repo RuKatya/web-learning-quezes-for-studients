@@ -1,13 +1,20 @@
-import { Suspense } from 'react'
-import { Await, defer, useLoaderData, useParams } from 'react-router-dom'
+import { Suspense, useEffect } from 'react'
+import { Await, Link, defer, useLoaderData, useParams } from 'react-router-dom'
 import axios from 'axios'
 import LoadingPage from '../../UI/LoadingPage'
 import { Questions } from '../../../features/questions/questionsInterface'
 import QuizCard from '../../UI/QuizCard'
+import { useAppDispatch } from '../../../app/hooks'
+import { setQuizInfo } from '../../../features/doneQuiz/doneQuizSlice'
 
 const QuestionPage = () => {
-    const { title } = useParams()
-    const { titles: { continueWork, questions, message } }: any = useLoaderData()
+    const dispatch = useAppDispatch();
+    const { subject, title } = useParams()
+    const { titles: { continueWork, questions, message, titleID } }: any = useLoaderData()
+
+    useEffect(() => {
+        if (continueWork) dispatch(setQuizInfo({ title, titleID }))
+    }, [continueWork, dispatch, title, titleID])
 
     return (
         <Suspense fallback={<LoadingPage />}>
@@ -15,8 +22,9 @@ const QuestionPage = () => {
                 <h1>{title}</h1>
                 {continueWork ? <>
                     {questions.map((question: Questions) => (
-                        <QuizCard key={question.QuestionID} quest={question} />
+                            <QuizCard key={question.QuestionID} quest={question} />
                     ))}
+                    <Link to={`/subject/${subject}/${title}/done-quiz`}>Done Quiz</Link>
                 </> : <>{message}</>}
 
             </Await>

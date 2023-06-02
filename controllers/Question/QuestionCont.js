@@ -118,7 +118,7 @@ exports.getAllQuestionsByTitle = async (req, res) => {
                     return res.send({ continueWork: false, message: err.message }).status(httpCodes.FORBIDDEN)
                 }
 
-                return res.send({ continueWork: true, questions }).status(httpCodes.OK)
+                return res.send({ continueWork: true, questions, titleID: title[0].Title_QuizID }).status(httpCodes.OK)
             })
         })
     } catch (error) {

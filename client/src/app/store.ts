@@ -4,6 +4,7 @@ import themeReducer from '../features/dark-light-theme/theme';
 import subjectsReducer from '../features/subjects/subjectsSlice';
 import titlesReducer from '../features/titles/titleSlice';
 import questionsReducer from '../features/questions/questionsSlice';
+import doneQuizReducer from '../features/doneQuiz/doneQuizSlice';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     subjects: subjectsReducer,
     titles: titlesReducer,
     questions: questionsReducer,
+    doneQuiz: doneQuizReducer
   },
 });
 

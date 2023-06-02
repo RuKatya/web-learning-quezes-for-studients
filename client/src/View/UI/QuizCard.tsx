@@ -1,15 +1,25 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { Questions } from '../../features/questions/questionsInterface'
 import BtnQuiz from './BtnQuiz';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { selectdoneQuiz, setQuizRightAns } from '../../features/doneQuiz/doneQuizSlice';
 
 interface QuizCardProps {
     quest: Questions
 }
-const QuizCard: FC<QuizCardProps> = ({ quest }) => {
-    const [flagAnswered, setFlagAnswered] = useState(false);
 
-    // const bla = Object.keys(quest)
-    // console.log(bla)
+const QuizCard: FC<QuizCardProps> = ({ quest }) => {
+    const dispatch = useAppDispatch();
+    const [flagAnswered, setFlagAnswered] = useState<boolean>(false);
+    const [rightAns, setRightAns] = useState<boolean>(false)
+    const [showAnswer, setShowAnswer] = useState<boolean>(false)
+    const doneQuiz = useAppSelector(selectdoneQuiz)
+
+    useEffect(() => {
+        if(rightAns) {
+            dispatch(setQuizRightAns(doneQuiz.rightAns+1))
+        }
+    }, [rightAns])
 
     return (
         <div>
@@ -20,6 +30,7 @@ const QuizCard: FC<QuizCardProps> = ({ quest }) => {
                 flagAnswered={flagAnswered}
                 setFlagAnswered={setFlagAnswered}
                 correctAns={quest.RigthQuestion}
+                setRightAns={setRightAns}
             />
             <BtnQuiz
                 answer={quest.Answer1}
@@ -27,6 +38,7 @@ const QuizCard: FC<QuizCardProps> = ({ quest }) => {
                 flagAnswered={flagAnswered}
                 setFlagAnswered={setFlagAnswered}
                 correctAns={quest.RigthQuestion}
+                setRightAns={setRightAns}
             />
             <BtnQuiz
                 answer={quest.Answer1}
@@ -34,6 +46,7 @@ const QuizCard: FC<QuizCardProps> = ({ quest }) => {
                 flagAnswered={flagAnswered}
                 setFlagAnswered={setFlagAnswered}
                 correctAns={quest.RigthQuestion}
+                setRightAns={setRightAns}
             />
             <BtnQuiz
                 answer={quest.Answer1}
@@ -41,7 +54,16 @@ const QuizCard: FC<QuizCardProps> = ({ quest }) => {
                 flagAnswered={flagAnswered}
                 setFlagAnswered={setFlagAnswered}
                 correctAns={quest.RigthQuestion}
+                setRightAns={setRightAns}
             />
+            {flagAnswered && !rightAns && (<button onClick={() => setShowAnswer(!showAnswer)}>{showAnswer ? "X" : "Show Right Answer"}</button>)}
+            {showAnswer && <p>{
+                quest.RigthQuestion.includes("1") ? "Answer A"
+                    : quest.RigthQuestion.includes("2") ? "Answer B"
+                        : quest.RigthQuestion.includes("3") ? "Answer C"
+                            : "Answer D"
+            }
+            </p>}
         </div>
     )
 }
