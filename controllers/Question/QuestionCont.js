@@ -100,11 +100,13 @@ exports.getAllQuestionsByTitle = async (req, res) => {
             return res.send({ continueWork: false, message: error.message }).status(httpCodes.FORBIDDEN)
         }
 
-        const getTitle = `SELECT * FROM weblearning.titles_quizes WHERE Title = "${Title}"`
+        const getTitle = `SELECT * FROM titles_quizes WHERE Title = "${Title}"`
+
+        console.log(Title)
 
         connection.query(getTitle, (err, title) => {
             if (err) {
-                console.error('QuestionCont.js line:72 sql error getAllQuestionsByTitle', err.sqlMessage);
+                console.error('QuestionCont.js line:7107 sql error getAllQuestionsByTitle', err.sqlMessage);
                 return res.send({ continueWork: false, message: err.message }).status(httpCodes.FORBIDDEN)
             }
 
