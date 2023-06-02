@@ -102,8 +102,6 @@ exports.getAllQuestionsByTitle = async (req, res) => {
 
         const getTitle = `SELECT * FROM titles_quizes WHERE Title = "${Title}"`
 
-        console.log(Title)
-
         connection.query(getTitle, (err, title) => {
             if (err) {
                 console.error('QuestionCont.js line:7107 sql error getAllQuestionsByTitle', err.sqlMessage);
