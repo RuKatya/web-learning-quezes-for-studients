@@ -6,7 +6,7 @@ import Registration from "../View/Pages/Auth/Regist/Registration";
 import { registAction } from "../View/Pages/Auth/Regist/RegistActions";
 import { loginAction } from "../View/Pages/Auth/Login/LoginActions";
 import Dashboard from "../View/Pages/Dashboard/Dashboard";
-import UserProfile from "../View/Pages/UserProfile/UserProfile";
+import UserProfile, { profileLoader } from "../View/Pages/UserProfile/UserProfile";
 import UserProtectedRout from "../PotectedRout/UserProtectedRout";
 import DashboardProtectedRout from "../PotectedRout/DashboardProtectedRout";
 import AuthProtectedRout from "../PotectedRout/AuthProtectedRout";
@@ -27,7 +27,7 @@ const RouterPage = () => {
                 <Route path="subject/:subject" element={<TitlePage />} loader={titleLoader} />
                 <Route path="subject/:subject/:title/statistic" element={<StatisticPage />} />
                 <Route path="subject/:subject/:title/questions" element={<QuestionPage />} loader={QuestionLoader} />
-                <Route path="subject/:subject/:title/done-quiz" element={<DoneQuiz/>}/>
+                <Route path="subject/:subject/:title/done-quiz" element={<DoneQuiz />} />
                 <Route path="auth" element={
                     <AuthProtectedRout>
                         <Auth />
@@ -47,11 +47,11 @@ const RouterPage = () => {
                     <Route path="subjects/:subjectId" element={<MainTitle />} />
                     <Route path="subjects/:subjectId/:titleId" element={<MainQuestions />} />
                 </Route>
-                <Route path="profile/:id" element={
+                <Route path="profile" element={
                     <UserProtectedRout>
                         <UserProfile />
                     </UserProtectedRout>
-                } />
+                } loader={profileLoader} />
             </Route>
         )
     )

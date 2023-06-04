@@ -13,7 +13,7 @@ import { selectAuth } from "../../../features/auth/authSlice";
 const linksForUser = [
     // { link: "", title: "Fav Quizes" },
     // { link: "", title: "Statistic" },
-    { link: "/profile/1", title: "Profile" },
+    { link: "/profile", title: "Profile" },
 ]
 
 const Navbar: FC = () => {

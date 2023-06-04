@@ -5,7 +5,7 @@ import LoadingPage from '../../UI/LoadingPage'
 import { Title } from '../../../features/titles/titleInterface'
 import { selectTheme } from '../../../features/dark-light-theme/theme'
 import { useAppSelector } from '../../../app/hooks'
-import PagesNavigation from '../../Components/PagesNavigation/PagesNavigation'
+// import PagesNavigation from '../../Components/PagesNavigation/PagesNavigation'
 
 const TitlePage = () => {
     const theme = useAppSelector(selectTheme)
