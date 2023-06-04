@@ -5,46 +5,67 @@ const id = Joi.number().required().greater(0).messages({
     'number.greater': "ID must be more than 0"
 })
 
-exports.deleteValidation = Joi.object({ // Delete Subject/Title/Question
+const SubjectName = Joi.string().min(2).required().messages({
+    'string.empty': "Subject can not be empty",
+    'string.min': "Subject must be at least minimum 2 sybmols",
+})
+
+const SubjectID = Joi.number().required().greater(0).messages({
+    'number.empty': "SubjectID can not be empty",
+    'number.greater': "SubjectID must be more than 0"
+})
+
+const QuestionText = Joi.string().min(5).required().messages({
+    'string.empty': "QuestionText can not be empty",
+    'string.min': "QuestionText must be minimum 5 sybmols",
+})
+
+const AnswerValidation = Joi.string().min(2).required().messages({
+    'string.empty': "Answer1 can not be empty",
+    'string.min': "Answer1 must be minimum 2 sybmols",
+})
+
+const Title = Joi.string().min(3).required().messages({
+    'string.empty': "Subject can not be empty",
+    'string.min': "Subject must be at least minimum 3 sybmols",
+})
+
+const Title_QuizID = Joi.number().required().greater(0).messages({
+    'number.empty': "Title_QuizID can not be empty",
+    'number.greater': "Title_QuizID must be more than 0"
+})
+
+const RigthQuestion = Joi.string().required().valid("Answer1", "Answer2", "Answer3", "Answer4").required().messages({
+    'string.empty': "RigthQuestion can not be empty",
+    'string.only': "RigthQuestion could include only 4 options: Answer1, Answer2, Answer3, Answer4",
+})
+
+
+// Delete Subject/Title/Question
+exports.deleteValidation = Joi.object({
     id
 })
 
-// ---- SUBJECT ---- //
-exports.addNewSubjectValidation = Joi.object({ // Add New Subject
-    subjectName: Joi.string().min(2).required().messages({
-        'string.empty': "Subject can not be empty",
-        'string.min': "Subject must be at least minimum 2 sybmols",
-    }),
+// Add New Subject/Get All titles To User
+exports.subjectNameValidation = Joi.object({
+    SubjectName
 })
 
-exports.updateSubjectValidation = Joi.object({ //Update Subject
-    SubjectName: Joi.string().min(3).required().messages({
-        'string.empty': "Subject can not be empty",
-        'string.min': "Subject must be at least minimum 3 sybmols",
-    }),
-    id: Joi.number().required().greater(0).messages({
-        'number.empty': "SubjectID can not be empty",
-        'number.greater': "ID must be more than 0"
-    }),
+// ---- SUBJECT ---- //
+//Update Subject
+exports.updateSubjectValidation = Joi.object({
+    SubjectName,
+    id
 })
 
 // ---- TITLE ---- //
 exports.addNewTitleValidation = Joi.object({ // Add New Title
-    Title: Joi.string().min(3).required().messages({
-        'string.empty': "Subject can not be empty",
-        'string.min': "Subject must be at least minimum 3 sybmols",
-    }),
-    SubjectID: Joi.number().required().greater(0).messages({
-        'number.empty': "SubjectID can not be empty",
-        'number.greater': "SubjectID must be more than 0"
-    }),
+    Title,
+    SubjectID
 })
 
 exports.getAllTitlesValidation = Joi.object({ //Get All Titles
-    SubjectID: Joi.number().required().greater(0).messages({
-        'number.empty': "SubjectID can not be empty",
-        'number.greater': "SubjectID must be more than 0"
-    }),
+    SubjectID
 })
 
 exports.updateTitleValidation = Joi.object({ // Update Title
@@ -52,60 +73,37 @@ exports.updateTitleValidation = Joi.object({ // Update Title
         'string.empty': "Subject can not be empty",
         'string.min': "Subject must be at least minimum 3 sybmols",
     }),
-    id: Joi.number().required().greater(0).messages({
-        'number.empty': "SubjectID can not be empty",
-        'number.greater': "ID must be more than 0"
+    id
+})
+
+exports.saveToDraftOrToDraft = Joi.object({
+    draft: Joi.boolean().required().messages({
+        'boolean.base': 'Only true/false value is valid',
+        'string.empty': 'Draft can not be empty'
     }),
+    id
 })
 
 // ---- Questions ---- //
 const question = Joi.object({ //Question Object Validation
-    QuestionText: Joi.string().min(5).required().messages({
-        'string.empty': "QuestionText can not be empty",
-        'string.min': "QuestionText must be minimum 5 sybmols",
-    }),
-    Answer1: Joi.string().min(2).required().messages({
-        'string.empty': "Answer1 can not be empty",
-        'string.min': "Answer1 must be minimum 2 sybmols",
-    }),
-    Answer2: Joi.string().min(2).required().messages({
-        'string.empty': "Answer2 can not be empty",
-        'string.min': "Answer2 must be minimum 2 sybmols",
-    }),
-    Answer3: Joi.string().min(2).required().messages({
-        'string.empty': "Answer3 can not be empty",
-        'string.min': "Answer3 must be minimum 2 sybmols",
-    }),
-    Answer4: Joi.string().min(2).required().messages({
-        'string.empty': "Answer4 can not be empty",
-        'string.min': "Answer4 must be minimum 2 sybmols",
-    }),
-    Title_QuizID: Joi.number().required().greater(0).messages({
-        'number.empty': "Title_QuizID can not be empty",
-        'number.greater': "Title_QuizID must be more than 0"
-    }),
-    RigthQuestion: Joi.string().required().valid("Answer1", "Answer2", "Answer3", "Answer4").required().messages({
-        'string.empty': "RigthQuestion can not be empty",
-        'string.only': "RigthQuestion could include only 4 options: Answer1, Answer2, Answer3, Answer4",
-    }),
-    SubjectID: Joi.number().required().greater(0).messages({
-        'number.empty': "SubjectID can not be empty",
-        'number.greater': "SubjectID must be more than 0"
-    }),
+    QuestionText,
+    Answer1: AnswerValidation,
+    Answer2: AnswerValidation,
+    Answer3: AnswerValidation,
+    Answer4: AnswerValidation,
+    Title_QuizID,
+    RigthQuestion,
+    SubjectID
 })
 
 exports.questionsValidation = Joi.array().items(question) //Array Of Questions Validation
 
 exports.getAllQuestionsaValidationByID = Joi.object({ //Get All Questions By ID
-    Title_QuizID: Joi.number().required().greater(0).messages({
-        'number.empty': "SubjectID can not be empty",
-        'number.greater': "SubjectID must be more than 0"
-    }),
+    Title_QuizID
 })
+
 exports.getAllQuestionsaValidationByName = Joi.object({ //Get All Questions By Name
-    Title: Joi.string().required().messages({
-        'string.empty': "QuestionText can not be empty",
-    }),
+    Title
 })
 
 exports.deleteManyIdsValidation = Joi.array().items(id)
@@ -115,28 +113,10 @@ exports.updateQuestionValidation = Joi.object({
         'number.empty': "SubjectID can not be empty",
         'number.greater': "SubjectID must be more than 0"
     }),
-    QuestionText: Joi.string().min(5).required().messages({
-        'string.empty': "QuestionText can not be empty",
-        'string.min': "QuestionText must be minimum 5 sybmols",
-    }),
-    Answer1: Joi.string().min(2).required().messages({
-        'string.empty': "Answer1 can not be empty",
-        'string.min': "Answer1 must be minimum 2 sybmols",
-    }),
-    Answer2: Joi.string().min(2).required().messages({
-        'string.empty': "Answer2 can not be empty",
-        'string.min': "Answer2 must be minimum 2 sybmols",
-    }),
-    Answer3: Joi.string().min(2).required().messages({
-        'string.empty': "Answer3 can not be empty",
-        'string.min': "Answer3 must be minimum 2 sybmols",
-    }),
-    Answer4: Joi.string().min(2).required().messages({
-        'string.empty': "Answer4 can not be empty",
-        'string.min': "Answer4 must be minimum 2 sybmols",
-    }),
-    RigthQuestion: Joi.string().required().valid("Answer1", "Answer2", "Answer3", "Answer4").required().messages({
-        'string.empty': "RigthQuestion can not be empty",
-        'string.only': "RigthQuestion could include only 4 options: Answer1, Answer2, Answer3, Answer4",
-    }),
+    QuestionText,
+    Answer1: AnswerValidation,
+    Answer2: AnswerValidation,
+    Answer3: AnswerValidation,
+    Answer4: AnswerValidation,
+    RigthQuestion
 })

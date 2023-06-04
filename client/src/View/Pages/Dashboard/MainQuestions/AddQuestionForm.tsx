@@ -3,7 +3,6 @@ import { Questions } from '../../../../features/questions/questionsInterface'
 import { Form, useParams } from 'react-router-dom'
 import { useAppDispatch } from '../../../../app/hooks'
 import { saveQuestions } from '../../../../features/questions/questionsApi'
-import EditQuestionForm from './EditQuestionForm'
 
 const AddQuestionForm = () => {
     const [questions, setQuestions] = useState<Array<Questions>>([])
@@ -43,13 +42,8 @@ const AddQuestionForm = () => {
     // ---- Save Questions ---- //
     const hendleSaveQuestions = (draft: boolean) => {
         const values = questions.flatMap(ques => Object.values(ques))
-        const allEmpty = values.some((val) => {
-            return val.length === 0
-        })
-
-        if (allEmpty) {
-            return alert("All fields are required")
-        }
+        const allEmpty = values.some((val) => (val.length === 0))
+        if (allEmpty) return alert("All fields are required")
 
         dispatch(saveQuestions({ questions, draft }))
     }
@@ -69,7 +63,8 @@ const AddQuestionForm = () => {
                                 rows={10}
                                 onChange={hendleChanges}
                                 required
-                                minLength={5}></textarea>
+                                minLength={5}
+                                autoFocus></textarea>
                             <input
                                 type="text"
                                 id={`${index}`}

@@ -11,9 +11,9 @@ export const getSubjects = createAsyncThunk("subjects/getSubjects", async () => 
     }
 })
 
-export const addSubject = createAsyncThunk("subjects/addNewSubject", async (subjectName: string) => {
+export const addSubject = createAsyncThunk("subjects/addNewSubject", async (SubjectName: string) => {
     try {
-        const { data } = await axios.post("/subjects/save-new-subject", { subjectName })
+        const { data } = await axios.post("/subjects/save-new-subject", { SubjectName })
         return data
     } catch (error) {
         console.log(error)

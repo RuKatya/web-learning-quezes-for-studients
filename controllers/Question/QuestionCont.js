@@ -18,19 +18,17 @@ exports.saveNewQuestions = (req, res) => {
         const { error } = questionsValidation.validate(questions)
 
         if (error) {
-            console.error('QuestionCont.js line:14 validation error of saveNewQuestions:', error.message)
+            console.error('QuestionCont.js line:21 validation error of saveNewQuestions:', error.message)
             return res.send({ continueWork: false, message: error.message }).status(httpCodes.FORBIDDEN)
         }
 
-        const questionsToServer = questions.map(obj =>
-            Object.values(obj)
-        )
+        const questionsToServer = questions.map(obj => Object.values(obj))
 
         const query = `INSERT INTO title_qustions (QuestionText, Answer1, Answer2, Answer3, Answer4, Title_QuizID, RigthQuestion, SubjectID) VALUES ?`
 
         connection.query(query, [questionsToServer], (err, result) => {
             if (err) {
-                console.error('SubjectsCont.js line:26 sql error saveNewQuestions', err.sqlMessage);
+                console.error('SubjectsCont.js line:31 sql error saveNewQuestions', err.sqlMessage);
                 return res.send({ continueWork: false, message: err.sqlMessage }).status(httpCodes.BAD_REQUEST)
             }
 
@@ -38,7 +36,7 @@ exports.saveNewQuestions = (req, res) => {
 
             connection.query(saveTitleDraft, err => {
                 if (err) {
-                    console.error('SubjectsCont.js line:34 sql error saveNewQuestions', err.sqlMessage);
+                    console.error('SubjectsCont.js line:39 sql error saveNewQuestions', err.sqlMessage);
                     return res.send({ continueWork: false, message: err.sqlMessage }).status(httpCodes.BAD_REQUEST)
                 }
             })
@@ -47,7 +45,7 @@ exports.saveNewQuestions = (req, res) => {
 
             connection.query(getQuestions, (err, questions) => {
                 if (err) {
-                    console.error('SubjectsCont.js line:43 sql error saveNewQuestions', err.sqlMessage);
+                    console.error('SubjectsCont.js line:48 sql error saveNewQuestions', err.sqlMessage);
                     return res.send({ continueWork: false, message: err.sqlMessage }).status(httpCodes.BAD_REQUEST)
                 }
 
@@ -55,7 +53,7 @@ exports.saveNewQuestions = (req, res) => {
             })
         })
     } catch (error) {
-        console.log('QuestionCont.js line:24 saveNewQuestions error', error);
+        console.log('QuestionCont.js line:56 saveNewQuestions error', error);
         return res.send({ message: "Server Feiled, try again" }).status(httpCodes.SERVER_ERROR)
     }
 }
@@ -68,7 +66,7 @@ exports.getAllQuestionsByTitleID = async (req, res) => {
         const { error } = getAllQuestionsaValidationByID.validate({ Title_QuizID })
 
         if (error) {
-            console.error('QuestionCont.js line:67 validation error of getAllQuestionsByTitle:', error.message)
+            console.error('QuestionCont.js line:69 validation error of getAllQuestionsByTitleID:', error.message)
             return res.send({ continueWork: false, message: error.message }).status(httpCodes.FORBIDDEN)
         }
 
@@ -76,14 +74,14 @@ exports.getAllQuestionsByTitleID = async (req, res) => {
 
         connection.query(getQuestions, (err, questions) => {
             if (err) {
-                console.error('QuestionCont.js line:72 sql error getAllQuestionsByTitle', err.sqlMessage);
+                console.error('QuestionCont.js line:77 sql error getAllQuestionsByTitleID', err.sqlMessage);
                 return res.send({ continueWork: false, message: err.message }).status(httpCodes.FORBIDDEN)
             }
 
             return res.send({ continueWork: true, questions }).status(httpCodes.OK)
         })
     } catch (error) {
-        console.log('QuestionCont.js line:50 getAllQuestionsByTitle error', error);
+        console.log('QuestionCont.js line:84 getAllQuestionsByTitleID error', error);
         return res.send({ message: "Server Feiled, try again" }).status(httpCodes.SERVER_ERROR)
     }
 }
@@ -96,7 +94,7 @@ exports.getAllQuestionsByTitle = async (req, res) => {
         const { error } = getAllQuestionsaValidationByName.validate({ Title })
 
         if (error) {
-            console.error('QuestionCont.js line:67 validation error of getAllQuestionsByTitle:', error.message)
+            console.error('QuestionCont.js line:97 validation error of getAllQuestionsByTitle:', error.message)
             return res.send({ continueWork: false, message: error.message }).status(httpCodes.FORBIDDEN)
         }
 
@@ -104,7 +102,7 @@ exports.getAllQuestionsByTitle = async (req, res) => {
 
         connection.query(getTitle, (err, title) => {
             if (err) {
-                console.error('QuestionCont.js line:7107 sql error getAllQuestionsByTitle', err.sqlMessage);
+                console.error('QuestionCont.js line:105 sql error getAllQuestionsByTitle', err.sqlMessage);
                 return res.send({ continueWork: false, message: err.message }).status(httpCodes.FORBIDDEN)
             }
 
@@ -114,7 +112,7 @@ exports.getAllQuestionsByTitle = async (req, res) => {
 
             connection.query(getQuestions, (err, questions) => {
                 if (err) {
-                    console.error('QuestionCont.js line:72 sql error getAllQuestionsByTitle', err.sqlMessage);
+                    console.error('QuestionCont.js line:115 sql error getAllQuestionsByTitle', err.sqlMessage);
                     return res.send({ continueWork: false, message: err.message }).status(httpCodes.FORBIDDEN)
                 }
 
@@ -122,7 +120,7 @@ exports.getAllQuestionsByTitle = async (req, res) => {
             })
         })
     } catch (error) {
-        console.log('QuestionCont.js line:50 getAllQuestionsByTitle error', error);
+        console.log('QuestionCont.js line:123 getAllQuestionsByTitle error', error);
         return res.send({ message: "Server Feiled, try again" }).status(httpCodes.SERVER_ERROR)
     }
 }
@@ -135,7 +133,7 @@ exports.updateQuestion = async (req, res) => {
         const { error } = updateQuestionValidation.validate({ QuestionID, QuestionText, Answer1, Answer2, Answer3, Answer4, RigthQuestion })
 
         if (error) {
-            console.error('QuestionCont.js line:67 validation error of getAllQuestionsByTitle:', error.message)
+            console.error('QuestionCont.js line:136 validation error of updateQuestion:', error.message)
             return res.send({ continueWork: false, message: error.message }).status(httpCodes.FORBIDDEN)
         }
 
@@ -143,14 +141,14 @@ exports.updateQuestion = async (req, res) => {
 
         connection.query(updateQuestion, (err, result) => {
             if (err) {
-                console.error('QuestionCont.js line:72 sql error getAllQuestionsByTitle', err.sqlMessage);
+                console.error('QuestionCont.js line:144 sql error updateQuestion', err.sqlMessage);
                 return res.send({ continueWork: false, message: err.message }).status(httpCodes.FORBIDDEN)
             }
 
             res.send({ continueWork: true, message: "Question Updated", QuestionID, QuestionText, Answer1, Answer2, Answer3, Answer4, RigthQuestion })
         })
     } catch (error) {
-        console.log('QuestionCont.js line:110 updateQuestion error', error);
+        console.log('QuestionCont.js line:151 updateQuestion error', error);
         return res.send({ message: "Server Feiled, try again" }).status(httpCodes.SERVER_ERROR)
     }
 }
@@ -163,7 +161,7 @@ exports.deleteQuestion = async (req, res) => {
         const { error } = deleteValidation.validate({ id })
 
         if (error) {
-            console.error('QuestionCont.js line:97 validation error of deleteQuestion:', error.message)
+            console.error('QuestionCont.js line:164 validation error of deleteQuestion:', error.message)
             return res.send({ continueWork: false, message: error.message }).status(httpCodes.FORBIDDEN)
         }
 
@@ -171,14 +169,14 @@ exports.deleteQuestion = async (req, res) => {
 
         connection.query(deleteQuestionQuery, (err, result) => {
             if (err) {
-                console.error('QuestionCont.js line:103 sql error deleteQuestion', err.sqlMessage);
+                console.error('QuestionCont.js line:172 sql error deleteQuestion', err.sqlMessage);
                 return res.send({ continueWork: false, message: err.message }).status(httpCodes.FORBIDDEN)
             }
 
             return res.send({ continueWork: true, id, message: "Question Deleted" }).status(httpCodes.OK)
         })
     } catch (error) {
-        console.log('QuestionCont.js line:110 deleteQuestion error', error);
+        console.log('QuestionCont.js line:179 deleteQuestion error', error);
         return res.send({ message: "Server Feiled, try again" }).status(httpCodes.SERVER_ERROR)
     }
 }
@@ -191,7 +189,7 @@ exports.deleteManyQuestions = async (req, res) => {
         const { error } = deleteManyIdsValidation.validate(ids)
 
         if (error) {
-            console.error('QuestionCont.js line:97 validation error of deleteQuestion:', error.message)
+            console.error('QuestionCont.js line:192 validation error of deleteManyQuestions:', error.message)
             return res.send({ continueWork: false, message: error.message }).status(httpCodes.FORBIDDEN)
         }
 
@@ -199,14 +197,14 @@ exports.deleteManyQuestions = async (req, res) => {
 
         connection.query(deleteMany, (err, result) => {
             if (err) {
-                console.error('QuestionCont.js line:124 sql error deleteManyQuestions', err.sqlMessage);
+                console.error('QuestionCont.js line:200 sql error deleteManyQuestions', err.sqlMessage);
                 return res.send({ continueWork: false, message: err.message }).status(httpCodes.FORBIDDEN)
             }
 
             return res.send({ continueWork: true, ids, message: "Questions Deleted" }).status(httpCodes.OK)
         })
     } catch (error) {
-        console.log('QuestionCont.js line:110 deleteQuestion error', error);
+        console.log('QuestionCont.js line:207 deleteManyQuestions error', error);
         return res.send({ message: "Server Feiled, try again" }).status(httpCodes.SERVER_ERROR)
     }
 }

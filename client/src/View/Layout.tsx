@@ -4,7 +4,8 @@ import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { selectTheme } from '../features/dark-light-theme/theme'
 import { checkLogin } from '../features/auth/authAPI'
 import PagesNavigation from './Components/PagesNavigation/PagesNavigation'
-import Navbar from './Components/Navigation/Navbar'
+import Navbar from './Components/Navigation/NavBar'
+// import Navbar from './Components/Navigation/Navbar'
 
 const Layout = () => {
     let location = useLocation();
