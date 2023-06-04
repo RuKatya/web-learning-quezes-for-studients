@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
-import DashboardAddNew from '../../../UI/DashboardAddNew/DashboardAddNew'
-import { useAppDispatch } from '../../../../app/hooks'
-import { addNewTitle } from '../../../../features/titles/titleApi'
+import { useAppDispatch } from '../../../../../app/hooks'
+import { addNewTitle } from '../../../../../features/titles/titleApi'
+import DashboardAddNew from '../../../../UI/DashboardAddNew/DashboardAddNew'
 
 interface AddItemProps {
     subjectId: number

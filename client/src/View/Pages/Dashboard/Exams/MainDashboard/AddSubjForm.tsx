@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
-import { useAppDispatch } from '../../../../app/hooks'
-import { addSubject } from '../../../../features/subjects/subjectsAPI'
-import DashboardAddNew from '../../../UI/DashboardAddNew/DashboardAddNew'
+import { useAppDispatch } from '../../../../../app/hooks'
+import { addSubject } from '../../../../../features/subjects/subjectsAPI'
+import DashboardAddNew from '../../../../UI/DashboardAddNew/DashboardAddNew'
 
 const AddSubjForm: FC = () => {
     const [showAddNewSubjectWindow, setShowAddNewSubjectWindow] = useState<boolean>(false)

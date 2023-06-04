@@ -10,14 +10,19 @@ import UserProfile, { profileLoader } from "../View/Pages/UserProfile/UserProfil
 import UserProtectedRout from "../PotectedRout/UserProtectedRout";
 import DashboardProtectedRout from "../PotectedRout/DashboardProtectedRout";
 import AuthProtectedRout from "../PotectedRout/AuthProtectedRout";
-import MainDashboard from "../View/Pages/Dashboard/MainDashboard/MainDashboard";
+import MainDashboard from "../View/Pages/Dashboard/Exams/MainDashboard/MainDashboard";
 import MainPage from "../View/Pages/MainPage/MainPage";
-import MainTitle from "../View/Pages/Dashboard/MainTitles/MainTitle";
-import MainQuestions from "../View/Pages/Dashboard/MainQuestions/MainQuestions";
+// import MainTitle from "../View/Pages/Dashboard/MainTitles/MainTitle";
+// import MainQuestions from "../View/Pages/Dashboard/MainQuestions/MainQuestions";
 import TitlePage, { titleLoader } from "../View/Pages/TitlePage/TitlePage";
 import StatisticPage from "../View/Pages/StatisticPage/StatisticPage";
 import QuestionPage, { QuestionLoader } from "../View/Pages/QuestionsPage/QuestionPage";
 import DoneQuiz from "../View/Pages/DoneQuiz/DoneQuiz";
+import MainUsersPage from "../View/Pages/Dashboard/UsersPage/MainUsers/MainUsersPage";
+import MainTitle from "../View/Pages/Dashboard/Exams/MainTitles/MainTitle";
+import MainQuestions from "../View/Pages/Dashboard/Exams/MainQuestions/MainQuestions";
+import UserPage from "../View/Pages/Dashboard/UsersPage/UserPage/UserPage";
+import DashboardStatisticPage from "../View/Pages/Dashboard/UsersStatistic/MainStatisticPage/DashboardStatisticPage";
 
 const RouterPage = () => {
     const router = createBrowserRouter(
@@ -46,6 +51,9 @@ const RouterPage = () => {
                     <Route index element={<MainDashboard />} />
                     <Route path="subjects/:subjectId" element={<MainTitle />} />
                     <Route path="subjects/:subjectId/:titleId" element={<MainQuestions />} />
+                    <Route path="allUser" element={<MainUsersPage />} />
+                    <Route path="user/:id" element={<UserPage />} />
+                    <Route path="user-statisic" element={<DashboardStatisticPage />} />
                 </Route>
                 <Route path="profile" element={
                     <UserProtectedRout>

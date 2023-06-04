@@ -1,0 +1,34 @@
+.asideDashboardNav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 5% 0%;
+
+  @media screen and (min-width: 361px) {
+    padding: 3% 0%;
+  }
+
+  @media screen and (min-width: 769px) {
+    padding: 1% 0%;
+  }
+
+  a {
+    font-size: 18px;
+  }
+
+  &__dark-theme {
+    background-color: rgb(26, 26, 26);
+
+    a {
+      color: rgb(209, 209, 209);
+    }
+  }
+
+  &__light-theme {
+    background-color: rgb(209, 209, 209);
+
+    a {
+      color: rgb(26, 26, 26);
+    }
+  }
+}

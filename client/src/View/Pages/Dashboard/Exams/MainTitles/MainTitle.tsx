@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
-import { setTitleMessageEmpty, titlesMessage, titlesStatus } from '../../../../features/titles/titleSlice';
-import { getTitlesBySubjectID } from '../../../../features/titles/titleApi';
-import LoadingPage from '../../../UI/LoadingPage';
-import InfoAlert from '../../../UI/InfoAlert';
 import AddTitleForm from './AddTitleForm';
 import TitleList from './TitleList';
+import { useAppDispatch, useAppSelector } from '../../../../../app/hooks';
+import { setTitleMessageEmpty, titlesMessage, titlesStatus } from '../../../../../features/titles/titleSlice';
+import { getTitlesBySubjectID } from '../../../../../features/titles/titleApi';
+import LoadingPage from '../../../../UI/LoadingPage';
+import InfoAlert from '../../../../UI/InfoAlert';
 
 type TitleParams = {
     subjectId: string
@@ -31,7 +31,7 @@ const MainTitle = () => {
     }, [titleMsg])
 
     return (
-        <div className='dashboardInfo'>
+        <div className='dashboard-exams'>
             {
                 titleStatus === "loading" ?
                     <LoadingPage />

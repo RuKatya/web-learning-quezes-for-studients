@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '../../../../app/hooks'
-import { getQuestions } from '../../../../features/questions/questionsApi'
-import { questionsMessage, questionsStatus, setQuestionMessageEmpty } from '../../../../features/questions/questionsSlice'
 import AddQuestionForm from './AddQuestionForm'
-import LoadingPage from '../../../UI/LoadingPage'
-import InfoAlert from '../../../UI/InfoAlert'
 import QuestionsList from './QuestionsList'
-import { saveDraftOrPublish } from '../../../../features/titles/titleApi'
+import { useAppDispatch, useAppSelector } from '../../../../../app/hooks'
+import { questionsMessage, questionsStatus, setQuestionMessageEmpty } from '../../../../../features/questions/questionsSlice'
+import { getQuestions } from '../../../../../features/questions/questionsApi'
+import LoadingPage from '../../../../UI/LoadingPage'
+import { saveDraftOrPublish } from '../../../../../features/titles/titleApi'
+import InfoAlert from '../../../../UI/InfoAlert'
 
 const MainQuestions = () => {
     const [openMessage, setOpenMessage] = useState<boolean>(false)
@@ -22,12 +22,11 @@ const MainQuestions = () => {
 
     useEffect(() => {
         if (questMessage.length > 0) setOpenMessage(true)
-        console.log(questMessage)
     }, [questMessage])
 
     return (
-        <div className='dashboardInfo'>
-            {questStatus === "loading" ?
+        <div className='dashboard-exams'>
+            {/* {questStatus === "loading" ?
                 <LoadingPage /> :
                 <>
                     <h2>Questions</h2>
@@ -42,7 +41,7 @@ const MainQuestions = () => {
 
                     <AddQuestionForm />
                     <QuestionsList />
-                </>}
+                </>} */}
         </div>
     )
 }

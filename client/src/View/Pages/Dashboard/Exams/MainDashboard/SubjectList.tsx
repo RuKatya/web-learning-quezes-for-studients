@@ -1,8 +1,8 @@
 import { FC } from 'react'
-import { SubjectList } from '../../../../features/subjects/subjectsInterface'
+import { SubjectList } from '../../../../../features/subjects/subjectsInterface'
 import SubjectItem from './SubjectItem'
-import { selectSubject } from '../../../../features/subjects/subjectsSlice'
-import { useAppSelector } from '../../../../app/hooks'
+import { selectSubject } from '../../../../../features/subjects/subjectsSlice'
+import { useAppSelector } from '../../../../../app/hooks'
 
 // export interface SubjectListInterface {
 //     subjects: Array<SubjectList>

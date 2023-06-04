@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
-import { SubjectList } from '../../../../features/subjects/subjectsInterface'
-import { useAppDispatch } from '../../../../app/hooks'
-import { removeSubject, updateSubject } from '../../../../features/subjects/subjectsAPI'
-import ListItem from '../../../UI/ListItem'
+import { SubjectList } from '../../../../../features/subjects/subjectsInterface'
+import { useAppDispatch } from '../../../../../app/hooks'
+import { removeSubject, updateSubject } from '../../../../../features/subjects/subjectsAPI'
+import ListItem from '../../../../UI/ListItem'
 
 interface SubjectItemProps {
     sub: SubjectList

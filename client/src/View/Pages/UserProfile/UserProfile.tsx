@@ -1,19 +1,20 @@
 import axios from 'axios'
-import React, { Suspense } from 'react'
+import { Suspense } from 'react'
 import { Await, defer, useLoaderData } from 'react-router-dom'
 import LoadingPage from '../../UI/LoadingPage'
 
 const UserProfile = () => {
-    const { user: { continueWork, UserName, Email, message } }: any = useLoaderData()
-    console.log(continueWork, UserName, Email)
+    const { user: { continueWork, userName, email, message } }: any = useLoaderData()
 
     return (
         <Suspense fallback={<LoadingPage />}>
             <Await resolve={continueWork}>
                 {continueWork ? <div>
                     <h1>USER PROFILE</h1>
-                    <p>{UserName}</p>
-                    <p>{Email}</p>
+                    <p>{email}</p>
+                    <p>{userName}</p>
+                    <button>Update UserName</button>
+                    <button>Delete Account</button>
                 </div> : <div>{message}</div>}
             </Await>
         </Suspense>

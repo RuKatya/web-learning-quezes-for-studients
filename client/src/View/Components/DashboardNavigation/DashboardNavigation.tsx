@@ -5,8 +5,8 @@ import { useAppSelector } from '../../../app/hooks';
 
 const dashboardLinks = [
     { to: "dashboard", title: "Dashboard" },
-    { to: "dashboard", title: "Users" },
-    { to: "dashboard", title: "Statistic" },
+    { to: "dashboard/allUser", title: "Users" },
+    { to: "dashboard/user-statisic", title: "Statistic" },
 ]
 
 const DashboardNavigation = () => {
@@ -15,11 +15,8 @@ const DashboardNavigation = () => {
 
     return (
         <aside className={`asideDashboardNav asideDashboardNav__${theme}-theme`}>
-            {
-                dashboardLinks.map((link, index) => (
-                    <DashboardLink key={index} link={link} setActiveSideNav={setActiveSideNav} activeSideNav={activeSideNav} />
-                ))
-            }
+            {dashboardLinks.map((link, index) => (
+                <DashboardLink key={index} link={link} setActiveSideNav={setActiveSideNav} activeSideNav={activeSideNav} />))}
         </aside>
     )
 }

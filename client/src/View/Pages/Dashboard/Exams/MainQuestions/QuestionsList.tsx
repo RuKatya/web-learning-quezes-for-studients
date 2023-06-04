@@ -1,8 +1,8 @@
-import { selectQuestions } from '../../../../features/questions/questionsSlice'
-import { useAppDispatch, useAppSelector } from '../../../../app/hooks'
 import { FC, useState } from 'react'
 import QuestionItem from './QuestionItem'
-import { deleteManyQuestions } from '../../../../features/questions/questionsApi'
+import { useAppDispatch, useAppSelector } from '../../../../../app/hooks'
+import { selectQuestions } from '../../../../../features/questions/questionsSlice'
+import { deleteManyQuestions } from '../../../../../features/questions/questionsApi'
 
 const QuestionsList: FC = () => {
     const dispatch = useAppDispatch()

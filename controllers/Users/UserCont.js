@@ -153,7 +153,7 @@ exports.getUserProfile = async (req, res) => {
                 return res.send({ continueWork: false, message: err.sqlMessage }).status(httpCodes.BAD_REQUEST)
             }
 
-            return res.send({ continueWork: true, UserName: user[0].UserName, Email: user[0].Email }).status(httpCodes.OK)
+            return res.send({ continueWork: true, userName: user[0].UserName, email: user[0].Email }).status(httpCodes.OK)
         })
 
     } catch (error) {

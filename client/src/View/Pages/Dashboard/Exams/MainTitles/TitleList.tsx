@@ -1,9 +1,8 @@
-import React, { FC } from 'react'
-import { Title } from '../../../../features/titles/titleInterface'
-// import TitleItem from './TitleItem'
-import { useAppSelector } from '../../../../app/hooks'
-import { selectTitles } from '../../../../features/titles/titleSlice'
+import { FC } from 'react'
 import TitleItem from './TitleItem'
+import { useAppSelector } from '../../../../../app/hooks'
+import { selectTitles } from '../../../../../features/titles/titleSlice'
+import { Title } from '../../../../../features/titles/titleInterface'
 
 const TitleList: FC = () => {
     const titles = useAppSelector(selectTitles)

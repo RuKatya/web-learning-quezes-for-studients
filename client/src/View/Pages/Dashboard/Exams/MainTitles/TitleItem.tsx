@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
-import { useAppDispatch } from '../../../../app/hooks'
-import { removeTitle, updateTitle } from '../../../../features/titles/titleApi'
-import { Title } from '../../../../features/titles/titleInterface'
-import ListItem from '../../../UI/ListItem'
+import { Title } from '../../../../../features/titles/titleInterface'
+import { useAppDispatch } from '../../../../../app/hooks'
+import { removeTitle, updateTitle } from '../../../../../features/titles/titleApi'
+import ListItem from '../../../../UI/ListItem'
 
 interface TitleItemProps {
     title: Title

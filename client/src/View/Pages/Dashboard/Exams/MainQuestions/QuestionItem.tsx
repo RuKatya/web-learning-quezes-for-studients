@@ -1,8 +1,8 @@
 import { FC, useState } from 'react'
-import { Questions } from '../../../../features/questions/questionsInterface'
-import { deleteQuestion } from '../../../../features/questions/questionsApi'
-import { useAppDispatch } from '../../../../app/hooks'
 import EditQuestionForm from './EditQuestionForm'
+import { Questions } from '../../../../../features/questions/questionsInterface'
+import { useAppDispatch } from '../../../../../app/hooks'
+import { deleteQuestion } from '../../../../../features/questions/questionsApi'
 
 interface QuestionItemProps extends Questions {
     setArrQuestToDelete: Function,

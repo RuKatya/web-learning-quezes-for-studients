@@ -1,8 +1,8 @@
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import { Form } from 'react-router-dom'
-import { Questions } from '../../../../features/questions/questionsInterface'
-import { updateQuest } from '../../../../features/questions/questionsApi'
-import { useAppDispatch } from '../../../../app/hooks'
+import { Questions } from '../../../../../features/questions/questionsInterface'
+import { useAppDispatch } from '../../../../../app/hooks'
+import { updateQuest } from '../../../../../features/questions/questionsApi'
 
 export interface EditQuestProps {
     editItem: boolean,
