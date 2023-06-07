@@ -1,16 +1,16 @@
 import { Alert } from '@mui/material';
 import { Stack } from '@mui/material';
 import { useAppDispatch } from '../../app/hooks';
-import { useEffect } from 'react';
-import { relative } from 'path';
-import { useResponsivity } from '../../hooks/useWidth';
+// import { useEffect } from 'react';
+// import { relative } from 'path';
+// import { useResponsivity } from '../../hooks/useWidth';
 
 export interface InfoAlertProps {
     message: string, setOpenMessage: Function, removeMessage: Function
 }
 const InfoAlert = ({ message, setOpenMessage, removeMessage }: InfoAlertProps) => {
     const dispatch = useAppDispatch()
-    const isMobile = useResponsivity()
+    // const isMobile = useResponsivity()
 
 
     // useEffect(() => {

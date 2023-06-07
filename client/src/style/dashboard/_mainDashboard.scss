@@ -4,13 +4,16 @@
 // $purpleColorOfBtns: #9319f0;
 
 @import "./dashboardNavigation";
+@import "./dashboardInfo";
+@import "./subjectTitleItem";
 
-.dashboardMain {
+.dashboard {
   width: clamp(250px, 95%, 1400px);
   margin: 1% auto;
   box-sizing: border-box;
   height: 75vh;
-  pa &__dark-theme {
+
+  &__dark-theme {
     background-color: $dark-theme-main;
     color: white;
   }
@@ -21,11 +24,17 @@
   }
 }
 
-.dashboard-exams {
+.dashboard-main {
   width: 100%;
   height: 90%;
   background-color: aqua;
   overflow-y: auto;
+  box-sizing: border-box;
+  padding: 5%;
+
+  @media screen and (min-width: 361px) {
+    padding: 2%;
+  }
 }
 
 // .dashboardMain {

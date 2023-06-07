@@ -2,7 +2,7 @@ import React from 'react'
 
 const DashboardStatisticPage = () => {
     return (
-        <div>
+        <div >
             <h1>ALL USER STATISTIC</h1>
         </div>
     )

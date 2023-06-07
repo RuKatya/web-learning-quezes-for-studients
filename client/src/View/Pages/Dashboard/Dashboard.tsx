@@ -8,9 +8,11 @@ const Dashboard: FC = () => {
   const theme = useAppSelector(selectTheme)
 
   return (
-    <div className={`dashboardMain dashboardMain__${theme}-theme`}>
+    <div className={`dashboard dashboard__${theme}-theme`}>
       <DashboardNavigation />
-      <Outlet />
+      <div className="dashboard-main">
+        <Outlet />
+      </div>
     </div>
   )
 }

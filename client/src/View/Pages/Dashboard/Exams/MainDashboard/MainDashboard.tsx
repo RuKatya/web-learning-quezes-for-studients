@@ -21,22 +21,22 @@ const MainDashboard = () => {
         if (subMessage.length > 0) setOpenMessage(true)
     }, [subMessage])
 
-    return (
-        <div className='dashboard-exams'>
-            {subStatus === 'loading' ?
-                <LoadingPage /> :
-                <> {openMessage && (
-                    <InfoAlert
-                        message={subMessage}
-                        setOpenMessage={setOpenMessage}
-                        removeMessage={setMessageEmpty}
-                    />)}
+    return (<>
+        {subStatus === 'loading' ?
+            <LoadingPage /> :
+            <>{openMessage && (
+                <InfoAlert
+                    message={subMessage}
+                    setOpenMessage={setOpenMessage}
+                    removeMessage={setMessageEmpty}
+                />)}
 
+                <div className='dashboard-info'>
                     <AddSubjForm />
                     <SubjectList />
-                </>}
-        </div>
-    )
+                </div>
+            </>}
+    </>)
 }
 
 export default MainDashboard

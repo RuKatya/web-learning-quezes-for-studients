@@ -31,7 +31,7 @@ const MainTitle = () => {
     }, [titleMsg])
 
     return (
-        <div className='dashboard-exams'>
+        <div >
             {
                 titleStatus === "loading" ?
                     <LoadingPage />

@@ -25,7 +25,7 @@ const MainQuestions = () => {
     }, [questMessage])
 
     return (
-        <div className='dashboard-exams'>
+        <div >
             {/* {questStatus === "loading" ?
                 <LoadingPage /> :
                 <>
