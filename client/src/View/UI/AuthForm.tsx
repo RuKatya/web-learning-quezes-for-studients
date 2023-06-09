@@ -2,6 +2,7 @@ import { ReactNode, FC } from 'react'
 import { Link, Form } from "react-router-dom";
 import { selectTheme } from '../../features/dark-light-theme/theme';
 import { useAppSelector } from '../../app/hooks';
+import { useResponsivity } from '../../hooks/useWidth';
 
 interface FormProps {
     children?: ReactNode,
@@ -12,6 +13,7 @@ interface FormProps {
 
 const AuthForm: FC<FormProps> = ({ children, title, buttonText, action }) => {
     const theme = useAppSelector(selectTheme)
+    const isMobile = useResponsivity()
 
     return (
         <div className={`authForm-box authForm-box__${theme}-theme`}>
@@ -36,14 +38,15 @@ const AuthForm: FC<FormProps> = ({ children, title, buttonText, action }) => {
                     <div
                         className={`authForm__create-login-info authForm__create-login-info__${theme}-theme`}>
                         Have an account?
+                        {isMobile && <br />}
                         <Link
                             to="/auth"
                             className={`authForm__create-login-info__link authForm__create-login-info__link__${theme}-theme`}
                         >Login now </Link>
                     </div>
                 }
-            </Form>
-        </div>
+            </Form >
+        </div >
     )
 }
 

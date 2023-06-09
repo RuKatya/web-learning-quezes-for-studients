@@ -30,8 +30,21 @@ const Navbar: FC = () => {
     }, [isMobile])
 
     return (
-        <>
-            <nav className={`navbar navbar__${theme}-theme`}>
+        <nav className={`navbar navbar__${theme}-theme`}>
+            <NavLink to="/" className="homePagebtn">
+                <Logo
+                    classProps={"navBar-logo"}
+                    setToggleMenu={setToggleMenu}
+                    setToggleSecondMenu={setToggleSecondMenu}
+                />
+            </NavLink>
+
+            {user.isLogin ? <>
+            </>
+                :
+                <>
+                </>}
+            {/* <nav className={`navbar navbar__${theme}-theme`}>
                 <NavLink to="/" className="homePagebtn">
                     <Logo
                         classProps={"navBar-logo"}
@@ -69,8 +82,8 @@ const Navbar: FC = () => {
                     setToggleSecondMenu={setToggleSecondMenu}
                     setToggleMenu={setToggleMenu}
                 />
-            )}
-        </>
+            )} */}
+        </nav>
     )
 }
 
