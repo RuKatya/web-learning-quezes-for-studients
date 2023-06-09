@@ -21,11 +21,11 @@ export const validateForm = (fieldName: string, value: string) => {
 }
 
 export const validBeforeSend = (user: any) => {
-    console.log(user)
+    // console.log(user)
 
     const { userName, email, password, confirmPassword } = user
 
-    console.log(email)
+    // console.log(email)
     if (userName < 2) {
         return { continueNext: false, messageFromClient: "User Name less than 2 symbols" }
     }

@@ -7,6 +7,8 @@ import AdminBtn from './AdminBtn'
 import LogoutBtn from './LogoutBtn'
 import { NavLink } from 'react-router-dom'
 import { selectTheme } from '../../../features/dark-light-theme/theme'
+import MenuIcon from '@mui/icons-material/Menu';
+
 
 interface Links {
     link: string
@@ -18,44 +20,41 @@ interface NavigationLinksProps {
     linksForUser: Array<Links>
     setToggleMenu: Function
     setToggleSecondMenu: Function
+    heightOfNavbar: number
 }
 
-const NavigationLinks: FC<NavigationLinksProps> = ({ toggleMenu, linksForUser, setToggleMenu, setToggleSecondMenu }) => {
+const NavigationLinks: FC<NavigationLinksProps> = ({ toggleMenu, linksForUser, setToggleMenu, setToggleSecondMenu, heightOfNavbar }) => {
     const isMobile = useResponsivity()
     const user = useAppSelector(selectAuth);
     const theme = useAppSelector(selectTheme)
 
-
     return (
         <>
+            {isMobile && (
+                <MenuIcon fontSize="large"
+                    onClick={() => {
+                        setToggleMenu(!toggleMenu)
+                        setToggleSecondMenu(false)
+                    }}
+                />
+            )}
+
             {(toggleMenu || !isMobile) && (
-                <div className={`navbar__navigation--links navbar__navigation--links__${theme}-theme`}>
-                    {
-                        user.isLogin ? <>
-                            {user.isLogin && linksForUser.map((link, index) => (
-                                <LinksOfMav
-                                    key={index}
-                                    link={link.link}
-                                    title={link.title}
-                                    setToggleMenu={setToggleMenu}
-                                />
-                            ))}
-                            <AdminBtn setToggleMenu={setToggleMenu} />
-                            <LogoutBtn />
-                        </>
-                            :
-                            <>
-                                <NavLink
-                                    className={`navbar__navigation--link__${theme}-theme`}
-                                    to="/auth"
-                                    onClick={() => {
-                                        setToggleMenu(!toggleMenu)
-                                        setToggleSecondMenu(false)
-                                    }}
-                                >SIGN IN</NavLink>
-                            </>
-                    }
-                </div>)}
+                <div
+                    className={`navbar__navigation--links navbar__navigation--links__${theme}-theme`}
+                    style={{ top: user.isLogin ? `${heightOfNavbar}px` : '0px' }}>
+                    {user.isLogin && linksForUser.map((link, index) => (
+                        <LinksOfMav
+                            key={index}
+                            link={link.link}
+                            title={link.title}
+                            setToggleMenu={setToggleMenu}
+                        />
+                    ))}
+                    <AdminBtn setToggleMenu={setToggleMenu} />
+                    <LogoutBtn />
+                </div >)
+            }
         </>
     )
 }

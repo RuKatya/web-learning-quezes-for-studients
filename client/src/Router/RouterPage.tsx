@@ -23,6 +23,8 @@ import MainTitle from "../View/Pages/Dashboard/Exams/MainTitles/MainTitle";
 import MainQuestions from "../View/Pages/Dashboard/Exams/MainQuestions/MainQuestions";
 import UserPage from "../View/Pages/Dashboard/UsersPage/UserPage/UserPage";
 import DashboardStatisticPage from "../View/Pages/Dashboard/UsersStatistic/MainStatisticPage/DashboardStatisticPage";
+import AllUserStatistics from "../View/Pages/AllUserStatistics/AllUserStatistics";
+import UserSaveFav from "../View/Pages/UserSaveFav/UserSaveFav";
 
 const RouterPage = () => {
     const router = createBrowserRouter(
@@ -55,11 +57,22 @@ const RouterPage = () => {
                     <Route path="user/:id" element={<UserPage />} />
                     <Route path="user-statisic" element={<DashboardStatisticPage />} />
                 </Route>
-                <Route path="profile" element={
+
+                <Route path="user-profile" element={
                     <UserProtectedRout>
                         <UserProfile />
                     </UserProtectedRout>
                 } loader={profileLoader} />
+                <Route path="user-statistic" element={
+                    <UserProtectedRout>
+                        <AllUserStatistics />
+                    </UserProtectedRout>
+                } />
+                <Route path="user-save-quizes" element={
+                    <UserProtectedRout>
+                        <UserSaveFav />
+                    </UserProtectedRout>
+                } />
             </Route>
         )
     )
