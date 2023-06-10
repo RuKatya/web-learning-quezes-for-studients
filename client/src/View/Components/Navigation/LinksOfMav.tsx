@@ -1,7 +1,9 @@
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { NavLink } from "react-router-dom";
-import { useAppSelector } from "../../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { selectTheme } from "../../../features/dark-light-theme/theme";
+import { getFavQuizes } from '../../../features/savedFavQuizes/savedFavQuizesApi';
+import { countSavedQuizes, selectSavedQuizes } from '../../../features/savedFavQuizes/savedFavQuizesSlice';
 
 interface LinksProps {
     link: string,
@@ -12,17 +14,21 @@ interface LinksProps {
 
 const LinksOfMav: FC<LinksProps> = ({ link, title, setToggleMenu }) => {
     const theme = useAppSelector(selectTheme)
-    // const [numberSaved, setNumberSaves] = useState(11)
+    const countSavedQuizesOfUser = useAppSelector(countSavedQuizes)
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(getFavQuizes())
+    }, [])
 
     return (
         <NavLink
             to={link}
             className={`navbar__navigation--link navbar__navigation--link__${theme}-theme`}
-            // className={`navigation__link navigation__link--${theme} ${title === "Fav Quizes" && "navigation__link--favQuizes"}`}
             onClick={() => setToggleMenu(false)}
         >{
                 title === "Fav Quizes" ?
-                    <>{title} <span>{11}</span></>
+                    <>{title} <span>{countSavedQuizesOfUser}</span></>
                     :
                     title
             }</NavLink>

@@ -5,6 +5,9 @@ import subjectsReducer from '../features/subjects/subjectsSlice';
 import titlesReducer from '../features/titles/titleSlice';
 import questionsReducer from '../features/questions/questionsSlice';
 import doneQuizReducer from '../features/doneQuiz/doneQuizSlice';
+import usersReducer from '../features/users/usersSlice';
+import oneUserReducer from '../features/oneUser/oneUserSlice';
+import savedFavQuizesReducer from '../features/savedFavQuizes/savedFavQuizesSlice';
 
 export const store = configureStore({
   reducer: {
@@ -13,7 +16,10 @@ export const store = configureStore({
     subjects: subjectsReducer,
     titles: titlesReducer,
     questions: questionsReducer,
-    doneQuiz: doneQuizReducer
+    doneQuiz: doneQuizReducer,
+    users: usersReducer,
+    oneUser: oneUserReducer,
+    savedFavQuizes: savedFavQuizesReducer
   },
 });
 

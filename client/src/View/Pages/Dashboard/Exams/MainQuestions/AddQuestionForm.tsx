@@ -45,6 +45,10 @@ const AddQuestionForm = () => {
         const allEmpty = values.some((val) => (val.length === 0))
         if (allEmpty) return alert("All fields are required")
 
+        const minLenght = values.some((val) => (val.length < 2))
+
+        if (minLenght) return alert("Must include atleast 2 symbols")
+
         dispatch(saveQuestions({ questions, draft }))
     }
 

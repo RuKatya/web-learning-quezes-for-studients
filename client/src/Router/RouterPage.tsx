@@ -54,7 +54,7 @@ const RouterPage = () => {
                     <Route path="subjects/:subjectId" element={<MainTitle />} />
                     <Route path="subjects/:subjectId/:titleId" element={<MainQuestions />} />
                     <Route path="allUser" element={<MainUsersPage />} />
-                    <Route path="user/:id" element={<UserPage />} />
+                    <Route path="allUser/user/:userId" element={<UserPage />} />
                     <Route path="user-statisic" element={<DashboardStatisticPage />} />
                 </Route>
 

@@ -34,6 +34,7 @@ app.use('/users', require('./routers/Users/usersRout'))
 app.use('/subjects', require('./routers/Subject/subjectsRout'))
 app.use('/title-quiz', require('./routers/Title/TitleRou'))
 app.use('/title-questions', require('./routers/Questions/QuestionRout'))
+app.use('/saved-quizes', require('./routers/SavedQuizes/SavedQuizesRout'))
 
 app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));

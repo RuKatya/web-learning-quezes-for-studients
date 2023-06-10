@@ -145,7 +145,7 @@ exports.getUserProfile = async (req, res) => {
 
         const { userID } = await jwt.decode(weblearningtoken, process.env.SECRET)
 
-        const userSearch = `SELECT * FROM users WHERE userID=${userID}`
+        const userSearch = `SELECT Email, UserName FROM users WHERE userID=${userID}`
 
         connection.query(userSearch, (err, user) => {
             if (err) {
@@ -159,5 +159,54 @@ exports.getUserProfile = async (req, res) => {
     } catch (error) {
         console.error('UserCont.js line:132 function getUserProfile', error);
         return res.send({ message: "Server Feiled, try again" }).status(httpCodes.SERVER_ERROR)
+    }
+}
+
+// ---- Get All Users To Dashboard ---- //
+exports.getAllUsers = async (req, res) => {
+    try {
+
+        const { weblearningtoken } = req.cookies
+
+        const { userID } = await jwt.decode(weblearningtoken, process.env.SECRET)
+
+        if (!weblearningtoken) {
+            console.log(`UserConst.js line:95 No cookie token of checkUserCookies`)
+            return res.send({ continueWork: false, isLogin: false }).status(httpCodes.NOT_FOUND)
+        }
+
+        const getAllUsers = `SELECT UserID, UserName FROM users WHERE UserID !=${userID}`
+
+        connection.query(getAllUsers, (err, users) => {
+            if (err) {
+                console.error('UserConst.js line:172 sql error of getAllUsers:', err.sqlMessage);
+                return res.send({ continueWork: false, message: err.sqlMessage }).status(httpCodes.BAD_REQUEST)
+            }
+
+            return res.send({ continueWork: true, users }).status(httpCodes.OK)
+        })
+    } catch (error) {
+        console.error('UserCont.js line:179 function getAllUsers', error);
+        return res.send({ message: "Server Feiled, try again" }).status(httpCodes.SERVER_ERROR)
+    }
+}
+
+// ---- Get One User For Dashboard ---- //
+exports.getOneUser = (req, res) => {
+    try {
+        const { userID } = req.body
+
+        const userSearch = `SELECT Email, UserName, UserID, UserRole FROM users WHERE userID=${userID}`
+
+        connection.query(userSearch, (err, user) => {
+            if (err) {
+                console.error('UserConst.js line:203 sql error of getAllUsers:', err.sqlMessage);
+                return res.send({ continueWork: false, message: err.sqlMessage }).status(httpCodes.BAD_REQUEST)
+            }
+
+            res.send({ continueWork: true, user: user[0] })
+        })
+    } catch (error) {
+
     }
 }

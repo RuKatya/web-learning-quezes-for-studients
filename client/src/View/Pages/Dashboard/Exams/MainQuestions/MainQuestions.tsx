@@ -26,7 +26,7 @@ const MainQuestions = () => {
 
     return (
         <div >
-            {/* {questStatus === "loading" ?
+            {questStatus === "loading" ?
                 <LoadingPage /> :
                 <>
                     <h2>Questions</h2>
@@ -41,7 +41,7 @@ const MainQuestions = () => {
 
                     <AddQuestionForm />
                     <QuestionsList />
-                </>} */}
+                </>}
         </div>
     )
 }

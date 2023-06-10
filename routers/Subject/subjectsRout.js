@@ -1,5 +1,4 @@
 const router = require('express').Router();
-
 const { saveNewSubject, getAllSubjects, removeSubject, updateSubject } = require('../../controllers/Subject/SubjectsCont');
 const userRole = require('../../middleWare/userRole');
 
