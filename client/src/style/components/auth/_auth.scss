@@ -1,14 +1,10 @@
 .authPage {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include displayFlex($justefyContent: center);
   height: 80vh;
 }
 
 .authForm-box {
   width: clamp(270px, 40%, 450px);
-  background-color: rgb(46, 187, 140);
   padding: 3% 0%;
 
   h2 {
@@ -27,12 +23,12 @@
 }
 
 .authForm {
-  width: 80%;
+  @include displayFlex(
+    $direction: column,
+    $displayWidth: 80%,
+    $justefyContent: center
+  );
   margin: 0% auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 
   & input {
     width: 100%;
@@ -91,13 +87,11 @@
       color: black;
       display: none;
 
-      // @media screen and (max-width: 768px) {
-      //   // box-shadow: 0px 4px 5px rgb(154, 154, 154);
-      //   width: 90%;
-      //   left: 0%;
-      //   // bottom: 50%;
-      //   top: -15vh;
-      // }
+      @media screen and (max-width: 768px) {
+        top: 20vh;
+        width: 90%;
+        left: 0%;
+      }
     }
 
     &:focus + .inputsForm__formInputs--info-block {

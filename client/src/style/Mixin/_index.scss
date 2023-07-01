@@ -1,0 +1,11 @@
+@mixin displayFlex(
+  $direction: row,
+  $justefyContent: flex-start,
+  $displayWidth: 100%
+) {
+  width: $displayWidth;
+  display: flex;
+  flex-direction: $direction;
+  align-items: center;
+  justify-content: $justefyContent;
+}

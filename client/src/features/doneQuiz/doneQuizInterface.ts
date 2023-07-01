@@ -1,7 +1,12 @@
-export interface QuizInfo {
+
+export interface QuizId {
+    titleID: number
+}
+
+export interface QuizInfo extends QuizId {
     rightAns: number,
     titleName: string,
-    titleID: number
+    totalQuestions: number
 }
 
 export interface QuizDoneInfo {
@@ -10,7 +15,7 @@ export interface QuizDoneInfo {
     message: string
 }
 
-export interface ReducerPayloadInfo {
+export interface ReducerPayloadInfo extends QuizId {
     title: string | undefined,
-    titleID: number
+    totalQuestions: number
 }
