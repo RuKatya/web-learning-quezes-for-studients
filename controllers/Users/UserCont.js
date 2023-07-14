@@ -92,12 +92,12 @@ exports.checkUserCookies = async (req, res) => {
     try {
         const { weblearningtoken } = req.cookies
 
-        const { userID } = await jwt.decode(weblearningtoken, process.env.SECRET)
-
         if (!weblearningtoken) {
             console.log(`UserConst.js line:95 No cookie token of checkUserCookies`)
             return res.send({ continueWork: false, isLogin: false }).status(httpCodes.NOT_FOUND)
         }
+
+        const { userID } = await jwt.decode(weblearningtoken, process.env.SECRET)
 
         const userSearch = `SELECT * FROM users WHERE userID=${userID}` // Search the user with the id that saved in cookies
 
@@ -112,7 +112,7 @@ exports.checkUserCookies = async (req, res) => {
 
             res.cookie("weblearningtoken", token, { maxAge: 1000 * 60 * 60 * 3, httpOnly: true }) // send data of user to save in cookies
 
-            res.send({
+            return res.send({
                 continueWork: true,
                 isLogin: true,
                 message: "User Login",
@@ -121,8 +121,8 @@ exports.checkUserCookies = async (req, res) => {
             }).status(httpCodes.OK)
         })
     } catch (error) {
-        console.error('UserCont.js line:121 function checkUserCookies', error);
-        return res.send({ continueWork: false, isLogin: false, message: "Login Please" }).status(httpCodes.SERVER_ERROR)
+        console.log('UserCont.js line:124 function checkUserCookies', error);
+        return res.send({ continueWork: false, isLogin: false, message: "Login Please" })
     }
 }
 

@@ -31,6 +31,7 @@ export const authSlice = createSlice({
             })
             .addCase(checkLogin.fulfilled, (state, action: PayloadAction<CheckLogin>) => {
                 state.status = 'idle';
+                console.log(action.payload)
                 if (action.payload.continueWork) {
                     state.user = {
                         isLogin: action.payload.isLogin,

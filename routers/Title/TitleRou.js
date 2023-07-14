@@ -8,6 +8,6 @@ router
     .patch('/update-title', userRole, updateTitle)
     .patch('/save-draft-or-publish', userRole, saveDraftOrPublish)
     .delete('/remove-title', userRole, removeTitle)
-    .post('/get-all-titles-for-user', userRole, getAllTitlesUser)
+    .post('/get-all-titles-for-user', getAllTitlesUser)
 
 module.exports = router;
