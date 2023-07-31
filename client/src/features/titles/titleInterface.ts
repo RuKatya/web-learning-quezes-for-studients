@@ -1,6 +1,7 @@
 import { DeleteInterface } from "../subjects/subjectsInterface"
 
 export interface Title {
+    savedQuizID?: number | null,
     SubjectID: number,
     Title: string,
     Title_QuizID: number,

@@ -3,7 +3,7 @@ import { RootState } from "../../app/store";
 // import { UsersList, getAllUserPayload } from "./usersInterface";
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { getUserPayload, oneUserInit } from "./oneUserInterface";
-import { getOneUser } from "./oneUserApi";
+import { getOneUser, updateUserRole } from "./oneUserApi";
 
 const initialState: oneUserInit = {
     user: { UserID: 0, UserName: "", Email: "", UserRole: "user" },
@@ -36,6 +36,25 @@ export const oneUserSlice = createSlice({
                 }
             })
             .addCase(getOneUser.rejected, (state) => {
+                state.status = 'failed';
+            })
+            .addCase(updateUserRole.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(updateUserRole.fulfilled, (state, action
+                // : PayloadAction<getUserPayload>
+            ) => {
+                state.status = 'idle';
+
+                const { continueWork, userRole, message } = action.payload
+
+                if (continueWork) {
+                    state.user = { ...state.user, UserRole: userRole }
+                } else {
+                    state.message = message
+                }
+            })
+            .addCase(updateUserRole.rejected, (state) => {
                 state.status = 'failed';
             })
     }

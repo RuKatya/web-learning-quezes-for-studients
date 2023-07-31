@@ -107,6 +107,11 @@ exports.checkUserCookies = async (req, res) => {
                 return res.send({ continueWork: false, message: err.sqlMessage }).status(httpCodes.BAD_REQUEST)
             }
 
+            if (user.length == 0) {
+                console.error('UserConst.js line:113 checkUserCookies: No user');
+                return res.send({ continueWork: false, message: "No user" }).status(httpCodes.BAD_REQUEST)
+            }
+
             const cookiesData = { userID: user[0].UserID, userRole: user[0].UserRole }
             const token = jwt.encode(cookiesData, process.env.SECRET)
 
@@ -207,6 +212,52 @@ exports.getOneUser = (req, res) => {
             res.send({ continueWork: true, user: user[0] })
         })
     } catch (error) {
+        console.error('UserCont.js line:179 function getOneUser', error);
+        return res.send({ message: "Server Feiled, try again" }).status(httpCodes.SERVER_ERROR)
+    }
+}
 
+// ---- Delete One User ---- //
+exports.deleteOnUser = (req, res) => {
+    try {
+        const { userID } = req.body
+        console.log(userID)
+
+        const deleteUser = `DELETE FROM users WHERE UserID = ${userID}`
+
+        connection.query(deleteUser, (err, user) => {
+            if (err) {
+                console.error('UserConst.js line:223 sql error of deleteOnUser:', err.sqlMessage);
+                return res.send({ continueWork: false, message: err.sqlMessage }).status(httpCodes.BAD_REQUEST)
+            }
+
+            res.send({ continueWork: true, userID })
+        })
+    } catch (error) {
+        console.error('UserCont.js line:238 function deleteOnUser', error);
+        return res.send({ message: "Server Feiled, try again" }).status(httpCodes.SERVER_ERROR)
+    }
+}
+
+// ---- Update User Role ---- //
+exports.updateUserRole = (req, res) => {
+    try {
+        const { userId, userRole } = req.body
+
+        console.log(userId, userRole)
+
+        const updateRole = `UPDATE users SET UserRole = "${userRole}" WHERE UserId = ${userId};`
+
+        connection.query(updateRole, (err, user) => {
+            if (err) {
+                console.error('UserConst.js line:254 sql error of updateUserRole:', err.sqlMessage);
+                return res.send({ continueWork: false, message: err.sqlMessage }).status(httpCodes.BAD_REQUEST)
+            }
+
+            res.send({ continueWork: true, userId, userRole, message: "User Role Updated" })
+        })
+    } catch (error) {
+        console.error('UserCont.js line:238 function updateUserRole', error);
+        return res.send({ message: "Server Feiled, try again" }).status(httpCodes.SERVER_ERROR)
     }
 }

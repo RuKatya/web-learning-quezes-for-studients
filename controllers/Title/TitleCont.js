@@ -159,6 +159,7 @@ exports.saveDraftOrPublish = async (req, res) => {
     }
 }
 
+// ---- FOR USER ---- //
 // ---- Get All Title For User ---- //
 exports.getAllTitlesUser = async (req, res) => {
     try {
@@ -180,9 +181,23 @@ exports.getAllTitlesUser = async (req, res) => {
             }
 
             const SubjectID = result[0].SubjectID
-            const getAllTitles = `SELECT * FROM titles_quizes WHERE SubjectID = '${SubjectID}' AND Draft = 0`
+            const aaa = `
+            SELECT 
+                titles_quizes.Title_QuizID,
+                titles_quizes.Title,
+                titles_quizes.SubjectID,
+                titles_quizes.Draft,
+                savged_quizes.savedQuizID,
+                savged_quizes.UserID
+            FROM 
+                titles_quizes LEFT JOIN savged_quizes 
+            ON 
+                titles_quizes.Title_QuizID = savged_quizes.Title_QuizID AND savged_quizes.UserID = 19 
+            WHERE 
+                SubjectID = '${SubjectID}' AND Draft = 0 
+            `
 
-            connection.query(getAllTitles, (err, result) => {
+            connection.query(aaa, (err, result) => {
                 if (err) {
                     console.error('TitleConst.js line:187 sql error getAllTitlesUser', err.sqlMessage);
                     return res.send({ continueWork: false, message: err.sqlMessage }).status(httpCodes.BAD_REQUEST)

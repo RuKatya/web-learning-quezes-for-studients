@@ -5,7 +5,7 @@ import { selectAuth } from '../../../features/auth/authSlice'
 import LinksOfMav from './LinksOfMav'
 import AdminBtn from './AdminBtn'
 import LogoutBtn from './LogoutBtn'
-import { NavLink } from 'react-router-dom'
+// import { NavLink } from 'react-router-dom'
 import { selectTheme } from '../../../features/dark-light-theme/theme'
 import MenuIcon from '@mui/icons-material/Menu';
 
@@ -19,11 +19,13 @@ interface NavigationLinksProps {
     toggleMenu: boolean
     linksForUser: Array<Links>
     setToggleMenu: Function
-    setToggleSecondMenu: Function
+    // setToggleSecondMenu: Function
     heightOfNavbar: number
 }
 
-const NavigationLinks: FC<NavigationLinksProps> = ({ toggleMenu, linksForUser, setToggleMenu, setToggleSecondMenu, heightOfNavbar }) => {
+const NavigationLinks: FC<NavigationLinksProps> = ({ toggleMenu, linksForUser, setToggleMenu,
+    // setToggleSecondMenu, 
+    heightOfNavbar }) => {
     const isMobile = useResponsivity()
     const user = useAppSelector(selectAuth);
     const theme = useAppSelector(selectTheme)
@@ -34,7 +36,7 @@ const NavigationLinks: FC<NavigationLinksProps> = ({ toggleMenu, linksForUser, s
                 <MenuIcon fontSize="large"
                     onClick={() => {
                         setToggleMenu(!toggleMenu)
-                        setToggleSecondMenu(false)
+                        // setToggleSecondMenu(false)
                     }}
                 />
             )}

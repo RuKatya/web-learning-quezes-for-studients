@@ -1,25 +1,53 @@
-import React, { useEffect } from 'react'
-import { selectUsers } from '../../../../../features/users/usersSlice'
+import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../../../app/hooks'
 import { useParams } from 'react-router-dom'
 import { selectOneUser } from '../../../../../features/oneUser/oneUserSlice'
-import { getOneUser } from '../../../../../features/oneUser/oneUserApi'
+import { getOneUser, updateUserRole } from '../../../../../features/oneUser/oneUserApi'
+import DeleteBtn from './DeleteBtn'
 
 const UserPage = () => {
     const { userId } = useParams()
     const dispatch = useAppDispatch()
-    const users = useAppSelector(selectOneUser)
+    const user = useAppSelector(selectOneUser)
 
     useEffect(() => {
         dispatch(getOneUser(Number(userId)))
-    }, [userId])
+    }, [userId, dispatch])
 
+    const handleChangeUserRole = (ev: React.SyntheticEvent) => {
+        ev.preventDefault()
+
+        const target = ev.target as typeof ev.target & {
+            userRole: { value: string },
+            id: string
+        }
+
+        console.log(target.id)
+        const idUser = Number(target.id)
+        const userRole = target.userRole.value
+
+        dispatch(updateUserRole({ userId: idUser, userRole }))
+    }
+
+    console.log(user)
     return (
-        <div >
-            <h1>USER ONE</h1>
-            <div>{users.UserName}</div>
-            <div>{users.Email}</div>
-            <div>{users.UserRole}</div>
+        <div>
+            <DeleteBtn userId={Number(userId)} />
+
+            <h1>{user.UserName}</h1>
+            <div><h3>Email:</h3> <p>{user.Email}</p></div>
+            <div>
+                <form onSubmit={handleChangeUserRole} id={userId}>
+                    <h3>Role:</h3>
+                    <p>{user.UserRole}</p>
+                    <select name="userRole">
+                        <option disabled>Select User Role</option>
+                        <option defaultValue={user.UserRole == "admin" ? "admin" : "user"}>{user.UserRole == "admin" ? "admin" : "user"}</option>
+                        <option value={user.UserRole == "admin" ? "user" : "admin"}>{user.UserRole == "admin" ? "user" : "admin"}</option>
+                    </select>
+                    <button type="submit">Update User Role</button>
+                </form>
+            </div>
         </div>
     )
 }
