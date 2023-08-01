@@ -1,6 +1,6 @@
 const connection = require("../../connection")
 const { httpCodes } = require("../../utils/httpStatusCode")
-const { addNewTitleValidation, getAllTitlesValidation, updateTitleValidation, deleteValidation, saveToDraftOrToDraft, subjectNameValidation } = require("../../validation/dashboardValid")
+const { addNewTitleValidation, getAllTitlesValidation, updateTitleValidation, deleteValidation, saveToDraftOrToDraft } = require("../../validation/dashboardValid")
 
 // ---- Save New Title ---- //
 exports.saveNewTitle = (req, res) => {
@@ -164,13 +164,6 @@ exports.saveDraftOrPublish = async (req, res) => {
 exports.getAllTitlesUser = async (req, res) => {
     try {
         const { SubjectName } = req.body
-
-        const { error } = subjectNameValidation.validate({ SubjectName })
-
-        if (error) {
-            console.error('TitleConst.js line:170 validation error of getAllTitlesUser:', error.message)
-            return res.status(httpCodes.FORBIDDEN).send({ continueWork: false, message: error.message })
-        }
 
         const selectSubject = `SELECT * FROM subjects WHERE SubjectName = '${SubjectName}'`
 
