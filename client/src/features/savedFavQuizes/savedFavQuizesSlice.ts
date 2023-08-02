@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { GetSavedQuizedPayload, savedQuizesInit, saveToFavQuizesPayload } from './savedFavQuizesInterface';
-import { getFavQuizes, saveToFavQuizes } from './savedFavQuizesApi';
+import { GetSavedQuizedPayload, RemoveFromFavQuizes, savedQuizesInit, saveToFavQuizesPayload } from './savedFavQuizesInterface';
+import { getFavQuizes, removeFromFavQuizes, saveToFavQuizes } from './savedFavQuizesApi';
 
 const initialState: savedQuizesInit = {
     count: 0,
@@ -25,7 +25,6 @@ export const savedFavQuizesSlice = createSlice({
             })
             .addCase(getFavQuizes.fulfilled, (state, action: PayloadAction<GetSavedQuizedPayload>) => {
                 state.status = 'idle';
-
                 const { continueWork, quizes, message } = action.payload
 
                 if (continueWork) {
@@ -45,17 +44,35 @@ export const savedFavQuizesSlice = createSlice({
             .addCase(saveToFavQuizes.fulfilled, (state, action: PayloadAction<saveToFavQuizesPayload>) => {
                 state.status = 'idle';
 
-                const { continueWork, message, savedQuizID, Title_QuizID, Title_Name } = action.payload
+                const { continueWork, message, savedQuizID, Title_QuizID, Title_Name, SubjectName } = action.payload
 
                 if (continueWork) {
-                    state.list = [...state.list, { savedQuizID, Title_QuizID, Title_Name }]
+                    state.list = [...state.list, { savedQuizID, Title_QuizID, Title_Name, SubjectName }]
                     state.count = state.list.length
                 } else {
                     state.message = message
-                    state.list = state.list
                 }
             })
             .addCase(saveToFavQuizes.rejected, (state) => {
+                state.status = 'failed';
+            })
+            .addCase(removeFromFavQuizes.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(removeFromFavQuizes.fulfilled, (state, action: PayloadAction<RemoveFromFavQuizes>
+            ) => {
+                state.status = 'idle';
+
+                const { continueWork, message, savedQuizID } = action.payload
+
+                if (continueWork) {
+                    state.list = state.list.filter(item => item.savedQuizID !== savedQuizID)
+                    state.count = state.list.length
+                } else {
+                    state.message = message
+                }
+            })
+            .addCase(removeFromFavQuizes.rejected, (state) => {
                 state.status = 'failed';
             })
     }

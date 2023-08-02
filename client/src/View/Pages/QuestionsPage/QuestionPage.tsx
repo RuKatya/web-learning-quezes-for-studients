@@ -13,7 +13,7 @@ const QuestionPage = () => {
     const { titles: { continueWork, questions, message, titleID } }: any = useLoaderData()
 
     useEffect(() => {
-        if (continueWork) dispatch(setQuizInfo({ title, titleID }))
+        if (continueWork) dispatch(setQuizInfo({ title, titleID, totalQuestions: questions.length }))
     }, [continueWork, dispatch, title, titleID])
 
     return (
@@ -22,7 +22,7 @@ const QuestionPage = () => {
                 <h1>{title}</h1>
                 {continueWork ? <>
                     {questions.map((question: Questions) => (
-                            <QuizCard key={question.QuestionID} quest={question} />
+                        <QuizCard key={question.QuestionID} quest={question} />
                     ))}
                     <Link to={`/subject/${subject}/${title}/done-quiz`}>Done Quiz</Link>
                 </> : <>{message}</>}

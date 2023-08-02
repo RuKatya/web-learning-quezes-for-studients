@@ -2,12 +2,12 @@ import { FC, useEffect, useRef, useState } from "react";
 import { useResponsivity } from "../../../hooks/useWidth";
 import { useAppSelector } from "../../../app/hooks";
 import { selectTheme } from "../../../features/dark-light-theme/theme"
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Logo from "../../logo/Logo";
 import ThemeSwitchButton from "../../UI/ThemeButton";
 import NavigationLinks from "./NavigationLinks";
-import MenuIcon from '@mui/icons-material/Menu';
-import AsideBar from "./AsideBar";
+// import MenuIcon from '@mui/icons-material/Menu';
+// import AsideBar from "./AsideBar";
 import { selectAuth } from "../../../features/auth/authSlice";
 
 const linksForUser = [
@@ -18,15 +18,15 @@ const linksForUser = [
 
 const Navbar: FC = () => {
     const [toggleMenu, setToggleMenu] = useState(false);
-    const [toggleSecondMenu, setToggleSecondMenu] = useState(false);
+    // const [toggleSecondMenu, setToggleSecondMenu] = useState(false);
     const isMobile = useResponsivity()
     const theme = useAppSelector(selectTheme)
     const user = useAppSelector(selectAuth);
-    let location = useLocation();
+    // let location = useLocation();
     const navEl = useRef<any>(null)
 
     useEffect(() => {
-        setToggleSecondMenu(false)
+        // setToggleSecondMenu(false)
         setToggleMenu(false)
     }, [isMobile])
 
@@ -36,7 +36,7 @@ const Navbar: FC = () => {
                 <Logo
                     classProps={"navBar-logo"}
                     setToggleMenu={setToggleMenu}
-                    setToggleSecondMenu={setToggleSecondMenu}
+                    // setToggleSecondMenu={setToggleSecondMenu}
                 />
             </NavLink>
 
@@ -46,7 +46,7 @@ const Navbar: FC = () => {
                         toggleMenu={toggleMenu}
                         linksForUser={linksForUser}
                         setToggleMenu={setToggleMenu}
-                        setToggleSecondMenu={setToggleSecondMenu}
+                        // setToggleSecondMenu={setToggleSecondMenu}
                         heightOfNavbar={navEl.current.clientHeight}
                     />
                 </>
@@ -56,7 +56,7 @@ const Navbar: FC = () => {
                         to="/auth"
                         onClick={() => {
                             setToggleMenu(!toggleMenu)
-                            setToggleSecondMenu(false)
+                            // setToggleSecondMenu(false)
                         }}
                     >SIGN IN</NavLink>}
                 <ThemeSwitchButton />

@@ -1,5 +1,7 @@
 import { FC, FormEventHandler } from 'react'
 import DashboardAddNewForm from './DashboardAddNewForm'
+import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
+import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
 
 interface DashboardAddNewProps {
     btnText: string,
@@ -18,22 +20,19 @@ const DashboardAddNew: FC<DashboardAddNewProps> = ({
     setShowAddNewSubjectWindow }) => {
 
     return (
-        <>
-            <button
-                onClick={() => setShowAddNewSubjectWindow(!showAddNewSubjectWindow)}
-                className='addMoreBtn'>
-                {showAddNewSubjectWindow ?
-                    "CLOSE" :
-                    `ADD NEW ${btnText}`
-                }
-            </button>
+        <div className='addMoreForm'>
+            <div
+                className='addMoreForm__btn'
+                onClick={() => setShowAddNewSubjectWindow(!showAddNewSubjectWindow)}>
+                {showAddNewSubjectWindow ? <DisabledByDefaultIcon /> : <LibraryAddIcon />}
+            </div>
 
-            {
-                showAddNewSubjectWindow && (
-                    <DashboardAddNewForm submitFunction={submitFunction} inputName={inputName} placeholderText={placeholderText} />
-                )
-            }
-        </>
+            {showAddNewSubjectWindow && (
+                <DashboardAddNewForm
+                    submitFunction={submitFunction}
+                    inputName={inputName}
+                    placeholderText={placeholderText} />)}
+        </div>
     )
 }
 

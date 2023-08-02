@@ -1,5 +1,5 @@
 import { RootState } from "../../app/store";
-import { getAllUsers } from "./usersApi";
+import { deleteOneUser, getAllUsers } from "./usersApi";
 import { UsersList, getAllUserPayload } from "./usersInterface";
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
@@ -34,6 +34,26 @@ export const usersSlice = createSlice({
                 }
             })
             .addCase(getAllUsers.rejected, (state) => {
+                state.status = 'failed';
+            })
+            .addCase(deleteOneUser.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(deleteOneUser.fulfilled, (state, action
+                //: PayloadAction<getUserPayload>
+            ) => {
+                state.status = 'idle';
+                console.log(action.payload)
+
+                const { continueWork, userID, message } = action.payload
+
+                if (continueWork) {
+                    state.list = state.list.filter(item => item.UserID !== userID)
+                } else {
+                    state.message = message
+                }
+            })
+            .addCase(deleteOneUser.rejected, (state) => {
                 state.status = 'failed';
             })
     }

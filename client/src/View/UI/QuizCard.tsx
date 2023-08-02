@@ -16,8 +16,8 @@ const QuizCard: FC<QuizCardProps> = ({ quest }) => {
     const doneQuiz = useAppSelector(selectdoneQuiz)
 
     useEffect(() => {
-        if(rightAns) {
-            dispatch(setQuizRightAns(doneQuiz.rightAns+1))
+        if (rightAns) {
+            dispatch(setQuizRightAns(doneQuiz.rightAns + 1))
         }
     }, [rightAns])
 

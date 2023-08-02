@@ -9,7 +9,7 @@ interface DashboardAddNewFormProps {
 
 const DashboardAddNewForm = ({ submitFunction, inputName, placeholderText }: DashboardAddNewFormProps) => {
     return (
-        <Form onSubmit={submitFunction} className='addMoreForm'>
+        <Form onSubmit={submitFunction} className='addMoreForm__form'>
             <input
                 type="text"
                 name={inputName}

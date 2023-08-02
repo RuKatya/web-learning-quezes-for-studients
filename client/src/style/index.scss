@@ -1,25 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap");
-
-@import "./vars/index";
-@import "./components/navbar";
-
-@import "./auth/auth";
-
-@import "./dashboard/mainDashboard";
-// @import "./components/input";
-// @import "./components/authForm";
-// @import "./pages/dashboardStyle";
-
-@import "./logo/logo";
-@import "./loader/loader";
-@import "./components/themeBtn";
-
-@import "./pages/for_users_pages/index";
+@import "./Vars/index";
+@import "./Mixin/index";
 
 body {
   width: clamp(250px, 100%, 1440px);
   margin: 0% auto;
   font-family: "Rubik", sans-serif;
+  position: relative;
 }
 
 a {
@@ -49,3 +35,10 @@ a {
     background-size: 100%;
   }
 }
+
+@import "./components/loader/loader";
+
+@import "./components/navigation/navbar/navbar";
+@import "./components/navigation/logo/logo";
+@import "./components/themeBtn/themeBtn";
+@import "./components/auth/auth";

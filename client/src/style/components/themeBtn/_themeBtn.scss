@@ -1,27 +1,22 @@
 .theme_switch {
-  width: 40px;
+  @include displayFlex($displayWidth: 40px);
   height: 20px;
-  border-radius: 2rem;
   position: relative;
-  display: flex;
-  align-items: center;
-  border: 1px solid rgb(210, 210, 210);
+  border: 1px solid #d2d2d2;
+  border-radius: 2rem;
 
   &--dark {
-    background-color: #ffffff;
+    background-color: $light-theme-main;
   }
 
   &--light {
-    background-color: #0b0d17;
+    background-color: $dark-theme-main;
   }
 
   div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include displayFlex($justefyContent: center, $displayWidth: 20px);
     position: absolute;
     box-sizing: border-box;
-    width: 20px;
     height: 100%;
     border-radius: $inputs-radius;
     transform: translateX(0%);
@@ -29,11 +24,11 @@
   }
 
   &__img--dark {
-    background-color: #0b0d17;
+    background-color: $dark-theme-main;
   }
 
   &__img--light {
-    background-color: #ffffff;
+    background-color: $light-theme-main;
   }
 }
 
