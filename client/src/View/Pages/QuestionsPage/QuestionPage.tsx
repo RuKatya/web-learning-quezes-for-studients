@@ -6,6 +6,7 @@ import { Questions } from '../../../features/questions/questionsInterface'
 import QuizCard from '../../UI/QuizCard'
 import { useAppDispatch } from '../../../app/hooks'
 import { setQuizInfo } from '../../../features/doneQuiz/doneQuizSlice'
+import Timer from '../../UI/Timer'
 
 const QuestionPage = () => {
     const dispatch = useAppDispatch();
@@ -16,10 +17,12 @@ const QuestionPage = () => {
         if (continueWork) dispatch(setQuizInfo({ title, titleID, totalQuestions: questions.length }))
     }, [continueWork, dispatch, title, titleID, questions.length])
 
+
     return (
         <Suspense fallback={<LoadingPage />}>
             <Await resolve={continueWork}>
                 <h1>{title}</h1>
+                <Timer />
                 {continueWork ? <>
                     {questions.map((question: Questions) => (
                         <QuizCard key={question.QuestionID} quest={question} />
