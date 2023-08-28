@@ -7,7 +7,7 @@ router
     .post('/save-new-user', addNewUser)
     .get('/check-cookies', checkUserCookies)
     .get('/user-logout', userLogout)
-    .get('/get-user-profile', getUserProfile)
+    // .get('/get-user-profile', getUserProfile)
 
     // ---- Admin ---- //
     .get('/get-all-users', userRole, getAllUsers)

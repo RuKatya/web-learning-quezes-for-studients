@@ -31,6 +31,7 @@ const connection = mysql.createConnection({
 
 
 app.use('/users', require('./routers/Users/usersRout'))
+app.use('/user', require('./routers/Users/usersProfileRout'))
 app.use('/subjects', require('./routers/Subject/subjectsRout'))
 app.use('/title-quiz', require('./routers/Title/TitleRou'))
 app.use('/title-questions', require('./routers/Questions/QuestionRout'))

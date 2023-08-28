@@ -22,7 +22,7 @@ const UserProfile = () => {
 }
 
 const getUserData = async () => {
-    const { data } = await axios.get("/users/get-user-profile")
+    const { data } = await axios.get("/user/get-user-profile")
     return data
 }
 
