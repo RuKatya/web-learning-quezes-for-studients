@@ -8,7 +8,7 @@ const PagesNavigation = () => {
     return (
         <div>
             {
-                location.pathname == "/" || location.pathname.includes("/auth") ? null :
+                location.pathname === "/" || location.pathname.includes("/auth") ? null :
                     <>
                         <Link to="/">Home</Link> {" > "}
                         {navidation.map((item, index) => (

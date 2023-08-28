@@ -14,7 +14,7 @@ const InfoAlert = ({ message, setOpenMessage, removeMessage }: InfoAlertProps) =
             setOpenMessage(false)
             dispatch(removeMessage())
         }, 2000)
-    }, [])
+    }, [dispatch, removeMessage, setOpenMessage])
 
     return (
         <Stack sx={{ width: '100%', position: 'absolute', bottom: "2%", left: "0%" }}>

@@ -1,9 +1,9 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect } from 'react'
 import { NavLink } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { selectTheme } from "../../../features/dark-light-theme/theme";
 import { getFavQuizes } from '../../../features/savedFavQuizes/savedFavQuizesApi';
-import { countSavedQuizes, selectSavedQuizes } from '../../../features/savedFavQuizes/savedFavQuizesSlice';
+import { countSavedQuizes } from '../../../features/savedFavQuizes/savedFavQuizesSlice';
 
 interface LinksProps {
     link: string,
@@ -19,7 +19,7 @@ const LinksOfMav: FC<LinksProps> = ({ link, title, setToggleMenu }) => {
 
     useEffect(() => {
         dispatch(getFavQuizes())
-    }, [])
+    }, [dispatch])
 
     return (
         <NavLink

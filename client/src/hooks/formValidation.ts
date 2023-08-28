@@ -4,6 +4,7 @@ export const validateForm = (fieldName: string, value: string) => {
             const nameValid = value.length > 2
             return nameValid
         case 'email':
+            // eslint-disable-next-line
             const emailRegex = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
             const isValidEmail = emailRegex.test(value);
             return isValidEmail
@@ -29,7 +30,7 @@ export const validBeforeSend = (user: any) => {
     if (userName < 2) {
         return { continueNext: false, messageFromClient: "User Name less than 2 symbols" }
     }
-
+// eslint-disable-next-line
     const emailRegex = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
 
     if (!emailRegex.test(email)) {

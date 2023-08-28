@@ -14,7 +14,7 @@ const QuestionPage = () => {
 
     useEffect(() => {
         if (continueWork) dispatch(setQuizInfo({ title, titleID, totalQuestions: questions.length }))
-    }, [continueWork, dispatch, title, titleID])
+    }, [continueWork, dispatch, title, titleID, questions.length])
 
     return (
         <Suspense fallback={<LoadingPage />}>

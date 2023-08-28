@@ -42,8 +42,8 @@ const UserPage = () => {
                     <p>{user.UserRole}</p>
                     <select name="userRole">
                         <option disabled>Select User Role</option>
-                        <option defaultValue={user.UserRole == "admin" ? "admin" : "user"}>{user.UserRole == "admin" ? "admin" : "user"}</option>
-                        <option value={user.UserRole == "admin" ? "user" : "admin"}>{user.UserRole == "admin" ? "user" : "admin"}</option>
+                        <option defaultValue={user.UserRole === "admin" ? "admin" : "user"}>{user.UserRole === "admin" ? "admin" : "user"}</option>
+                        <option value={user.UserRole === "admin" ? "user" : "admin"}>{user.UserRole === "admin" ? "user" : "admin"}</option>
                     </select>
                     <button type="submit">Update User Role</button>
                 </form>

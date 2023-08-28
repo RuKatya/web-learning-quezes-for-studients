@@ -10,7 +10,7 @@ const MainUsersPage: FC = () => {
 
     useEffect(() => {
         dispatch(getAllUsers())
-    }, [])
+    }, [dispatch])
 
     return (
         <div>

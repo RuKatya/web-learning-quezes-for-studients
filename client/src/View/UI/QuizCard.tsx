@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { Questions } from '../../features/questions/questionsInterface'
 import BtnQuiz from './BtnQuiz';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
@@ -19,7 +19,7 @@ const QuizCard: FC<QuizCardProps> = ({ quest }) => {
         if (rightAns) {
             dispatch(setQuizRightAns(doneQuiz.rightAns + 1))
         }
-    }, [rightAns])
+    }, [rightAns, dispatch, doneQuiz.rightAns])
 
     return (
         <div>

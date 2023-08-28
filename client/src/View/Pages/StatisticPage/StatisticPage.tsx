@@ -1,5 +1,5 @@
-import React from 'react'
-import PagesNavigation from '../../Components/PagesNavigation/PagesNavigation'
+// import React from 'react'
+// import PagesNavigation from '../../Components/PagesNavigation/PagesNavigation'
 import { Link, useParams } from 'react-router-dom'
 
 const StatisticPage = () => {
