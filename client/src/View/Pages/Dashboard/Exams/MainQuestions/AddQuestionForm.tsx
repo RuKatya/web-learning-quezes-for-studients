@@ -49,6 +49,7 @@ const AddQuestionForm = () => {
 
         if (minLenght) return alert("Must include atleast 2 symbols")
 
+        console.log(questions)
         dispatch(saveQuestions({ questions, draft }))
     }
 
@@ -137,3 +138,7 @@ const AddQuestionForm = () => {
 }
 
 export default AddQuestionForm
+
+
+// React.ChangeEvent<HTMLInputElement>
+// React.FormEvent<HTMLFormElement>

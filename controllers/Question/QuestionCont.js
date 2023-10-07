@@ -185,6 +185,7 @@ exports.deleteQuestion = async (req, res) => {
 exports.deleteManyQuestions = async (req, res) => {
     try {
         const { ids } = req.body
+        console.log(ids)
 
         const { error } = deleteManyIdsValidation.validate(ids)
 
