@@ -28,14 +28,18 @@ exports.getUserProfile = async (req, res) => {
 // ---- User Update UserName ---- //
 exports.updateUserUserName = async (req, res) => {
     const { weblearningtoken } = req.cookies
-    const {newUserName} = req.body
+    const { newUserName } = req.body
 
     const { userID } = await jwt.decode(weblearningtoken, process.env.SECRET)
 
-    // const userSearch = `SELECT Email, UserName FROM users WHERE userID=${userID}`
-    const updateUserName = `UPDATE table_name
-    SET column1 = value1, column2 = value2, ...
-    WHERE condition;`
+    const updateUserName = `UPDATE users SET UserName = "${newUserName}" WHERE userID=${userID};`
 
-    connection.query()
+    connection.query(updateUserName, (err, result) => {
+        if (err) {
+            console.error('UserConst.js line:152 sql error of getUserProfile:', err.sqlMessage);
+            return res.send({ continueWork: false, message: err.sqlMessage }).status(httpCodes.BAD_REQUEST)
+        }
+
+        return res.send({ continueWork: true, userName: newUserName }).status(httpCodes.OK)
+    })
 }

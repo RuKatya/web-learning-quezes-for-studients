@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { AuthState, CheckLogin, User } from './authInterface';
-import { checkLogin, logout } from './authAPI';
+import { checkLogin, chengeUserName, logout } from './authAPI';
 
 const initialState: AuthState = {
     user: {
@@ -61,6 +61,31 @@ export const authSlice = createSlice({
 
             })
             .addCase(logout.rejected, (state) => {
+                state.status = 'failed';
+            })
+            .addCase(chengeUserName.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(chengeUserName.fulfilled, (state, action: PayloadAction<{ continueWork: boolean, userName: string }>) => {
+                const { continueWork, userName } = action.payload
+                state.status = 'idle';
+
+                if (continueWork) {
+                    console.log(action.payload)
+                    state.user = {
+                        isLogin: state.user.isLogin,
+                        userName: userName,
+                        userRole: state.user.userRole
+                    }
+                } else {
+                    state.user = {
+                        isLogin: false,
+                        userName: "",
+                        userRole: ""
+                    }
+                }
+            })
+            .addCase(chengeUserName.rejected, (state) => {
                 state.status = 'failed';
             });
     }

@@ -18,3 +18,13 @@ export const logout = createAsyncThunk("auth/user-logout", async () => {
         console.log(error)
     }
 })
+
+export const chengeUserName = createAsyncThunk("auth/chenge-user-name", async (newUserName: string) => {
+    try {
+        console.log(newUserName)
+        const { data } = await axios.post('/user/update-user-profile', { newUserName })
+        return data
+    } catch (error) {
+        console.log(error)
+    }
+})
