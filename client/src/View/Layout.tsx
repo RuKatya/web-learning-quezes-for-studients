@@ -1,39 +1,39 @@
-import { useEffect } from 'react'
-import { Outlet, useLocation } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '../app/hooks'
-import { selectTheme } from '../features/dark-light-theme/theme'
-import { checkLogin } from '../features/auth/authAPI'
-import PagesNavigation from './Components/PagesNavigation/PagesNavigation'
+import { FC, useEffect } from "react";
+import { Outlet, useLocation } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { selectTheme } from "../features/dark-light-theme/theme";
+import { checkLogin } from "../features/auth/authAPI";
+import PagesNavigation from "./Components/PagesNavigation/PagesNavigation";
 // import Navbar from './Components/Navigation/NavBar'
-import Navbar from './Components/Navigation/Navbar'
+import Navbar from "./Components/Navigation/Navbar";
 
-const Layout = () => {
-    let location = useLocation();
-    const dispatch = useAppDispatch()
-    const theme = useAppSelector(selectTheme)
-
-    useEffect(() => {
-        dispatch(checkLogin())
-    }, [dispatch])
+const Layout: FC = () => {
+    const location = useLocation();
+    const dispatch = useAppDispatch();
+    const theme = useAppSelector(selectTheme);
 
     useEffect(() => {
-        const body = document.querySelector('body') as HTMLBodyElement
-        const root = document.querySelector("#root") as HTMLDivElement
+        dispatch(checkLogin());
+    }, [dispatch]);
+
+    useEffect(() => {
+        const body = document.querySelector("body") as HTMLBodyElement;
+        const root = document.querySelector("#root") as HTMLDivElement;
 
         if (location.pathname.includes("/auth") || location.pathname.includes("/subject/")) {
-            root.classList.remove("root-background-img")
+            root.classList.remove("root-background-img");
         } else {
-            root.classList.add("root-background-img")
+            root.classList.add("root-background-img");
         }
 
         if (theme === "dark") {
-            body?.classList.add("dark-body")
-            body?.classList.remove("light-body")
+            body?.classList.add("dark-body");
+            body?.classList.remove("light-body");
         } else {
-            body?.classList.add("light-body")
-            body?.classList.remove("dark-body")
+            body?.classList.add("light-body");
+            body?.classList.remove("dark-body");
         }
-    }, [theme, location])
+    }, [theme, location]);
 
     return (
         <div>
@@ -43,7 +43,7 @@ const Layout = () => {
                 <Outlet />
             </main>
         </div>
-    )
-}
+    );
+};
 
-export default Layout
+export default Layout;
